@@ -14,15 +14,21 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
 set(PROJECT_SOURCES
         main.cpp
-        window.cpp
-        window.h
-        window.ui
+        MenuWindow.cpp
+        MenuWindow.h
+        MenuWindow.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(Tetris
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+        GameWindow.ui
+        GameWindow.h
+        GameWindow.cpp
+
+
+
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Tetris APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
