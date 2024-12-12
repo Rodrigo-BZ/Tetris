@@ -1,27 +1,13 @@
 #include "GameWindow.h"
 #include "./ui_GameWindow.h"
 
-#include <QLabel>
-#include <QFrame>
-#include <QPalette>
-
 GameWindow::GameWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::GameWindow)
 {
     ui->setupUi(this);
 
-    QLabel *label = new QLabel(this);
-    label->setGeometry(100, 100, 50, 50);
-
-    QPalette palette = label->palette();
-    palette.setColor(QPalette::Window, Qt::gray);
-    label->setAutoFillBackground(true);
-    label->setPalette(palette);
-    label->setVisible(true);
-
-    label->setFrameShape(QFrame::Panel);
-    label->setLineWidth(3);
+    grid = new GameGrid(this, 250, 30, 30, 30);
 }
 
 GameWindow::~GameWindow()

@@ -2,6 +2,10 @@
 #define GAMEWINDOW_H
 
 #include <QMainWindow>
+#include <QLabel>
+#include <QFrame>
+#include <QPalette>
+#include "GameGrid.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class GameWindow; }
@@ -24,5 +28,6 @@ private slots:
 private:
     Ui::GameWindow *ui;
     QWidget *menuWindow;
+    GameGrid *grid;
 };
 #endif // GAMEWINDOW_H
