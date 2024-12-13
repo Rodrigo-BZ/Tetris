@@ -10,8 +10,23 @@
     <height>700</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>700</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>800</width>
+    <height>700</height>
+   </size>
+  </property>
   <property name="windowTitle">
-   <string>GameWindow</string>
+   <string>T E T R I S</string>
+  </property>
+  <property name="windowIcon">
+   <iconset theme="QIcon::ThemeIcon::MediaTape"/>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="btnMenu">
@@ -22,6 +37,12 @@
       <width>83</width>
       <height>29</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>8514oem</family>
+      <bold>false</bold>
+     </font>
     </property>
     <property name="text">
      <string>Menu</string>
@@ -36,22 +57,17 @@
       <height>30</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>8514oem</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
     <property name="text">
      <string>Reset</string>
     </property>
    </widget>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>800</width>
-     <height>25</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>
