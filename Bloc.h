@@ -2,12 +2,11 @@
 #define CLASS_BLOC
 
 #include <iostream>
-#include <array>
 #include QColor
 
 class Bloc {
 protected:
-    std::array<std::array<int, 4>, 4> forme;
+    int forme[4][4];
     QColor color;      // Cor da peça
 
 public:
