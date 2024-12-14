@@ -3,13 +3,14 @@
 
 class BlocL: public Bloc{
     public: 
-    BlocL(int c, int k): Bloc(c,k){
+    BlocL(): Bloc(){
         forme = {{
             {0, 1, 0, 0},
             {0, 1, 0, 0},
             {0, 1, 1, 0},
             {0, 0, 0, 0}
         }};
+        color = QColor(255,165,0); //orange
     }
 };
 
@@ -22,6 +23,7 @@ class BlocI: public Bloc{
             {0, 1, 0, 0},
             {0, 1, 0, 0}
         }};
+        color = QColor(0,255,255); //cyan
     }
 };
 
@@ -34,6 +36,7 @@ class BlocO: public Bloc{
             {0, 1, 1, 0},
             {0, 0, 0, 0}
         }};
+        color = QColor(255,255,0); //yellow
     }
 };
 
@@ -46,6 +49,7 @@ class BlocT: public Bloc{
             {0, 1, 0, 0},
             {0, 0, 0, 0}
         }};
+        color = QColor(128,0,128); //purple
     }
 };
 
@@ -58,6 +62,7 @@ class BlocJ: public Bloc{
             {1, 1, 0, 0},
             {0, 0, 0, 0}
         }};
+        color = QColor(0,0,255); //blue
     }
 };
 
@@ -70,6 +75,7 @@ class BlocS: public Bloc{
             {1, 1, 0, 0},
             {0, 0, 0, 0}
         }};
+        color = QColor(0,255,0); //green
     }
 };
 
@@ -82,5 +88,6 @@ class BlocZ: public Bloc{
             {0, 1, 1, 0},
             {0, 0, 0, 0}
         }};
+        color = QColor(255,0,0); //red
     }
 };
