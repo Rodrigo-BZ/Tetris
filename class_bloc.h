@@ -13,18 +13,15 @@ protected:
     int color;      // Cor da peça
 
 public:
-    // Construtor
-    Bloc(int kind, int color);
+    Bloc::Bloc(int k, int c) : kind(k), color(c), direction(0), orientation(0) {
+    forme = {{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}}};
+};
 
     // Métodos
     void rotation90();
     const std::array<std::array<int, 4>, 4>& getForme() const; 
     virtual ~Bloc() = default;
 };
-
-Bloc::Bloc(int k, int c) : kind(k), color(c), direction(0), orientation(0) {
-    forme = {{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}}};
-}
 
 void Bloc::rotation90() {
     std::array<std::array<int, 4>, 4> temp = forme;
