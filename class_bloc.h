@@ -11,7 +11,7 @@ protected:
     int color;      // Cor da peça
 
 public:
-    Bloc::Bloc(int c) : color(c), direction(0), orientation(0) {
+    Bloc(int c) : color(c), direction(0), orientation(0) {
     forme = {{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}}};
 };
 
