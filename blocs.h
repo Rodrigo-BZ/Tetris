@@ -1,9 +1,9 @@
 #include <iostream>
-#include "class_bloc.hpp"
+#include "class_bloc.h"
 
-class L: public Bloc{
+class BlocL: public Bloc{
     public: 
-    L(int c, int k): Bloc(c,k){
+    BlocL(int c, int k): Bloc(c,k){
         forme = {{
             {0, 1, 0, 0},
             {0, 1, 0, 0},
@@ -11,11 +11,11 @@ class L: public Bloc{
             {0, 0, 0, 0}
         }};
     }
-}
+};
 
-class I: public Bloc{
+class BlocI: public Bloc{
     public: 
-    I(int c, int k): Bloc(c,k){
+    BlocI(int c, int k): Bloc(c,k){
         forme = {{
             {0, 1, 0, 0},
             {0, 1, 0, 0},
@@ -23,11 +23,11 @@ class I: public Bloc{
             {0, 1, 0, 0}
         }};
     }
-}
+};
 
-class O: public Bloc{
+class BlocO: public Bloc{
     public: 
-    O(int c, int k): Bloc(c,k){
+    BlocO(int c, int k): Bloc(c,k){
         forme = {{
             {0, 0, 0, 0},
             {0, 1, 1, 0},
@@ -35,11 +35,11 @@ class O: public Bloc{
             {0, 0, 0, 0}
         }};
     }
-}
+};
 
-class T: public Bloc{
+class BlocT: public Bloc{
     public: 
-    T(int c, int k): Bloc(c,k){
+    BlocT(int c, int k): Bloc(c,k){
         forme = {{
             {0, 0, 0, 0},
             {1, 1, 1, 0},
@@ -47,11 +47,11 @@ class T: public Bloc{
             {0, 0, 0, 0}
         }};
     }
-}
+};
 
-class J: public Bloc{
+class BlocJ: public Bloc{
     public: 
-    J(int c, int k): Bloc(c,k){
+    BlocJ(int c, int k): Bloc(c,k){
         forme = {{
             {0, 1, 0, 0},
             {0, 1, 0, 0},
@@ -59,11 +59,11 @@ class J: public Bloc{
             {0, 0, 0, 0}
         }};
     }
-}
+};
 
-class S: public Bloc{
+class BlocS: public Bloc{
     public: 
-    S(int c, int k): Bloc(c,k){
+    BlocS(int c, int k): Bloc(c,k){
         forme = {{
             {0, 0, 0, 0},
             {0, 1, 1, 0},
@@ -71,11 +71,11 @@ class S: public Bloc{
             {0, 0, 0, 0}
         }};
     }
-}
+};
 
-class Z: public Bloc{
+class BlocZ: public Bloc{
     public: 
-    Z(int c, int k): Bloc(c,k){
+    BlocZ(int c, int k): Bloc(c,k){
         forme = {{
             {0, 0, 0, 0},
             {1, 1, 0, 0},
@@ -83,4 +83,4 @@ class Z: public Bloc{
             {0, 0, 0, 0}
         }};
     }
-}
+};
