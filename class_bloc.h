@@ -17,6 +17,7 @@ public:
     void rotation90_clockwise();
     void rotation90_counterclockwise();
     const std::array<std::array<int, 4>, 4>& getForme() const; 
+    QColor getColor const();
     virtual ~Bloc() = default;
 };
 
@@ -41,6 +42,8 @@ void Bloc::rotation90_counterclockwise() {
         }
     }
 }
+
+QColor getColor const() {return color;}
 
 
 const std::array<std::array<int, 4>, 4>& Bloc::getForme() const {
