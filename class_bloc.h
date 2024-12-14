@@ -8,12 +8,10 @@ class Bloc {
 protected:
     std::array<std::array<int, 4>, 4> forme; // Array 2D
     int direction;  // Direção atual da peça
-    int kind;       // Tipo da peça
-    int orientation; // Orientação atual
     int color;      // Cor da peça
 
 public:
-    Bloc::Bloc(int k, int c) : kind(k), color(c), direction(0), orientation(0) {
+    Bloc::Bloc(int c) : color(c), direction(0), orientation(0) {
     forme = {{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}}};
 };
 
