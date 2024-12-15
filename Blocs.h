@@ -1,23 +1,22 @@
 #ifndef CLASS_BLOC
 #define CLASS_BLOC
 
-#include <iostream>
-#include QColor
+#include <QColor>
+#include <array>
 
 class Bloc {
 protected:
-    int forme[4][4];
-    QColor color;      // Cor da peça
+    std::array<std::array<int, 4>, 4> forme = {0};
+    QColor color;
 
 public:
-    Bloc(QColor c) : color(c), orientation(0) {
-        forme = {{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}}};
-    };
-    void rotation90_clockwise();
-    void rotation90_counterclockwise();
-    const std::array<std::array<int, 4>, 4>& getForme() const;
-    QColor getColor const();
+    Bloc(QColor c) : color(c) {};
     virtual ~Bloc() = default;
+
+    void RotateClockwise();
+    void RotateCounterClockwise();
+    std::array<std::array<int, 4>, 4> GetForme() const;
+    QColor GetColor() const;
 };
 
 #endif // CLASS_BLOC

@@ -1,7 +1,7 @@
-#include <iostream>
 #include "Blocs.h"
 
-void Bloc::rotation90_clockwise() {
+void Bloc::RotateClockwise()
+{
     std::array<std::array<int, 4>, 4> temp = forme;
     int n = forme.size();
 
@@ -12,7 +12,8 @@ void Bloc::rotation90_clockwise() {
     }
 }
 
-void Bloc::rotation90_counterclockwise() {
+void Bloc::RotateCounterClockwise()
+{
     std::array<std::array<int, 4>, 4> temp = forme;
     int n = forme.size();
 
@@ -23,9 +24,12 @@ void Bloc::rotation90_counterclockwise() {
     }
 }
 
-QColor getColor const() {return color;}
+QColor Bloc::GetColor() const
+{
+    return color;
+}
 
-
-const std::array<std::array<int, 4>, 4>& Bloc::getForme() const {
+std::array<std::array<int, 4>, 4> Bloc::GetForme() const
+{
     return forme;
 }

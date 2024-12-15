@@ -1,93 +1,85 @@
-#include <iostream>
 #include "Blocs.h"
 
 class BlocL: public Bloc{
 public:
-    BlocL(): Bloc(){
+    BlocL(): Bloc(QColor(255,165,0)){ //orange
         forme = {{
             {0, 1, 0, 0},
             {0, 1, 0, 0},
             {0, 1, 1, 0},
             {0, 0, 0, 0}
         }};
-        color = QColor(255,165,0); //orange
     }
 };
 
 class BlocI: public Bloc{
 public:
-    BlocI(int c, int k): Bloc(c,k){
+    BlocI(): Bloc(QColor(0,255,255)){ //cyan
         forme = {{
             {0, 1, 0, 0},
             {0, 1, 0, 0},
             {0, 1, 0, 0},
             {0, 1, 0, 0}
         }};
-        color = QColor(0,255,255); //cyan
     }
 };
 
 class BlocO: public Bloc{
 public:
-    BlocO(int c, int k): Bloc(c,k){
+    BlocO(): Bloc(QColor(255,255,0)){ //yellow
         forme = {{
             {0, 0, 0, 0},
             {0, 1, 1, 0},
             {0, 1, 1, 0},
             {0, 0, 0, 0}
         }};
-        color = QColor(255,255,0); //yellow
     }
 };
 
 class BlocT: public Bloc{
 public:
-    BlocT(int c, int k): Bloc(c,k){
+    BlocT(): Bloc(QColor(128,0,128)){ //purple
         forme = {{
             {0, 0, 0, 0},
             {1, 1, 1, 0},
             {0, 1, 0, 0},
             {0, 0, 0, 0}
         }};
-        color = QColor(128,0,128); //purple
     }
 };
 
 class BlocJ: public Bloc{
 public:
-    BlocJ(int c, int k): Bloc(c,k){
+    BlocJ(): Bloc(QColor(0,0,255)){
         forme = {{
             {0, 1, 0, 0},
             {0, 1, 0, 0},
             {1, 1, 0, 0},
             {0, 0, 0, 0}
         }};
-        color = QColor(0,0,255); //blue
     }
 };
 
 class BlocS: public Bloc{
 public:
-    BlocS(int c, int k): Bloc(c,k){
+    BlocS(): Bloc(QColor(0,255,0)){ //green
         forme = {{
             {0, 0, 0, 0},
             {0, 1, 1, 0},
             {1, 1, 0, 0},
             {0, 0, 0, 0}
         }};
-        color = QColor(0,255,0); //green
     }
 };
 
 class BlocZ: public Bloc{
 public:
-    BlocZ(int c, int k): Bloc(c,k){
+    BlocZ(): Bloc(QColor(255,0,0)){ //red
         forme = {{
             {0, 0, 0, 0},
             {1, 1, 0, 0},
             {0, 1, 1, 0},
             {0, 0, 0, 0}
         }};
-        color = QColor(255,0,0); //red
     }
 };

@@ -26,6 +26,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         GameWindow.ui
         GameWindow.h
         GameWindow.cpp
+        BlocTypes.h Blocs.h
+        Blocs.cpp
 
 
 
