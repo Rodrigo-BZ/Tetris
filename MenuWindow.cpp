@@ -16,7 +16,7 @@ MenuWindow::~MenuWindow()
 void MenuWindow::GetGameWindowPtr(QWidget *gameWindow)
 {
     this->gameWindow = gameWindow;
-};
+}
 
 void MenuWindow::on_btnPlay_clicked()
 {
