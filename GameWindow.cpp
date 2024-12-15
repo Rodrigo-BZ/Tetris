@@ -6,6 +6,8 @@ GameWindow::GameWindow(QWidget *parent)
     , ui(new Ui::GameWindow)
 {
     ui->setupUi(this);
+
+    grid = new GameGrid(this, 250, 30, 30, 30);
 }
 
 GameWindow::~GameWindow()

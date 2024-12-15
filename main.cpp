@@ -9,6 +9,8 @@ int main(int argc, char *argv[])
     GameWindow gameWindow;
     menuWindow.GetGameWindowPtr(&gameWindow);
     gameWindow.GetMenuWindowPtr(&menuWindow);
+    //menuWindow.setWindowState(Qt::WindowFullScreen);
+    //gameWindow.setWindowState(Qt::WindowFullScreen);
     menuWindow.show();
     return a.exec();
 }
