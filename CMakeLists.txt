@@ -26,14 +26,12 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         GameWindow.ui
         GameWindow.h
         GameWindow.cpp
-        blocs
-        BlocTypes.h Blocs.h
-        Blocs.cpp
+        BlocTypes.h
+        Bloc.h
+        Bloc.cpp
         GameGrid.h
         GameGrid.cpp
         main
-
-
 
     )
 # Define target properties for Android with Qt 6 as:

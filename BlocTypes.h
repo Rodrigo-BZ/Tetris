@@ -1,4 +1,4 @@
-#include "Blocs.h"
+#include "Bloc.h"
 
 class BlocL: public Bloc{
 public:
@@ -50,7 +50,7 @@ public:
 
 class BlocJ: public Bloc{
 public:
-    BlocJ(): Bloc(QColor(0,0,255)){
+    BlocJ(): Bloc(QColor(0,0,255)){ //blue
         forme = {{
             {0, 1, 0, 0},
             {0, 1, 0, 0},
