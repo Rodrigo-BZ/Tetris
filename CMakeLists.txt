@@ -20,6 +20,8 @@ set(PROJECT_SOURCES
         GameWindow.ui
         GameWindow.h
         GameWindow.cpp
+        GameGrid.h
+        GameGrid.cpp
         Bloc.cpp
         Bloc.h
 )

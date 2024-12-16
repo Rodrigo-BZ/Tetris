@@ -10,6 +10,7 @@
 #include <QKeyEvent>
 #include "GameGrid.h"
 #include "BlocTypes.h"
+#include <QDebug>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class GameWindow; }
@@ -34,7 +35,9 @@ private slots:
     void UpdateBlocPosition(int *difference);
     void FixBloc();
     void TimerEvent();
-    void KeyPressEvent(QKeyEvent *k);
+    void keyPressEvent(QKeyEvent *k);
+    void handleKeyMovement();
+    void keyReleaseEvent(QKeyEvent *k);
 
 private:
     Ui::GameWindow *ui;
@@ -43,5 +46,7 @@ private:
     GameGrid *grid;
     Bloc *currentBloc;
     int blocPosition[2] = {3, 0};
+    QTimer* keyTimer;
+    int currentKey;
 };
 #endif // GAMEWINDOW_H

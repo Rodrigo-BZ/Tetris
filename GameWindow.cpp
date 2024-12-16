@@ -11,6 +11,11 @@ GameWindow::GameWindow(QWidget *parent)
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(TimerEvent()));
     timer->setInterval(100);
+    this->setFocusPolicy(Qt::StrongFocus);
+
+    keyTimer = new QTimer(this);  // Instantiate keyTimer
+    connect(keyTimer, &QTimer::timeout, this, &GameWindow::handleKeyMovement);
+    keyTimer->setInterval(50);
 }
 
 GameWindow::~GameWindow()
@@ -100,24 +105,44 @@ void GameWindow::TimerEvent()
     UpdateBlocPosition(difference);
 }
 
-void GameWindow::KeyPressEvent(QKeyEvent *k){
-    switch ( k->key() )
-    {
-        case Qt::Key_Up:
-            currentBloc->RotateClockwise();
-            break;
-        case Qt::Key_Down:
-            blocPosition[1]+=1;
-            break;
+void GameWindow::keyPressEvent(QKeyEvent *k) {
+    currentKey = k->key(); // Store the pressed key
+    if (!keyTimer->isActive()) {
+        keyTimer->start(100); // Adjust the interval as needed
+    }
+}
+
+
+void GameWindow::handleKeyMovement() {
+    if (currentKey == -1) return;
+
+    switch (currentKey) {
         case Qt::Key_Left:
-            if(blocPosition[0] > 0){
-                blocPosition[0]-=1;
+            if(blocPosition[0]>0){
+                blocPosition[0] -= 1;
+                PlaceBloc();
             }
             break;
         case Qt::Key_Right:
-            if(blocPosition[0] < 10){
-                blocPosition[0]+=1;
+            if (blocPosition[0] < 10) {
+                blocPosition[0] += 1;
+                PlaceBloc();
             }
             break;
+        case Qt::Key_Down:
+            blocPosition[1] += 1;
+            PlaceBloc();
+            break;
+        case Qt::Key_Up:
+            currentBloc->RotateClockwise();
+            PlaceBloc();
+            break;
+    }
+}
+
+void GameWindow::keyReleaseEvent(QKeyEvent *k) {
+    if (k->key() == currentKey) {
+        keyTimer->stop();
+        currentKey = -1; // Reset the key
     }
 }

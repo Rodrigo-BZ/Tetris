@@ -1,7 +1,7 @@
 #include <QApplication>
-#include "GameGrid.cpp"
-#include "GameWindow.cpp"
-#include "MenuWindow.cpp"
+#include "GameGrid.h"
+#include "GameWindow.h"
+#include "MenuWindow.h"
 
 int main(int argc, char *argv[])
 {
