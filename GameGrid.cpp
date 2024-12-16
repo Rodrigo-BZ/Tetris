@@ -38,19 +38,18 @@ int GameGrid::ColorGrid(std::array<std::array<int, 4>, 4> forme, int *position, 
     int valid = 1;
     int toColor[4][2] = {-1};
     int k = 0;
-    int blocDelimiters[4] = {3, 3, 0, 0};
+    int blocLowerDelimiters[4] = {-1};
 
     for(int a = 0; a < 4; a++) {
         for(int b = 0; b < 4; b++) {
             if(forme[b][a]) {
-                if(a < blocDelimiters[0]) //Lowest x in bloc
-                    blocDelimiters[0] = a;
-                if(a > blocDelimiters[2]) //Highest x in bloc
-                    blocDelimiters[2] = a;
-                if(b < blocDelimiters[1]) //Lowest y in bloc
-                    blocDelimiters[1] = b;
-                if(b > blocDelimiters[3]) //Highest y in bloc
-                    blocDelimiters[3] = b;
+                if(b < 3) {
+                    if(!forme[b + 1][a])
+                        blocLowerDelimiters[a] = b;
+                }
+                else {
+                    blocLowerDelimiters[a] = b;
+                }
             }
         }
     }
@@ -63,7 +62,15 @@ int GameGrid::ColorGrid(std::array<std::array<int, 4>, 4> forme, int *position, 
                     break;
                 }
                 else if(labelGrid[i + position[0]][j + position[1]]->palette().color(QPalette::Window) != Qt::gray &&
-                        (j == blocDelimiters[3])) {
+                        position == initialPosition) {
+                    valid = 0;
+                    break;
+                }
+                else if(labelGrid[i + position[0]][j + position[1]]->palette().color(QPalette::Window) != Qt::gray &&
+                        ((i == 0 && j == blocLowerDelimiters[0]) ||
+                         (i == 1 && j == blocLowerDelimiters[1]) ||
+                         (i == 2 && j == blocLowerDelimiters[2]) ||
+                         (i == 3 && j == blocLowerDelimiters[3]))) {
                     valid = 0;
                     break;
                 }
@@ -77,7 +84,7 @@ int GameGrid::ColorGrid(std::array<std::array<int, 4>, 4> forme, int *position, 
     }
 
     if(valid) {
-        UncolorGrid(initialPosition);
+        UncolorGrid(forme, initialPosition);
 
         for(int l = 0; l < 4; l++) {
             if(toColor[l][0] != -1 && toColor[l][1] != -1) {
@@ -91,11 +98,12 @@ int GameGrid::ColorGrid(std::array<std::array<int, 4>, 4> forme, int *position, 
     return valid;
 }
 
-void GameGrid::UncolorGrid(int *position)
+void GameGrid::UncolorGrid(std::array<std::array<int, 4>, 4> forme, int *position)
 {
     for(int i = 0; i < 4; i++) {
         for(int j = 0; j < 4; j++) {
-            labelGrid[i + position[0]][j + position[1]]->setPalette(Qt::gray);
+            if(forme[j][i])
+                labelGrid[i + position[0]][j + position[1]]->setPalette(Qt::gray);
         }
     }
 }

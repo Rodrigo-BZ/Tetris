@@ -16,7 +16,7 @@ public:
     ~GameGrid();
 
     int ColorGrid(std::array<std::array<int, 4>, 4> forme, int *position, int *initialPosition, QColor color);
-    void UncolorGrid(int *position);
+    void UncolorGrid(std::array<std::array<int, 4>, 4> forme, int *position);
 
 private:
     void ConstructGrid(QWidget *gridParent, int initialX, int initialY, int cellWidth, int cellHeight);
