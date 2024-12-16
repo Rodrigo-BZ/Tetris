@@ -1,5 +1,7 @@
 #include "MenuWindow.h"
 #include "./ui_MenuWindow.h"
+#include <QDebug>
+
 
 MenuWindow::MenuWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -20,6 +22,11 @@ void MenuWindow::GetGameWindowPtr(QWidget *gameWindow)
 
 void MenuWindow::on_btnPlay_clicked()
 {
-    gameWindow->show();
-    this->close();
+    if (gameWindow) {
+        gameWindow->show();
+        this->close();
+    } else {
+        qDebug() << "GameWindow not initialized!";
+    }
 }
+

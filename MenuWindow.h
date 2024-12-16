@@ -1,6 +1,7 @@
-#ifndef MENUWINDOW_H
-#define MENUWINDOW_H
+// #ifndef MENUWINDOW_H
+// #define MENUWINDOW_H
 
+#pragma once
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
@@ -24,4 +25,4 @@ private:
     Ui::MenuWindow *ui;
     QWidget *gameWindow;
 };
-#endif // MENUWINDOW_H
+// #endif // MENUWINDOW_H

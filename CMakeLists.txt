@@ -17,6 +17,11 @@ set(PROJECT_SOURCES
         MenuWindow.cpp
         MenuWindow.h
         MenuWindow.ui
+        GameWindow.ui
+        GameWindow.h
+        GameWindow.cpp
+        Bloc.cpp
+        Bloc.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -74,6 +79,8 @@ install(TARGETS Tetris
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
+
+add_definitions(-DQT_DEBUG)
 
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(Tetris)

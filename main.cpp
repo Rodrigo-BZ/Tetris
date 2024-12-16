@@ -1,6 +1,7 @@
 #include <QApplication>
-#include "MenuWindow.h"
-#include "GameWindow.h"
+#include "GameGrid.cpp"
+#include "GameWindow.cpp"
+#include "MenuWindow.cpp"
 
 int main(int argc, char *argv[])
 {

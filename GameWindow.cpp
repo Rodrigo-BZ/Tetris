@@ -99,3 +99,25 @@ void GameWindow::TimerEvent()
     int difference[2] = {0, 1};
     UpdateBlocPosition(difference);
 }
+
+void GameWindow::KeyPressEvent(QKeyEvent *k){
+    switch ( k->key() )
+    {
+        case Qt::Key_Up:
+            currentBloc->RotateClockwise();
+            break;
+        case Qt::Key_Down:
+            blocPosition[1]+=1;
+            break;
+        case Qt::Key_Left:
+            if(blocPosition[0] > 0){
+                blocPosition[0]-=1;
+            }
+            break;
+        case Qt::Key_Right:
+            if(blocPosition[0] < 10){
+                blocPosition[0]+=1;
+            }
+            break;
+    }
+}
