@@ -7,6 +7,7 @@
 #include <QPalette>
 #include <QTimer>
 #include <cstdlib>
+#include <QKeyEvent>
 #include "GameGrid.h"
 #include "BlocTypes.h"
 
@@ -33,6 +34,7 @@ private slots:
     void UpdateBlocPosition(int *difference);
     void FixBloc();
     void TimerEvent();
+    void KeyPressEvent(QKeyEvent *k);
 
 private:
     Ui::GameWindow *ui;
