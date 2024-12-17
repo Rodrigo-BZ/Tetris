@@ -77,7 +77,9 @@ void GameWindow::GenerateBloc()
 
 void GameWindow::PlaceBloc()
 {
-    grid->ColorGrid(currentBloc->GetForme(), blocPosition, blocPosition, currentBloc->GetColor());
+    if(!grid->ColorGrid(currentBloc->GetForme(), blocPosition, blocPosition, currentBloc->GetColor())) {
+        timer->stop(); //Implement game over
+    }
 }
 
 void GameWindow::UpdateBlocPosition(int *difference)
@@ -95,8 +97,8 @@ void GameWindow::FixBloc()
     timer->stop();
     blocPosition[0] = 3;
     blocPosition[1] = 0;
-    GenerateBloc();
     timer->start();
+    GenerateBloc();
 }
 
 void GameWindow::TimerEvent()
