@@ -1,6 +1,11 @@
 #include "GameWindow.h"
 #include "./ui_GameWindow.h"
 
+void GameWindow::focusInEvent(QFocusEvent *event) {
+    setFocus();
+    QMainWindow::focusInEvent(event);
+}
+
 GameWindow::GameWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::GameWindow)
@@ -11,11 +16,8 @@ GameWindow::GameWindow(QWidget *parent)
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(TimerEvent()));
     timer->setInterval(100);
-    this->setFocusPolicy(Qt::StrongFocus);
 
-    keyTimer = new QTimer(this);  // Instantiate keyTimer
-    connect(keyTimer, &QTimer::timeout, this, &GameWindow::handleKeyMovement);
-    keyTimer->setInterval(50);
+    setFocus();
 }
 
 GameWindow::~GameWindow()
@@ -73,6 +75,7 @@ void GameWindow::GenerateBloc()
             break;
     }
     PlaceBloc();
+    setFocus();
 }
 
 void GameWindow::PlaceBloc()
@@ -82,15 +85,23 @@ void GameWindow::PlaceBloc()
     }
 }
 
-void GameWindow::UpdateBlocPosition(int *difference)
-{
+void GameWindow::UpdateBlocPosition(int *difference) {
     int initialPosition[2] = {blocPosition[0], blocPosition[1]};
     blocPosition[0] += difference[0];
     blocPosition[1] += difference[1];
-    if(!grid->ColorGrid(currentBloc->GetForme(), blocPosition, initialPosition, currentBloc->GetColor())) {
-        FixBloc();
+
+    if (!grid->ColorGrid(currentBloc->GetForme(), blocPosition, initialPosition, currentBloc->GetColor())) {
+        // Se o movimento é para baixo, e falhou (gravidade)
+        if (difference[0] == 0 && difference[1] == 1) {
+            qDebug() << "Fixing block due to gravity.";
+            FixBloc();
+        } else {
+            blocPosition[0] = initialPosition[0];
+            blocPosition[1] = initialPosition[1];
+        }
     }
 }
+
 
 void GameWindow::FixBloc()
 {
@@ -103,48 +114,34 @@ void GameWindow::FixBloc()
 
 void GameWindow::TimerEvent()
 {
-    int difference[2] = {0, 1};
-    UpdateBlocPosition(difference);
+    if (!lastManualMove) {
+        int difference[2] = {0, 1};
+        UpdateBlocPosition(difference);
+    }
+    lastManualMove = false; 
 }
 
 void GameWindow::keyPressEvent(QKeyEvent *k) {
-    currentKey = k->key(); // Store the pressed key
-    if (!keyTimer->isActive()) {
-        keyTimer->start(100); // Adjust the interval as needed
-    }
-}
-
-
-void GameWindow::handleKeyMovement() {
-    if (currentKey == -1) return;
-
-    switch (currentKey) {
+    qDebug() << "Key pressed:" << k->key();
+    lastManualMove = true;
+    int diff_left[2] = {-1,0};
+    int diff_right[2] = {1,0};
+    int diff_down[2] = {0,1};
+    switch (k -> key()) {
         case Qt::Key_Left:
-            if(blocPosition[0]>0){
-                blocPosition[0] -= 1;
-                PlaceBloc();
-            }
+            HorizontalMove = true;
+            UpdateBlocPosition(diff_left);
             break;
         case Qt::Key_Right:
-            if (blocPosition[0] < 10) {
-                blocPosition[0] += 1;
-                PlaceBloc();
-            }
+            HorizontalMove = true;
+            UpdateBlocPosition(diff_right);
             break;
         case Qt::Key_Down:
-            blocPosition[1] += 1;
-            PlaceBloc();
+            UpdateBlocPosition(diff_down);
             break;
         case Qt::Key_Up:
-            currentBloc->RotateClockwise();
-            PlaceBloc();
+            currentBloc->RotateClockwise(blocPosition, grid);
             break;
-    }
 }
-
-void GameWindow::keyReleaseEvent(QKeyEvent *k) {
-    if (k->key() == currentKey) {
-        keyTimer->stop();
-        currentKey = -1; // Reset the key
-    }
+    HorizontalMove = false;
 }

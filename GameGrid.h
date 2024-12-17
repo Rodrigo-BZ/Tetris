@@ -7,6 +7,7 @@
 #include <QPalette>
 #include <QColor>
 #include <array>
+#include <QDebug>
 
 class GameGrid
 {
@@ -17,9 +18,11 @@ public:
 
     int ColorGrid(std::array<std::array<int, 4>, 4> forme, int *position, int *initialPosition, QColor color);
     void UncolorGrid(std::array<std::array<int, 4>, 4> forme, int *position);
+    QLabel* (*GetLabelGrid())[21];
 
 private:
     void ConstructGrid(QWidget *gridParent, int initialX, int initialY, int cellWidth, int cellHeight);
     QLabel *labelGrid[10][21];
+
 };
 #endif // GAMEGRID_H

@@ -36,8 +36,7 @@ private slots:
     void FixBloc();
     void TimerEvent();
     void keyPressEvent(QKeyEvent *k);
-    void handleKeyMovement();
-    void keyReleaseEvent(QKeyEvent *k);
+    void focusInEvent(QFocusEvent *event);
 
 private:
     Ui::GameWindow *ui;
@@ -48,5 +47,7 @@ private:
     int blocPosition[2] = {3, 0};
     QTimer* keyTimer;
     int currentKey;
+    bool lastManualMove = false;
+    bool HorizontalMove;
 };
 #endif // GAMEWINDOW_H

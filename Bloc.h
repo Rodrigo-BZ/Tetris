@@ -3,17 +3,19 @@
 
 #include <QColor>
 #include <array>
+#include "GameGrid.h"
 
 class Bloc {
 protected:
     std::array<std::array<int, 4>, 4> forme = {0};
     QColor color;
+    GameGrid *gamegrid;
 
 public:
     Bloc(QColor c) : color(c) {};
     virtual ~Bloc() = default;
 
-    void RotateClockwise();
+    void RotateClockwise(int *position, GameGrid *grid);
     void RotateCounterClockwise();
     std::array<std::array<int, 4>, 4> GetForme() const;
     QColor GetColor() const;
