@@ -105,6 +105,9 @@ void GameWindow::UpdateBlocPosition(int *difference, Direction direction) {
 void GameWindow::FixBloc()
 {
     timer->stop();
+    for(int j = 0; j < 21;j++){
+        ExcludeLine(j);
+    }
     blocPosition[0] = 3;
     blocPosition[1] = 0;
     timer->start();
@@ -143,4 +146,27 @@ void GameWindow::keyPressEvent(QKeyEvent *k) {
             break;
 }
     HorizontalMove = false;
+}
+
+void GameWindow::ExcludeLine(int LineNumber) {
+    int k = 0;
+
+    for (int i = 0; i < 10; i++) {
+        if (((grid->GetLabelGrid())[i][LineNumber]->palette()).color(QPalette::Window) != Qt::gray) {
+            k += 1;
+        }
+    }
+
+    if (k == 10) { 
+        for (int i = 0; i < 10; i++) { 
+            for (int j = LineNumber; j > 0; j--) {
+                (grid->GetLabelGrid())[i][j]->setPalette(
+                    (grid->GetLabelGrid())[i][j - 1]->palette()
+                );
+            }
+        }
+        for (int i = 0; i < 10; i++) {
+            (grid->GetLabelGrid())[i][0]->setPalette(Qt::gray);
+        }
+    }
 }

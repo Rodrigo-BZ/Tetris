@@ -37,6 +37,7 @@ private slots:
     void TimerEvent();
     void keyPressEvent(QKeyEvent *k);
     void focusInEvent(QFocusEvent *event);
+    void ExcludeLine(int LineNumber);
 
 private:
     Ui::GameWindow *ui;
