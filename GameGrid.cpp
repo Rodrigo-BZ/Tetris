@@ -71,10 +71,10 @@ int GameGrid::ColorGrid(std::array<std::array<int, 4>, 4> forme, int *position, 
                     break;
                 }
                 else if(labelGrid[i + position[0]][j + position[1]]->palette().color(QPalette::Window) != Qt::gray &&
-                        ((i == 0 && j == blocLowerDelimiters[0]+1) ||
-                         (i == 1 && j == blocLowerDelimiters[1]+1) ||
-                         (i == 2 && j == blocLowerDelimiters[2]+1) ||
-                         (i == 3 && j == blocLowerDelimiters[3]+1))) {
+                        ((i == 0 && j == blocLowerDelimiters[0]) ||
+                         (i == 1 && j == blocLowerDelimiters[1]) ||
+                         (i == 2 && j == blocLowerDelimiters[2]) ||
+                         (i == 3 && j == blocLowerDelimiters[3]))) {
                     qDebug() << "Collision";
                     valid = 0;
                     break;
