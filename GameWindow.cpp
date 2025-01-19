@@ -80,18 +80,17 @@ void GameWindow::GenerateBloc()
 
 void GameWindow::PlaceBloc()
 {
-    if(!grid->ColorGrid(currentBloc->GetForme(), blocPosition, blocPosition, currentBloc->GetColor())) {
+    if(!grid->ColorGrid(currentBloc->GetForme(), blocPosition, blocPosition, currentBloc->GetColor(),DOWN)) {
         timer->stop(); //Implement game over
     }
 }
 
-void GameWindow::UpdateBlocPosition(int *difference) {
+void GameWindow::UpdateBlocPosition(int *difference, Direction direction) {
     int initialPosition[2] = {blocPosition[0], blocPosition[1]};
     blocPosition[0] += difference[0];
     blocPosition[1] += difference[1];
 
-    if (!grid->ColorGrid(currentBloc->GetForme(), blocPosition, initialPosition, currentBloc->GetColor())) {
-        // Se o movimento é para baixo, e falhou (gravidade)
+    if (!grid->ColorGrid(currentBloc->GetForme(), blocPosition, initialPosition, currentBloc->GetColor(), direction)) {
         if (difference[0] == 0 && difference[1] == 1) {
             qDebug() << "Fixing block due to gravity.";
             FixBloc();
@@ -116,7 +115,7 @@ void GameWindow::TimerEvent()
 {
     if (!lastManualMove) {
         int difference[2] = {0, 1};
-        UpdateBlocPosition(difference);
+        UpdateBlocPosition(difference, DOWN);
     }
     lastManualMove = false; 
 }
@@ -130,14 +129,14 @@ void GameWindow::keyPressEvent(QKeyEvent *k) {
     switch (k -> key()) {
         case Qt::Key_Left:
             HorizontalMove = true;
-            UpdateBlocPosition(diff_left);
+            UpdateBlocPosition(diff_left, LEFT);
             break;
         case Qt::Key_Right:
             HorizontalMove = true;
-            UpdateBlocPosition(diff_right);
+            UpdateBlocPosition(diff_right, RIGHT);
             break;
         case Qt::Key_Down:
-            UpdateBlocPosition(diff_down);
+            UpdateBlocPosition(diff_down, DOWN);
             break;
         case Qt::Key_Up:
             currentBloc->RotateClockwise(blocPosition, grid);

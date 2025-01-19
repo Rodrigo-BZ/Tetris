@@ -37,7 +37,7 @@ void GameGrid::ConstructGrid(QWidget *gridParent, int initialX, int initialY, in
     }
 }
 
-int GameGrid::ColorGrid(std::array<std::array<int, 4>, 4> forme, int *position, int *initialPosition, QColor color)
+int GameGrid::ColorGrid(std::array<std::array<int, 4>, 4> forme, int *position, int *initialPosition, QColor color, Direction direction)
 {
     int valid = 1;
     int toColor[4][2] = {-1};
@@ -70,7 +70,7 @@ int GameGrid::ColorGrid(std::array<std::array<int, 4>, 4> forme, int *position, 
                     valid = 0;
                     break;
                 }
-                else if(labelGrid[i + position[0]][j + position[1]]->palette().color(QPalette::Window) != Qt::gray &&
+                else if(direction == DOWN && labelGrid[i + position[0]][j + position[1]]->palette().color(QPalette::Window) != Qt::gray &&
                         ((i == 0 && j == blocLowerDelimiters[0]) ||
                          (i == 1 && j == blocLowerDelimiters[1]) ||
                          (i == 2 && j == blocLowerDelimiters[2]) ||

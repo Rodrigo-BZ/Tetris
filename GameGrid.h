@@ -8,6 +8,7 @@
 #include <QColor>
 #include <array>
 #include <QDebug>
+#include "GameEnums.h"
 
 class GameGrid
 {
@@ -16,13 +17,14 @@ public:
     GameGrid(QWidget *gridParent, int initialX, int initialY, int cellWidth, int cellHeight);
     ~GameGrid();
 
-    int ColorGrid(std::array<std::array<int, 4>, 4> forme, int *position, int *initialPosition, QColor color);
+    int ColorGrid(std::array<std::array<int, 4>, 4> forme, int *position, int *initialPosition, QColor color, Direction direction);
     void UncolorGrid(std::array<std::array<int, 4>, 4> forme, int *position);
     QLabel* (*GetLabelGrid())[21];
+    bool ExcludableLine(int LineNumber);
 
 private:
     void ConstructGrid(QWidget *gridParent, int initialX, int initialY, int cellWidth, int cellHeight);
     QLabel *labelGrid[10][21];
 
 };
-#endif // GAMEGRID_H
+#endif

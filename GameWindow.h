@@ -32,7 +32,7 @@ private slots:
     void showEvent(QShowEvent* event);
     void GenerateBloc();
     void PlaceBloc();
-    void UpdateBlocPosition(int *difference);
+    void UpdateBlocPosition(int *difference, Direction direction);
     void FixBloc();
     void TimerEvent();
     void keyPressEvent(QKeyEvent *k);
