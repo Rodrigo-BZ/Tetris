@@ -3,6 +3,10 @@
 void Bloc::RotateClockwise(int *position, GameGrid *grid)
 {
     std::array<std::array<int, 4>, 4> temp = forme;
+    
+    if(position[0]<0 || position[0]>6){
+        return;
+    }
 
     for(int i = 0; i < 4; i++) {
         for(int j = 0; j < 4; j++) {
@@ -17,14 +21,23 @@ void Bloc::RotateClockwise(int *position, GameGrid *grid)
     }
 }
 
-void Bloc::RotateCounterClockwise()
+void Bloc::RotateCounterClockwise(int *position, GameGrid *grid)
 {
     std::array<std::array<int, 4>, 4> temp = forme;
-    int n = forme.size();
 
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < forme[i].size(); j++) {
-            forme[n - 1 - j][i] = temp[i][j];
+    if(position[0]<0 || position[0]>6){
+        return;
+    }
+
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
+            if(forme[j][i])
+                grid->GetLabelGrid()[i + position[0]][j + position[1]]->setPalette(Qt::gray);
+        }
+    }
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
+            forme[3 - j][i] = temp[i][j];
         }
     }
 }

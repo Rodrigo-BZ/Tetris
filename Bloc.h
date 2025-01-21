@@ -15,8 +15,9 @@ public:
     Bloc(QColor c) : color(c) {};
     virtual ~Bloc() = default;
 
+    bool IsValidRotation(int *position, GameGrid *grid);
     void RotateClockwise(int *position, GameGrid *grid);
-    void RotateCounterClockwise();
+    void RotateCounterClockwise(int *position, GameGrid *grid);
     std::array<std::array<int, 4>, 4> GetForme() const;
     QColor GetColor() const;
 };

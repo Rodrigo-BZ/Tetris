@@ -20,7 +20,6 @@ public:
     int ColorGrid(std::array<std::array<int, 4>, 4> forme, int *position, int *initialPosition, QColor color, Direction direction);
     void UncolorGrid(std::array<std::array<int, 4>, 4> forme, int *position);
     QLabel* (*GetLabelGrid())[21];
-    bool ExcludableLine(int LineNumber);
 
 private:
     void ConstructGrid(QWidget *gridParent, int initialX, int initialY, int cellWidth, int cellHeight);

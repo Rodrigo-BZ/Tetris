@@ -75,7 +75,6 @@ int GameGrid::ColorGrid(std::array<std::array<int, 4>, 4> forme, int *position, 
                          (i == 1 && j == blocLowerDelimiters[1]) ||
                          (i == 2 && j == blocLowerDelimiters[2]) ||
                          (i == 3 && j == blocLowerDelimiters[3]))) {
-                    qDebug() << "Collision";
                     valid = 0;
                     break;
                 }

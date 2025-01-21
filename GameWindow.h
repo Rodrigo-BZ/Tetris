@@ -38,6 +38,7 @@ private slots:
     void keyPressEvent(QKeyEvent *k);
     void focusInEvent(QFocusEvent *event);
     void ExcludeLine(int LineNumber);
+    void gameOver();
 
 private:
     Ui::GameWindow *ui;
@@ -50,5 +51,13 @@ private:
     int currentKey;
     bool lastManualMove = false;
     bool HorizontalMove;
+    int Niveau;
+    int linesCleared;
+    int linesClearedatOnce;
+    int Score = 0;
+    QLabel *scoreLabel; 
+    QLabel *levelLabel;
+    void InitializeScoreWidget(); 
+    void UpdateScoreLabel();
 };
 #endif // GAMEWINDOW_H
