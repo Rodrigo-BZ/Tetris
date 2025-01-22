@@ -1,6 +1,7 @@
 #include <QApplication>
 #include "GameWindow.h"
 #include "MenuWindow.h"
+#include "ServerWindow.h"
 
 int main(int argc, char *argv[])
 {
@@ -9,8 +10,9 @@ int main(int argc, char *argv[])
     GameWindow gameWindow;
     menuWindow.GetGameWindowPtr(&gameWindow);
     gameWindow.GetMenuWindowPtr(&menuWindow);
-    //menuWindow.setWindowState(Qt::WindowFullScreen);
-    //gameWindow.setWindowState(Qt::WindowFullScreen);
     menuWindow.show();
+
+    ServerWindow serverWin;
+    serverWin.show();
     return a.exec();
 }

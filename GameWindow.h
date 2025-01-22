@@ -11,6 +11,9 @@
 #include "GameGrid.h"
 #include "BlocTypes.h"
 #include <QDebug>
+#include "PlayerClient.h"
+#include <QMessageBox>
+#include <QInputDialog>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class GameWindow; }
@@ -41,6 +44,18 @@ private slots:
     void gameOver();
     void InitializeGame();
 
+    void attemptConnection();
+    void connectedToServer();
+    void attemptLogin(const QString &userName);
+    void loggedIn();
+    void loginFailed(const QString &reason);
+    void messageReceived(const QString &sender, const QString &text);
+    void sendMessage();
+    void disconnectedFromServer();
+    void userJoined(const QString &username);
+    void userLeft(const QString &username);
+    void error(QAbstractSocket::SocketError socketError);
+
 private:
     bool multip = false;
     Ui::GameWindow *ui;
@@ -63,5 +78,7 @@ private:
     QLabel *gameOverLabel = nullptr;
     void InitializeScoreWidget(); 
     void UpdateScoreLabel();
+
+    PlayerClient *m_playerClient;
 };
 #endif // GAMEWINDOW_H

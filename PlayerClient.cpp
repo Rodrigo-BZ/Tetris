@@ -28,7 +28,7 @@ void PlayerClient::login(const QString &userName)
         // Create the JSON we want to send
         QJsonObject message;
         message[QStringLiteral("type")] = QStringLiteral("login");
-        message[QStringLiteral("username")] = userName;
+        message["username"] = userName;
 
         // Send the JSON using QDataStream
         clientStream << QJsonDocument(message).toJson(QJsonDocument::Compact);

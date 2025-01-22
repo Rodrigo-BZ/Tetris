@@ -8,7 +8,7 @@ void GameWindow::focusInEvent(QFocusEvent *event) {
 
 GameWindow::GameWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::GameWindow)
+    , ui(new Ui::GameWindow), m_playerClient(new PlayerClient(this))
 {
     ui->setupUi(this);
 
@@ -21,6 +21,16 @@ GameWindow::GameWindow(QWidget *parent)
     int x = (width() - 300) / 2;
     int y = (height() - 100) / 2;
     gameOverLabel->setGeometry(x, y, 300, 100);
+    gameOverLabel->hide();
+
+    connect(m_playerClient, &PlayerClient::connected, this, &GameWindow::connectedToServer);
+    connect(m_playerClient, &PlayerClient::loggedIn, this, &GameWindow::loggedIn);
+    connect(m_playerClient, &PlayerClient::loginError, this, &GameWindow::loginFailed);
+    connect(m_playerClient, &PlayerClient::messageReceived, this, &GameWindow::messageReceived);
+    connect(m_playerClient, &PlayerClient::disconnected, this, &GameWindow::disconnectedFromServer);
+    connect(m_playerClient, &PlayerClient::error, this, &GameWindow::error);
+    connect(m_playerClient, &PlayerClient::userJoined, this, &GameWindow::userJoined);
+    connect(m_playerClient, &PlayerClient::userLeft, this, &GameWindow::userLeft);
 
     setFocus();
 }
@@ -28,7 +38,12 @@ GameWindow::GameWindow(QWidget *parent)
 void GameWindow::SetMultiPlayer(bool multip)
 {
     this->multip = multip;
-    InitializeGame();
+    if(multip) {
+        attemptConnection();
+    }
+    else {
+        InitializeGame();
+    }
 }
 
 void GameWindow::InitializeGame()
@@ -140,6 +155,8 @@ void GameWindow::PlaceBloc()
     if(!grid->ColorGrid(currentBloc->GetForme(), blocPosition, blocPosition, currentBloc->GetColor(),DOWN)) {
         timer->stop();
     }
+
+    sendMessage();
 }
 
 void GameWindow::UpdateBlocPosition(int *difference, Direction direction) {
@@ -158,8 +175,9 @@ void GameWindow::UpdateBlocPosition(int *difference, Direction direction) {
             blocPosition[1] = initialPosition[1];
         }
     }
-}
 
+    sendMessage();
+}
 
 void GameWindow::FixBloc()
 {
@@ -233,7 +251,7 @@ void GameWindow::keyPressEvent(QKeyEvent *k) {
         case Qt::Key_X:
             currentBloc->RotateCounterClockwise(blocPosition, grid);
             break;
-}
+    }
     HorizontalMove = false;
 }
 
@@ -266,4 +284,134 @@ void GameWindow::ExcludeLine(int LineNumber) {
             linesCleared=0;
         }
     }
+
+    sendMessage();
+}
+
+void GameWindow::attemptConnection()
+{
+    // We use 127.0.0.1 (localhost)
+    QString hostAddress = "127.0.0.1";
+    // Tell the client to connect to the host using the port 7777
+    m_playerClient->connectToServer(QHostAddress(hostAddress), 7777);
+}
+
+void GameWindow::connectedToServer()
+{
+    // once we connected to the server we ask the user for what username they would like to use
+    const QString newUsername = QInputDialog::getText(this, tr("Chose Username"), tr("Username"));
+    if (newUsername.isEmpty()){
+        // if the user clicked cancel or typed nothing, we just disconnect from the server
+        return m_playerClient->disconnectFromHost();
+    }
+    // try to login with the given username
+    attemptLogin(newUsername);
+}
+
+void GameWindow::attemptLogin(const QString &userName)
+{
+    // use the client to attempt a log in with the given username
+    m_playerClient->login(userName);
+}
+
+void GameWindow::loggedIn()
+{
+    // once we successfully log in we enable the ui to display and send messages
+    printf("LOGGEDIN");
+}
+
+void GameWindow::loginFailed(const QString &reason)
+{
+    // the server rejected the login attempt
+    // display the reason for the rejection in a message box
+    QMessageBox::critical(this, tr("Error"), reason);
+    // allow the user to retry, execute the same slot as when just connected
+    connectedToServer();
+}
+
+void GameWindow::messageReceived(const QString &sender, const QString &text)
+{
+    printf("recebido");
+}
+
+void GameWindow::sendMessage()
+{
+    // we use the client to send the message
+    m_playerClient->sendMessage("teste");
+}
+
+void GameWindow::disconnectedFromServer()
+{
+    // if the client loses connection to the server
+    // communicate the event to the user via a message box
+    QMessageBox::warning(this, tr("Disconnected"), tr("The host terminated the connection"));
+    // disable the ui to send and display messages
+    on_btnMenu_clicked();
+}
+
+void GameWindow::userJoined(const QString &username)
+{
+    QMessageBox::information(this, tr("User Joined"), tr("%1 Joined").arg(username));
+}
+
+void GameWindow::userLeft(const QString &username)
+{
+    QMessageBox::information(this, tr("User Left"), tr("%1 Left").arg(username));
+}
+
+void GameWindow::error(QAbstractSocket::SocketError socketError)
+{
+    // show a message to the user that informs of what kind of error occurred
+    switch (socketError) {
+    case QAbstractSocket::RemoteHostClosedError:
+    case QAbstractSocket::ProxyConnectionClosedError:
+        return; // handled by disconnectedFromServer
+    case QAbstractSocket::ConnectionRefusedError:
+        QMessageBox::critical(this, tr("Error"), tr("The host refused the connection"));
+        break;
+    case QAbstractSocket::ProxyConnectionRefusedError:
+        QMessageBox::critical(this, tr("Error"), tr("The proxy refused the connection"));
+        break;
+    case QAbstractSocket::ProxyNotFoundError:
+        QMessageBox::critical(this, tr("Error"), tr("Could not find the proxy"));
+        break;
+    case QAbstractSocket::HostNotFoundError:
+        QMessageBox::critical(this, tr("Error"), tr("Could not find the server"));
+        break;
+    case QAbstractSocket::SocketAccessError:
+        QMessageBox::critical(this, tr("Error"), tr("You don't have permissions to execute this operation"));
+        break;
+    case QAbstractSocket::SocketResourceError:
+        QMessageBox::critical(this, tr("Error"), tr("Too many connections opened"));
+        break;
+    case QAbstractSocket::SocketTimeoutError:
+        QMessageBox::warning(this, tr("Error"), tr("Operation timed out"));
+        return;
+    case QAbstractSocket::ProxyConnectionTimeoutError:
+        QMessageBox::critical(this, tr("Error"), tr("Proxy timed out"));
+        break;
+    case QAbstractSocket::NetworkError:
+        QMessageBox::critical(this, tr("Error"), tr("Unable to reach the network"));
+        break;
+    case QAbstractSocket::UnknownSocketError:
+        QMessageBox::critical(this, tr("Error"), tr("An unknown error occurred"));
+        break;
+    case QAbstractSocket::UnsupportedSocketOperationError:
+        QMessageBox::critical(this, tr("Error"), tr("Operation not supported"));
+        break;
+    case QAbstractSocket::ProxyAuthenticationRequiredError:
+        QMessageBox::critical(this, tr("Error"), tr("Your proxy requires authentication"));
+        break;
+    case QAbstractSocket::ProxyProtocolError:
+        QMessageBox::critical(this, tr("Error"), tr("Proxy communication failed"));
+        break;
+    case QAbstractSocket::TemporaryError:
+    case QAbstractSocket::OperationError:
+        QMessageBox::warning(this, tr("Error"), tr("Operation failed, please try again"));
+        return;
+    default:
+        Q_UNREACHABLE();
+    }
+
+    on_btnMenu_clicked();
 }
