@@ -25,11 +25,11 @@ public:
     ~GameWindow();
 
     void GetMenuWindowPtr(QWidget *menuWindow);
+    void SetMultiPlayer(bool multip);
 
 private slots:
     void on_btnMenu_clicked();
     void on_btnReset_clicked();
-    void showEvent(QShowEvent* event);
     void GenerateBloc();
     void PlaceBloc();
     void UpdateBlocPosition(int *difference, Direction direction);
@@ -39,12 +39,15 @@ private slots:
     void focusInEvent(QFocusEvent *event);
     void ExcludeLine(int LineNumber);
     void gameOver();
+    void InitializeGame();
 
 private:
+    bool multip = false;
     Ui::GameWindow *ui;
     QWidget *menuWindow;
     QTimer *timer;
     GameGrid *grid;
+    GameGrid *opponentGrid;
     Bloc *currentBloc;
     int blocPosition[2] = {3, 0};
     QTimer* keyTimer;
@@ -57,6 +60,7 @@ private:
     int Score = 0;
     QLabel *scoreLabel; 
     QLabel *levelLabel;
+    QLabel *gameOverLabel = nullptr;
     void InitializeScoreWidget(); 
     void UpdateScoreLabel();
 };

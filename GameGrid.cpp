@@ -12,7 +12,11 @@ GameGrid::GameGrid(QWidget *gridParent, int initialX, int initialY, int cellWidt
 
 GameGrid::~GameGrid()
 {
-
+    for(int i = 0; i < 10; i++) {
+        for(int j = 0; j < 21; j++) {
+            delete labelGrid[i][j];
+        }
+    }
 }
 
 QLabel* (*GameGrid::GetLabelGrid())[21] {

@@ -10,7 +10,7 @@
 #include <QDebug>
 #include "GameEnums.h"
 
-class GameGrid
+class GameGrid : QWidget
 {
 public:
     GameGrid(QWidget *gridParent);

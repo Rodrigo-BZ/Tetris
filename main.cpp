@@ -1,5 +1,4 @@
 #include <QApplication>
-#include "GameGrid.h"
 #include "GameWindow.h"
 #include "MenuWindow.h"
 

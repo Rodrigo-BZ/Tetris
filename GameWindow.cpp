@@ -14,15 +14,46 @@ GameWindow::GameWindow(QWidget *parent)
 
     InitializeScoreWidget();
 
-    grid = new GameGrid(this, 250, 30, 30, 30);
-    timer = new QTimer(this);
+    gameOverLabel = new QLabel("GAME OVER", this);
+    gameOverLabel->setGeometry(150, 200, 300, 100);
+    gameOverLabel->setStyleSheet("font-size: 32px; color: red; font-weight: bold;");
+    gameOverLabel->setAlignment(Qt::AlignCenter);
+    int x = (width() - 300) / 2;
+    int y = (height() - 100) / 2;
+    gameOverLabel->setGeometry(x, y, 300, 100);
+
+    setFocus();
+}
+
+void GameWindow::SetMultiPlayer(bool multip)
+{
+    this->multip = multip;
+    InitializeGame();
+}
+
+void GameWindow::InitializeGame()
+{
+    if(multip) {
+        grid = new GameGrid(this, 75, 30, 30, 30);
+        opponentGrid = new GameGrid(this, 425, 30, 30, 30);
+        ui->btnReset->hide();
+    }
+    else {
+        grid = new GameGrid(this, 250, 30, 30, 30);
+        ui->btnReset->show();
+    }
+
+    gameOverLabel->hide();
     Niveau = 0;
     linesCleared = 0;
     Score = 0;
+    blocPosition[0] = 3;
+    blocPosition[1] = 0;
+    GenerateBloc();
+    timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(TimerEvent()));
     timer->setInterval(600);
-
-    setFocus();
+    timer->start();
 }
 
 void GameWindow::InitializeScoreWidget() {
@@ -58,29 +89,20 @@ void GameWindow::GetMenuWindowPtr(QWidget *menuWindow)
 
 void GameWindow::on_btnMenu_clicked()
 {
+    delete timer;
+    delete grid;
+    if(multip) {
+        delete opponentGrid;
+    }
     menuWindow->show();
     this->close();
 }
 
 void GameWindow::on_btnReset_clicked()
 {
-    grid = new GameGrid(this, 250, 30, 30, 30);
-    timer = new QTimer(this);
-    Niveau = 0;
-    linesCleared = 0;
-    Score = 0;
-    delete currentBloc;
-    blocPosition[0] = 3;
-    blocPosition[1] = 0;
-    GenerateBloc();
-    timer->setInterval(600);
-}
-
-void GameWindow::showEvent(QShowEvent* event)
-{
-    QMainWindow::showEvent(event);
-    GenerateBloc();
-    timer->start();
+    delete timer;
+    delete grid;
+    InitializeGame();
 }
 
 void GameWindow::GenerateBloc()
@@ -116,7 +138,7 @@ void GameWindow::GenerateBloc()
 void GameWindow::PlaceBloc()
 {
     if(!grid->ColorGrid(currentBloc->GetForme(), blocPosition, blocPosition, currentBloc->GetColor(),DOWN)) {
-        timer->stop(); //Implement game over
+        timer->stop();
     }
 }
 
@@ -174,21 +196,9 @@ void GameWindow::FixBloc()
 
 void GameWindow::gameOver(){
     timer->stop();
-
-    QLabel *gameOverLabel = new QLabel("GAME OVER", this);
-    gameOverLabel->setGeometry(150, 200, 300, 100);
-    gameOverLabel->setStyleSheet("font-size: 32px; color: red; font-weight: bold;");
-    gameOverLabel->setAlignment(Qt::AlignCenter);
-    int x = (width() - 300) / 2; 
-    int y = (height() - 100) / 2;
-    gameOverLabel->setGeometry(x, y, 300, 100);
     gameOverLabel->show();
-
-    QPushButton *menuButton = new QPushButton("Voltar ao Menu", this);
-    menuButton->setGeometry(x + 75, y + 90, 150, 40);
-    connect(menuButton, &QPushButton::clicked, this, &GameWindow::on_btnMenu_clicked);
-    menuButton->show();
-
+    gameOverLabel->activateWindow();
+    gameOverLabel->raise();
 }
 
 void GameWindow::TimerEvent()
