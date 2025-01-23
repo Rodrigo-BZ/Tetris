@@ -229,6 +229,16 @@ void GameWindow::keyPressEvent(QKeyEvent *k) {
         case Qt::Key_Down:
             UpdateBlocPosition(diff_down, DOWN);
             break;
+        case Qt::Key_Space:
+            for(int i = 1; i < 21; i++){
+                int inPosition[2] = {blocPosition[0], blocPosition[1]+i-1};
+                int afPosition[2] = {blocPosition[0], blocPosition[1]+i};
+                if(!grid->ColorGrid(currentBloc->GetForme(), afPosition, inPosition, currentBloc->GetColor(), DOWN)){
+                    FixBloc();
+                    break;
+                }
+            }
+            break;
         case Qt::Key_Z:
             if(blocPosition[0] < 0){
                 switch(blocPosition[0]){
