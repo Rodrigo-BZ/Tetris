@@ -11,6 +11,7 @@
 #include "GameGrid.h"
 #include "BlocTypes.h"
 #include <QDebug>
+#include "NextBlocPred.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class GameWindow; }
@@ -31,6 +32,7 @@ private slots:
     void on_btnReset_clicked();
     void showEvent(QShowEvent* event);
     void GenerateBloc();
+    void PredictBloc();
     void PlaceBloc();
     void UpdateBlocPosition(int *difference, Direction direction);
     void FixBloc();
@@ -45,18 +47,19 @@ private:
     QWidget *menuWindow;
     QTimer *timer;
     GameGrid *grid;
+    NextBlocPred *blocPred;
     Bloc *currentBloc;
+    Bloc *nextBloc;
     int blocPosition[2] = {3, 0};
     QTimer* keyTimer;
     int currentKey;
-    bool lastManualMove = false;
-    bool HorizontalMove;
     int Niveau;
     int linesCleared;
     int linesClearedatOnce;
     int Score = 0;
     QLabel *scoreLabel; 
     QLabel *levelLabel;
+    QLabel *predLabel;
     void InitializeScoreWidget(); 
     void UpdateScoreLabel();
 };

@@ -10,6 +10,7 @@ protected:
     std::array<std::array<int, 4>, 4> forme = {0};
     QColor color;
     GameGrid *gamegrid;
+    int lenght;
 
 public:
     Bloc(QColor c) : color(c) {};
