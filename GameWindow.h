@@ -76,6 +76,7 @@ private:
     QLabel *scoreLabel; 
     QLabel *levelLabel;
     QLabel *gameOverLabel = nullptr;
+    QLabel *opponentGameOverLabel = nullptr;
     void InitializeScoreWidget(); 
     void UpdateScoreLabel();
 

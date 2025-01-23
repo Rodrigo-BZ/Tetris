@@ -14,15 +14,6 @@ GameWindow::GameWindow(QWidget *parent)
 
     InitializeScoreWidget();
 
-    gameOverLabel = new QLabel("GAME OVER", this);
-    gameOverLabel->setGeometry(150, 200, 300, 100);
-    gameOverLabel->setStyleSheet("font-size: 32px; color: red; font-weight: bold;");
-    gameOverLabel->setAlignment(Qt::AlignCenter);
-    int x = (width() - 300) / 2;
-    int y = (height() - 100) / 2;
-    gameOverLabel->setGeometry(x, y, 300, 100);
-    gameOverLabel->hide();
-
     connect(m_playerClient, &PlayerClient::connected, this, &GameWindow::connectedToServer);
     connect(m_playerClient, &PlayerClient::loggedIn, this, &GameWindow::loggedIn);
     connect(m_playerClient, &PlayerClient::loginError, this, &GameWindow::loginFailed);
@@ -51,14 +42,39 @@ void GameWindow::InitializeGame()
     if(multip) {
         grid = new GameGrid(this, 75, 30, 30, 30);
         opponentGrid = new GameGrid(this, 425, 30, 30, 30);
+
         ui->btnReset->hide();
+
+        gameOverLabel = new QLabel("GAME OVER", this);
+        gameOverLabel->setStyleSheet("font-size: 32px; color: red; font-weight: bold;");
+        gameOverLabel->setAlignment(Qt::AlignCenter);
+        int x = (width() / 4) - 125;
+        int y = (height() - 100) / 2;
+        gameOverLabel->setGeometry(x, y, 300, 100);
+        gameOverLabel->hide();
+
+        opponentGameOverLabel = new QLabel("GAME OVER", this);
+        opponentGameOverLabel->setStyleSheet("font-size: 32px; color: red; font-weight: bold;");
+        opponentGameOverLabel->setAlignment(Qt::AlignCenter);
+        int oppx = ((width() * 3) / 4) - 175;
+        int oppy = (height() - 100) / 2;
+        opponentGameOverLabel->setGeometry(oppx, oppy, 300, 100);
+        opponentGameOverLabel->hide();
     }
     else {
         grid = new GameGrid(this, 250, 30, 30, 30);
+
         ui->btnReset->show();
+
+        gameOverLabel = new QLabel("GAME OVER", this);
+        gameOverLabel->setStyleSheet("font-size: 32px; color: red; font-weight: bold;");
+        gameOverLabel->setAlignment(Qt::AlignCenter);
+        int x = (width() - 300) / 2;
+        int y = (height() - 100) / 2;
+        gameOverLabel->setGeometry(x, y, 300, 100);
+        gameOverLabel->hide();
     }
 
-    gameOverLabel->hide();
     Niveau = 0;
     linesCleared = 0;
     Score = 0;
@@ -119,6 +135,16 @@ void GameWindow::on_btnMenu_clicked()
         opponentGrid = nullptr;
     }
 
+    if(gameOverLabel != nullptr) {
+        delete gameOverLabel;
+        gameOverLabel = nullptr;
+    }
+
+    if(opponentGameOverLabel != nullptr) {
+        delete opponentGameOverLabel;
+        opponentGameOverLabel = nullptr;
+    }
+
     menuWindow->show();
     this->close();
 }
@@ -133,6 +159,16 @@ void GameWindow::on_btnReset_clicked()
     if(grid != nullptr) {
         delete grid;
         grid = nullptr;
+    }
+
+    if(gameOverLabel != nullptr) {
+        delete gameOverLabel;
+        gameOverLabel = nullptr;
+    }
+
+    if(opponentGameOverLabel != nullptr) {
+        delete opponentGameOverLabel;
+        opponentGameOverLabel = nullptr;
     }
 
     InitializeGame();
@@ -235,6 +271,7 @@ void GameWindow::gameOver(){
     gameOverLabel->show();
     gameOverLabel->activateWindow();
     gameOverLabel->raise();
+    sendMessage('l');
 }
 
 void GameWindow::TimerEvent()
@@ -352,6 +389,11 @@ void GameWindow::messageReceived(const QString &sender, const QString &text)
 {
     if(text.compare(QLatin1String("start"), Qt::CaseInsensitive) == 0)
         InitializeGame();
+    else if(text.compare(QLatin1String("over"), Qt::CaseInsensitive) == 0) {
+        opponentGameOverLabel->show();
+        opponentGameOverLabel->activateWindow();
+        opponentGameOverLabel->raise();
+    }
     else
         opponentGrid->CopyState(text);
 }
@@ -362,6 +404,8 @@ void GameWindow::sendMessage(QChar event)
 
     if(event == 's') // Start game
         message = "start";
+    else if(event == 'l') // Game over
+        message = "over";
     else // No event
         message = grid->SaveState();
 
