@@ -104,19 +104,37 @@ void GameWindow::GetMenuWindowPtr(QWidget *menuWindow)
 
 void GameWindow::on_btnMenu_clicked()
 {
-    delete timer;
-    delete grid;
-    if(multip) {
-        delete opponentGrid;
+    if(timer != nullptr) {
+        delete timer;
+        timer = nullptr;
     }
+
+    if(grid != nullptr) {
+        delete grid;
+        grid = nullptr;
+    }
+
+    if(opponentGrid != nullptr) {
+        delete opponentGrid;
+        opponentGrid = nullptr;
+    }
+
     menuWindow->show();
     this->close();
 }
 
 void GameWindow::on_btnReset_clicked()
 {
-    delete timer;
-    delete grid;
+    if(timer != nullptr) {
+        delete timer;
+        timer = nullptr;
+    }
+
+    if(grid != nullptr) {
+        delete grid;
+        grid = nullptr;
+    }
+
     InitializeGame();
 }
 
@@ -156,7 +174,7 @@ void GameWindow::PlaceBloc()
         timer->stop();
     }
 
-    sendMessage();
+    sendMessage(' ');
 }
 
 void GameWindow::UpdateBlocPosition(int *difference, Direction direction) {
@@ -176,7 +194,7 @@ void GameWindow::UpdateBlocPosition(int *difference, Direction direction) {
         }
     }
 
-    sendMessage();
+    sendMessage(' ');
 }
 
 void GameWindow::FixBloc()
@@ -285,7 +303,7 @@ void GameWindow::ExcludeLine(int LineNumber) {
         }
     }
 
-    sendMessage();
+    sendMessage(' ');
 }
 
 void GameWindow::attemptConnection()
@@ -331,13 +349,23 @@ void GameWindow::loginFailed(const QString &reason)
 
 void GameWindow::messageReceived(const QString &sender, const QString &text)
 {
-    printf("recebido");
+    if(text.compare(QLatin1String("start"), Qt::CaseInsensitive) == 0)
+        InitializeGame();
+    else
+        opponentGrid->CopyState(text);
 }
 
-void GameWindow::sendMessage()
+void GameWindow::sendMessage(QChar event)
 {
+    QString message;
+
+    if(event == 's') // Start game
+        message = "start";
+    else // No event
+        message = grid->SaveState();
+
     // we use the client to send the message
-    m_playerClient->sendMessage("teste");
+    m_playerClient->sendMessage(message);
 }
 
 void GameWindow::disconnectedFromServer()
@@ -351,7 +379,9 @@ void GameWindow::disconnectedFromServer()
 
 void GameWindow::userJoined(const QString &username)
 {
-    QMessageBox::information(this, tr("User Joined"), tr("%1 Joined").arg(username));
+    //QMessageBox::information(this, tr("User Joined"), tr("%1 Joined").arg(username));
+    sendMessage('s');
+    InitializeGame();
 }
 
 void GameWindow::userLeft(const QString &username)
@@ -413,5 +443,5 @@ void GameWindow::error(QAbstractSocket::SocketError socketError)
         Q_UNREACHABLE();
     }
 
-    on_btnMenu_clicked();
+    //on_btnMenu_clicked();
 }

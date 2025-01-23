@@ -50,7 +50,7 @@ private slots:
     void loggedIn();
     void loginFailed(const QString &reason);
     void messageReceived(const QString &sender, const QString &text);
-    void sendMessage();
+    void sendMessage(QChar event);
     void disconnectedFromServer();
     void userJoined(const QString &username);
     void userLeft(const QString &username);
@@ -60,9 +60,9 @@ private:
     bool multip = false;
     Ui::GameWindow *ui;
     QWidget *menuWindow;
-    QTimer *timer;
-    GameGrid *grid;
-    GameGrid *opponentGrid;
+    QTimer *timer = nullptr;
+    GameGrid *grid = nullptr;
+    GameGrid *opponentGrid = nullptr;
     Bloc *currentBloc;
     int blocPosition[2] = {3, 0};
     QTimer* keyTimer;

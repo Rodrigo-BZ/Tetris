@@ -17,13 +17,18 @@ public:
     GameGrid(QWidget *gridParent, int initialX, int initialY, int cellWidth, int cellHeight);
     ~GameGrid();
 
+public slots:
     int ColorGrid(std::array<std::array<int, 4>, 4> forme, int *position, int *initialPosition, QColor color, Direction direction);
     void UncolorGrid(std::array<std::array<int, 4>, 4> forme, int *position);
+    void CopyState(QString oppState);
+    QString SaveState();
     QLabel* (*GetLabelGrid())[21];
 
 private:
-    void ConstructGrid(QWidget *gridParent, int initialX, int initialY, int cellWidth, int cellHeight);
     QLabel *labelGrid[10][21];
 
+private slots:
+    void ConstructGrid(QWidget *gridParent, int initialX, int initialY, int cellWidth, int cellHeight);
 };
+
 #endif
