@@ -308,6 +308,7 @@ void GameWindow::ExcludeLine(int LineNumber) {
 
 void GameWindow::attemptConnection()
 {
+    ui->btnReset->hide();
     // We use 127.0.0.1 (localhost)
     QString hostAddress = "127.0.0.1";
     // Tell the client to connect to the host using the port 7777

@@ -3,7 +3,6 @@
 
 #include <QTcpServer>
 #include <QVector>
-//#include <QThread>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonValue>
