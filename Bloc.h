@@ -19,6 +19,7 @@ public:
     bool IsValidRotation(int *position, GameGrid *grid);
     void RotateClockwise(int *position, GameGrid *grid);
     void RotateCounterClockwise(int *position, GameGrid *grid);
+    bool FreeColumn(int columnNumber);
     std::array<std::array<int, 4>, 4> GetForme() const;
     QColor GetColor() const;
 };

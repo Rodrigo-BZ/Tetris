@@ -217,6 +217,8 @@ void GameWindow::keyPressEvent(QKeyEvent *k) {
     int diff_left[2] = {-1,0};
     int diff_right[2] = {1,0};
     int diff_down[2] = {0,1};
+    int double_diff_right[2] = {2,0};
+    int double_diff_left[2] = {-2,0};
     switch (k -> key()) {
         case Qt::Key_Left:
             UpdateBlocPosition(diff_left, LEFT);
@@ -228,9 +230,49 @@ void GameWindow::keyPressEvent(QKeyEvent *k) {
             UpdateBlocPosition(diff_down, DOWN);
             break;
         case Qt::Key_Z:
+            if(blocPosition[0] < 0){
+                switch(blocPosition[0]){
+                case -1:
+                    UpdateBlocPosition(diff_right, RIGHT);
+                    break;
+                case -2:
+                    UpdateBlocPosition(double_diff_right, RIGHT);
+                    break;
+                }
+            }
+            else if(blocPosition[0] > 7){
+                switch(blocPosition[0]){
+                case 8:
+                    UpdateBlocPosition(diff_left, LEFT);
+                    break;
+                case 9:
+                    UpdateBlocPosition(double_diff_left, LEFT);
+                    break;
+                }
+            }
             currentBloc->RotateClockwise(blocPosition, grid);
             break;
         case Qt::Key_X:
+            if(blocPosition[0] < 0){
+                switch(blocPosition[0]){
+                case -1:
+                    UpdateBlocPosition(diff_right, RIGHT);
+                    break;
+                case -2:
+                    UpdateBlocPosition(double_diff_right, RIGHT);
+                    break;
+                }
+            }
+            else if(blocPosition[0] > 7){
+                switch(blocPosition[0]){
+                case 8:
+                    UpdateBlocPosition(diff_left, LEFT);
+                    break;
+                case 9:
+                    UpdateBlocPosition(double_diff_left, LEFT);
+                    break;
+                }
+            }
             currentBloc->RotateCounterClockwise(blocPosition, grid);
             break;
 }
