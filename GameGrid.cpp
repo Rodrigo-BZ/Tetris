@@ -12,7 +12,11 @@ GameGrid::GameGrid(QWidget *gridParent, int initialX, int initialY, int cellWidt
 
 GameGrid::~GameGrid()
 {
-
+    for(int i = 0; i < 10; i++) {
+        for(int j = 0; j < 21; j++) {
+            delete labelGrid[i][j];
+        }
+    }
 }
 
 QLabel* (*GameGrid::GetLabelGrid())[21] {
@@ -108,6 +112,69 @@ void GameGrid::UncolorGrid(std::array<std::array<int, 4>, 4> forme, int *positio
         for(int j = 0; j < 4; j++) {
             if(forme[j][i])
                 labelGrid[i + position[0]][j + position[1]]->setPalette(Qt::gray);
+        }
+    }
+}
+
+QString GameGrid::SaveState()
+{
+    QString state;
+    state.resize(210, ' ');
+
+    for(int i = 0; i < 10; i++) {
+        for(int j = 0; j < 21; j++) {
+            QChar saved;
+            QColor color = labelGrid[i][j]->palette().color(QPalette::Window);
+
+            if(color == Qt::gray)
+                saved = 'G';
+            else if(color == QColor(255,165,0))
+                saved = 'o';
+            else if(color == QColor(0,255,255))
+                saved = 'c';
+            else if(color == QColor(255,255,0))
+                saved = 'y';
+            else if(color == QColor(128,0,128))
+                saved = 'p';
+            else if(color == QColor(0,0,255))
+                saved = 'b';
+            else if(color == QColor(0,255,0))
+                saved = 'g';
+            else if(color == QColor(255,0,0))
+                saved = 'r';
+
+            state[j + (i * 21)] = saved;
+        }
+    }
+
+    return state;
+}
+
+void GameGrid::CopyState(QString oppState)
+{
+    for(int i = 0; i < 10; i++) {
+        for(int j = 0; j < 21; j++) {
+            QPalette palette = labelGrid[i][j]->palette();
+            QChar received = oppState[j + (i * 21)];
+
+            if(received == 'G')
+                palette.setColor(QPalette::Window, Qt::gray);
+            else if(received == 'o')
+                palette.setColor(QPalette::Window, QColor(255,165,0));
+            else if(received == 'c')
+                palette.setColor(QPalette::Window, QColor(0,255,255));
+            else if(received == 'y')
+                palette.setColor(QPalette::Window, QColor(255,255,0));
+            else if(received == 'p')
+                palette.setColor(QPalette::Window, QColor(128,0,128));
+            else if(received == 'b')
+                palette.setColor(QPalette::Window, QColor(0,0,255));
+            else if(received == 'g')
+                palette.setColor(QPalette::Window, QColor(0,255,0));
+            else if(received == 'r')
+                palette.setColor(QPalette::Window, QColor(255,0,0));
+
+            labelGrid[i][j]->setPalette(palette);
         }
     }
 }
