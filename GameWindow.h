@@ -34,6 +34,7 @@ public:
 private slots:
     void on_btnMenu_clicked();
     void on_btnReset_clicked();
+    void on_btnConnect_clicked();
     void GenerateBloc();
     void PredictBloc();
     void PlaceBloc();
@@ -45,6 +46,10 @@ private slots:
     void ExcludeLine(int LineNumber);
     void gameOver();
     void InitializeGame();
+    void ResetUi();
+    void InitializePredictionWidget(int labelStartingX, int blocStartingX);
+    void InitializeScoreWidget(int startingX);
+    void UpdateScoreLabel();
 
     void attemptConnection();
     void connectedToServer();
@@ -62,26 +67,27 @@ private:
     bool multip = false;
     Ui::GameWindow *ui;
     QWidget *menuWindow;
-    NextBlocPred *blocPred;
+    NextBlocPred *blocPred = nullptr;
     QTimer *timer = nullptr;
     GameGrid *grid = nullptr;
     GameGrid *opponentGrid = nullptr;
-    Bloc *currentBloc;
-    Bloc *nextBloc;
+    Bloc *currentBloc = nullptr;
+    Bloc *nextBloc = nullptr;
     int blocPosition[2] = {3, 0};
-    QTimer* keyTimer;
     int currentKey;
     int Niveau;
     int linesCleared;
     int linesClearedatOnce;
     int Score = 0;
-    QLabel *scoreLabel; 
-    QLabel *levelLabel;
-    QLabel *predLabel;
+    QString playerName;
+    QLabel *scoreLabel = nullptr;
+    QLabel *levelLabel = nullptr;
+    QLabel *predLabel = nullptr;
     QLabel *gameOverLabel = nullptr;
     QLabel *opponentGameOverLabel = nullptr;
-    void InitializeScoreWidget(); 
-    void UpdateScoreLabel();
+    QLabel *waitingOpponentLabel = nullptr;
+    QLabel *playerNameLabel = nullptr;
+    QLabel *opponentNameLabel = nullptr;
 
     PlayerClient *m_playerClient;
 };

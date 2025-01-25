@@ -44,20 +44,6 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         PlayerClient.cpp
         NextBlocPred.h
         NextBlocPred.cpp
-        ../Downloads/Press_Start_2P.zip
-        ../Downloads/PressStart2P-Regular.ttf
-
-
-
-
-
-
-
-
-
-
-
-
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Tetris APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
