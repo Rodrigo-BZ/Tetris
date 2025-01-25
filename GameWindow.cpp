@@ -14,6 +14,13 @@ GameWindow::GameWindow(QWidget *parent)
 
     InitializeScoreWidget();
 
+    predLabel = new QLabel("Next bloc:", this);
+    predLabel->setGeometry(width() - 220, 230, 200, 30);
+    predLabel->setStyleSheet("font-size: 16px; color: black;");
+
+    predLabel->show();
+    blocPred = new NextBlocPred(this, width() - 200, 270, 20, 20);
+
     connect(m_playerClient, &PlayerClient::connected, this, &GameWindow::connectedToServer);
     connect(m_playerClient, &PlayerClient::loggedIn, this, &GameWindow::loggedIn);
     connect(m_playerClient, &PlayerClient::loginError, this, &GameWindow::loginFailed);
@@ -80,6 +87,7 @@ void GameWindow::InitializeGame()
     Score = 0;
     blocPosition[0] = 3;
     blocPosition[1] = 0;
+    PredictBloc();
     GenerateBloc();
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(TimerEvent()));
@@ -90,15 +98,15 @@ void GameWindow::InitializeGame()
 void GameWindow::InitializeScoreWidget() {
     scoreLabel = new QLabel("Score: 0", this);
 
-    scoreLabel->setGeometry(width() - 220, 160, 200, 30);
-    scoreLabel->setStyleSheet("font-size: 16px; color: black;");
+    scoreLabel->setGeometry(width() - 220, 80, 200, 30);
+    scoreLabel->setStyleSheet("font-size: 22px; color: black;");
 
     scoreLabel->show();
 
     levelLabel = new QLabel("Level: 0", this);
 
-    levelLabel->setGeometry(width()-220, 200, 200, 30);
-    levelLabel->setStyleSheet("font-size: 16px; color: black;");
+    levelLabel->setGeometry(width()-220, 120, 200, 30);
+    levelLabel->setStyleSheet("font-size: 22px; color: black;");
 
     levelLabel->show();
 }
@@ -151,6 +159,10 @@ void GameWindow::on_btnMenu_clicked()
 
 void GameWindow::on_btnReset_clicked()
 {
+    UpdateScoreLabel();
+    delete currentBloc;
+    PredictBloc();
+  
     if(timer != nullptr) {
         delete timer;
         timer = nullptr;
@@ -174,32 +186,39 @@ void GameWindow::on_btnReset_clicked()
     InitializeGame();
 }
 
-void GameWindow::GenerateBloc()
+void GameWindow::PredictBloc()
 {
     int blocType = rand() % 7;
     switch(blocType) {
-        case 0:
-            currentBloc = new BlocL();
-            break;
-        case 1:
-            currentBloc = new BlocI();
-            break;
-        case 2:
-            currentBloc = new BlocO();
-            break;
-        case 3:
-            currentBloc = new BlocT();
-            break;
-        case 4:
-            currentBloc = new BlocJ();
-            break;
-        case 5:
-            currentBloc = new BlocS();
-            break;
-        case 6:
-            currentBloc = new BlocZ();
-            break;
+    case 0:
+        nextBloc = new BlocL();
+        break;
+    case 1:
+        nextBloc = new BlocI();
+        break;
+    case 2:
+        nextBloc = new BlocO();
+        break;
+    case 3:
+        nextBloc = new BlocT();
+        break;
+    case 4:
+        nextBloc = new BlocJ();
+        break;
+    case 5:
+        nextBloc = new BlocS();
+        break;
+    case 6:
+        nextBloc = new BlocZ();
+        break;
     }
+    blocPred->SetNextBloc(nextBloc->GetForme(),nextBloc->GetColor());
+}
+
+void GameWindow::GenerateBloc()
+{
+    currentBloc = nextBloc;
+    PredictBloc();
     PlaceBloc();
     setFocus();
 }
@@ -235,7 +254,6 @@ void GameWindow::UpdateBlocPosition(int *difference, Direction direction) {
 
 void GameWindow::FixBloc()
 {
-    timer->stop();
     linesClearedatOnce = 0;
     for(int j = 0; j < 21;j++){
         ExcludeLine(j);
@@ -262,7 +280,6 @@ void GameWindow::FixBloc()
     }
     blocPosition[0] = 3;
     blocPosition[1] = 0;
-    timer->start();
     GenerateBloc();
 }
 
@@ -276,38 +293,83 @@ void GameWindow::gameOver(){
 
 void GameWindow::TimerEvent()
 {
-    if (!lastManualMove) {
-        int difference[2] = {0, 1};
-        UpdateBlocPosition(difference, DOWN);
+    int difference[2] = {0, 1};
+    UpdateBlocPosition(difference, DOWN);
     }
-    lastManualMove = false; 
-}
 
 void GameWindow::keyPressEvent(QKeyEvent *k) {
-    lastManualMove = true;
     int diff_left[2] = {-1,0};
     int diff_right[2] = {1,0};
     int diff_down[2] = {0,1};
+    int double_diff_right[2] = {2,0};
+    int double_diff_left[2] = {-2,0};
     switch (k -> key()) {
         case Qt::Key_Left:
-            HorizontalMove = true;
             UpdateBlocPosition(diff_left, LEFT);
             break;
         case Qt::Key_Right:
-            HorizontalMove = true;
             UpdateBlocPosition(diff_right, RIGHT);
             break;
         case Qt::Key_Down:
             UpdateBlocPosition(diff_down, DOWN);
             break;
+        case Qt::Key_Space:
+            for(int i = 1; i < 21; i++){
+                int inPosition[2] = {blocPosition[0], blocPosition[1]+i-1};
+                int afPosition[2] = {blocPosition[0], blocPosition[1]+i};
+                if(!grid->ColorGrid(currentBloc->GetForme(), afPosition, inPosition, currentBloc->GetColor(), DOWN)){
+                    FixBloc();
+                    break;
+                }
+            }
+            break;
         case Qt::Key_Z:
+            if(blocPosition[0] < 0){
+                switch(blocPosition[0]){
+                case -1:
+                    UpdateBlocPosition(diff_right, RIGHT);
+                    break;
+                case -2:
+                    UpdateBlocPosition(double_diff_right, RIGHT);
+                    break;
+                }
+            }
+            else if(blocPosition[0] > 7){
+                switch(blocPosition[0]){
+                case 8:
+                    UpdateBlocPosition(diff_left, LEFT);
+                    break;
+                case 9:
+                    UpdateBlocPosition(double_diff_left, LEFT);
+                    break;
+                }
+            }
             currentBloc->RotateClockwise(blocPosition, grid);
             break;
         case Qt::Key_X:
+            if(blocPosition[0] < 0){
+                switch(blocPosition[0]){
+                case -1:
+                    UpdateBlocPosition(diff_right, RIGHT);
+                    break;
+                case -2:
+                    UpdateBlocPosition(double_diff_right, RIGHT);
+                    break;
+                }
+            }
+            else if(blocPosition[0] > 7){
+                switch(blocPosition[0]){
+                case 8:
+                    UpdateBlocPosition(diff_left, LEFT);
+                    break;
+                case 9:
+                    UpdateBlocPosition(double_diff_left, LEFT);
+                    break;
+                }
+            }
             currentBloc->RotateCounterClockwise(blocPosition, grid);
             break;
     }
-    HorizontalMove = false;
 }
 
 void GameWindow::ExcludeLine(int LineNumber) {

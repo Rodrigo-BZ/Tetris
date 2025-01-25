@@ -11,6 +11,7 @@
 #include "GameGrid.h"
 #include "BlocTypes.h"
 #include <QDebug>
+#include "NextBlocPred.h"
 #include "PlayerClient.h"
 #include <QMessageBox>
 #include <QInputDialog>
@@ -34,6 +35,7 @@ private slots:
     void on_btnMenu_clicked();
     void on_btnReset_clicked();
     void GenerateBloc();
+    void PredictBloc();
     void PlaceBloc();
     void UpdateBlocPosition(int *difference, Direction direction);
     void FixBloc();
@@ -60,21 +62,22 @@ private:
     bool multip = false;
     Ui::GameWindow *ui;
     QWidget *menuWindow;
+    NextBlocPred *blocPred;
     QTimer *timer = nullptr;
     GameGrid *grid = nullptr;
     GameGrid *opponentGrid = nullptr;
     Bloc *currentBloc;
+    Bloc *nextBloc;
     int blocPosition[2] = {3, 0};
     QTimer* keyTimer;
     int currentKey;
-    bool lastManualMove = false;
-    bool HorizontalMove;
     int Niveau;
     int linesCleared;
     int linesClearedatOnce;
     int Score = 0;
     QLabel *scoreLabel; 
     QLabel *levelLabel;
+    QLabel *predLabel;
     QLabel *gameOverLabel = nullptr;
     QLabel *opponentGameOverLabel = nullptr;
     void InitializeScoreWidget(); 
