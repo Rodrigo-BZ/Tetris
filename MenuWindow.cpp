@@ -41,3 +41,8 @@ void MenuWindow::on_btnMultiplayer_clicked()
         qDebug() << "GameWindow not initialized!";
     }
 }
+
+void MenuWindow::on_btnQuit_clicked()
+{
+    this->close();
+}
