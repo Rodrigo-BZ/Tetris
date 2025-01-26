@@ -44,6 +44,7 @@ private slots:
     void keyPressEvent(QKeyEvent *k);
     void focusInEvent(QFocusEvent *event);
     void ExcludeLine(int LineNumber);
+    void AddLinePenalty();
     void gameOver();
     void InitializeGame();
     void ResetUi(bool multip);

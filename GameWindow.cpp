@@ -139,11 +139,7 @@ void GameWindow::ResetUi(bool multip)
 {
     if(multip) {
         grid = std::make_unique<GameGrid>(this, 75, 50, 30, 30);
-        opponentGrid = std::make_unique<GameGrid>(this, width() - 300 - 75, 50, 30, 30);
-        opponentGameOverLabel = std::make_unique<QLabel>("GAME OVER", this);
-        opponentGameOverLabel->hide();
-        waitingOpponentLabel = std::make_unique<QLabel>("Waiting for opponent to connect...", this);
-        waitingOpponentLabel->hide();
+
 
         InitializePredictionWidget((width() - 200) / 2, (width() - 100) / 2);
         InitializeScoreWidget((width() - 200) / 2);
@@ -154,6 +150,17 @@ void GameWindow::ResetUi(bool multip)
         InitializePredictionWidget(width() - 300, width() - 250);
         InitializeScoreWidget(width() - 300);
     }
+
+    opponentGrid = std::make_unique<GameGrid>(this, width() - 300 - 75, 50, 30, 30);
+    opponentGameOverLabel = std::make_unique<QLabel>("GAME OVER", this);
+    opponentGameOverLabel->hide();
+    waitingOpponentLabel = std::make_unique<QLabel>("Waiting for opponent to connect...", this);
+    waitingOpponentLabel->hide();
+
+    if(playerNameLabel != nullptr)
+        playerNameLabel->hide();
+    if(opponentNameLabel != nullptr)
+        opponentNameLabel->hide();
 
     gameOverLabel = std::make_unique<QLabel>("GAME OVER", this);
     gameOverLabel->hide();
@@ -268,14 +275,30 @@ void GameWindow::FixBloc()
             UpdateScoreLabel();
             break;
         case 2:
+            if(multip) {
+                sendMessage('p');
+                sendMessage(' ');
+            }
             Score += 100 * (Niveau + 1);
             UpdateScoreLabel();
             break;
         case 3:
+            if(multip) {
+                sendMessage('p');
+                sendMessage('p');
+                sendMessage(' ');
+            }
             Score += 300 * (Niveau + 1);
             UpdateScoreLabel();
             break;
         case 4:
+            if(multip) {
+                sendMessage('p');
+                sendMessage('p');
+                sendMessage('p');
+                sendMessage('p');
+                sendMessage(' ');
+            }
             Score += 1200 * (Niveau + 1);
             UpdateScoreLabel();
             break;
@@ -381,7 +404,8 @@ void GameWindow::keyPressEvent(QKeyEvent *k)
     }
 }
 
-void GameWindow::ExcludeLine(int LineNumber) {
+void GameWindow::ExcludeLine(int LineNumber)
+{
     int k = 0;
 
     for (int i = 0; i < 10; i++) {
@@ -409,10 +433,14 @@ void GameWindow::ExcludeLine(int LineNumber) {
             timer->setInterval(600 - Niveau * 50);
             linesCleared=0;
         }
+        if(multip)
+            sendMessage(' ');
     }
+}
 
-    if(multip)
-        sendMessage(' ');
+void GameWindow::AddLinePenalty()
+{
+    grid->AddLineBottom(currentBloc->GetForme(), blocPosition);
 }
 
 void GameWindow::attemptConnection()
@@ -486,6 +514,8 @@ void GameWindow::messageReceived(const QString &sender, const QString &text)
         timer->stop();
         allowMovements = false;
     }
+    else if(text.compare(QLatin1String("penalty"), Qt::CaseInsensitive) == 0)
+        AddLinePenalty();
     else
         opponentGrid->CopyState(text);
 }
@@ -498,6 +528,8 @@ void GameWindow::sendMessage(QChar event)
         message = "start";
     else if(event == 'l') // Game over
         message = "over";
+    else if(event == 'p') // Penalty
+        message = "penalty";
     else // No event
         message = grid->SaveState();
 

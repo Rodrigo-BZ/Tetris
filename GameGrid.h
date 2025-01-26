@@ -22,6 +22,7 @@ public slots:
     void UncolorGrid(std::array<std::array<int, 4>, 4> forme, int *position);
     void CopyState(QString oppState);
     void Show();
+    void AddLineBottom(std::array<std::array<int, 4>, 4> forme, int *position);
     QString SaveState();
     QLabel* (*GetLabelGrid())[21];
 
