@@ -8,10 +8,7 @@ void Bloc::RotateClockwise(int *position, GameGrid *grid)
     bool otherBlocksNear_right = false;
     bool otherBlocksNear_down = false;
 
-    if(lenght == 4){
-        return;
-    }
-    else if(lenght == 9){
+    if(lenght == 9){
         if(position[1] > 17){
             return;
         }
@@ -165,10 +162,7 @@ void Bloc::RotateCounterClockwise(int *position, GameGrid *grid)
     int otherBlocksNear_left = false;
     int otherBlocksNear_right = false;
     int otherBlocksNear_down = false;
-    if(lenght == 4){
-        return;
-    }
-    else if(lenght == 9){
+    if(lenght == 9){
         if(position[1] > 17){
             return;
         }
