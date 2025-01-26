@@ -6,6 +6,7 @@ void Bloc::RotateClockwise(int *position, GameGrid *grid)
     bool otherBlocksNear = false;
     bool otherBlocksNear_left = false;
     bool otherBlocksNear_right = false;
+    bool otherBlocksNear_down = false;
 
     if(lenght == 9){
         if(position[1] > 17){
@@ -25,6 +26,9 @@ void Bloc::RotateClockwise(int *position, GameGrid *grid)
             for(int i = 0; i < 3; i++) {
                 for(int j = 0; j < 3; j++){
                     if(grid->GetLabelGrid()[i + position[0]][j + position[1]]->palette().color(QPalette::Window) != Qt::gray){
+                        if(j == 2){
+                            otherBlocksNear_down = true;
+                        }
                         if(i == 1 || i == 0){
                             otherBlocksNear_left = true;
                         }
@@ -35,19 +39,22 @@ void Bloc::RotateClockwise(int *position, GameGrid *grid)
                 }
             }
         }
-        if(otherBlocksNear_left && otherBlocksNear_right){
+        if((otherBlocksNear_left && otherBlocksNear_right) || otherBlocksNear_down){
             forme = temp;
+            for(int i = 0; i < 3; i++) {
+                for(int j = 0; j < 3; j++) {
+                    if(forme[j][i]){
+                        grid->GetLabelGrid()[i + position[0]][j + position[1]]->setPalette(color);
+                    }
+                }
+            }
             return;
         }
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
 
                 if(otherBlocksNear && grid->GetLabelGrid()[j + position[0]][2 - i + position[1]]->palette().color(QPalette::Window) != Qt::gray){
-                    if(2 - i == 2 || 2 - i == 1){
-                        forme = temp;
-                        return;
-                    }
-                    else if(j <= 1){
+                    if(j <= 1){
                         position[0] += 1;
                     }
                     else{
@@ -56,6 +63,13 @@ void Bloc::RotateClockwise(int *position, GameGrid *grid)
                         }
                         else{
                             forme = temp;
+                            for(int i = 0; i < 3; i++) {
+                                for(int j = 0; j < 3; j++) {
+                                    if(forme[j][i]){
+                                        grid->GetLabelGrid()[i + position[0]][j + position[1]]->setPalette(color);
+                                    }
+                                }
+                            }
                             return;
                         }
                     }
@@ -94,6 +108,13 @@ void Bloc::RotateClockwise(int *position, GameGrid *grid)
         }
         if(otherBlocksNear_left && otherBlocksNear_right){
             forme = temp;
+            for(int i = 0; i < 3; i++) {
+                for(int j = 0; j < 3; j++) {
+                    if(forme[j][i]){
+                        grid->GetLabelGrid()[i + position[0]][j + position[1]]->setPalette(color);
+                    }
+                }
+            }
             return;
         }
         for (int i = 0; i < 4; i++) {
@@ -111,11 +132,25 @@ void Bloc::RotateClockwise(int *position, GameGrid *grid)
                         }
                         else{
                             forme = temp;
+                            for(int i = 0; i < 3; i++) {
+                                for(int j = 0; j < 3; j++) {
+                                    if(forme[j][i]){
+                                        grid->GetLabelGrid()[i + position[0]][j + position[1]]->setPalette(color);
+                                    }
+                                }
+                            }
                             return;
                         }
                     }
                 }
                 forme[j][3 - i] = temp[i][j];
+            }
+        }
+    }
+    for(int i = 0; i < 3; i++) {
+        for(int j = 0; j < 3; j++) {
+            if(forme[j][i]){
+                grid->GetLabelGrid()[i + position[0]][j + position[1]]->setPalette(color);
             }
         }
     }
@@ -157,15 +192,19 @@ void Bloc::RotateCounterClockwise(int *position, GameGrid *grid)
         }
         if(otherBlocksNear_left && otherBlocksNear_right){
             forme = temp;
+            for(int i = 0; i < 3; i++) {
+                for(int j = 0; j < 3; j++) {
+                    if(forme[j][i]){
+                        grid->GetLabelGrid()[i + position[0]][j + position[1]]->setPalette(color);
+                    }
+                }
+            }
             return;
         }
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if(otherBlocksNear == 1 && grid->GetLabelGrid()[2 - j + position[0]][i + position[1]]->palette().color(QPalette::Window) != Qt::gray){
-                    if(i >= 2){
-                        return;
-                    }
-                    else if(2 - j <= 1){
+                    if(2 - j <= 1){
                         position[0] += 1;
                     }
                     else{
@@ -211,15 +250,19 @@ void Bloc::RotateCounterClockwise(int *position, GameGrid *grid)
         }
         if(otherBlocksNear_left && otherBlocksNear_right){
             forme = temp;
+            for(int i = 0; i < 3; i++) {
+                for(int j = 0; j < 3; j++) {
+                    if(forme[j][i]){
+                        grid->GetLabelGrid()[i + position[0]][j + position[1]]->setPalette(color);
+                    }
+                }
+            }
             return;
         }
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 if(otherBlocksNear == 1 && grid->GetLabelGrid()[j + position[0]][3 - i + position[1]]->palette().color(QPalette::Window) != Qt::gray){
-                    if(i >= 2){
-                        return;
-                    }
-                    else if(j <= 1){
+                    if(j <= 1){
                         position[0] += 1;
                     }
                     else{
@@ -233,6 +276,13 @@ void Bloc::RotateCounterClockwise(int *position, GameGrid *grid)
                     }
                 }
                 forme[j][3 - i] = temp[i][j];
+            }
+        }
+    }
+    for(int i = 0; i < 3; i++) {
+        for(int j = 0; j < 3; j++) {
+            if(forme[j][i]){
+                grid->GetLabelGrid()[i + position[0]][j + position[1]]->setPalette(color);
             }
         }
     }
