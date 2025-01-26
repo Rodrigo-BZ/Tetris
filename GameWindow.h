@@ -46,6 +46,7 @@ private slots:
     void ExcludeLine(int LineNumber);
     void AddLinePenalty();
     void gameOver();
+    void Victory();
     void InitializeGame();
     void ResetUi(bool multip);
     void InitializePredictionWidget(int labelStartingX, int blocStartingX);

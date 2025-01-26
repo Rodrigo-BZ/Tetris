@@ -46,6 +46,8 @@ void GameWindow::SetMultiPlayer(bool multip)
 
 void GameWindow::InitializeGame()
 {
+    ResetUi(multip);
+
     if(multip) {
         gameOverLabel->setStyleSheet("font-size: 32px; color: red; font-weight: bold;");
         gameOverLabel->setAlignment(Qt::AlignCenter);
@@ -67,6 +69,7 @@ void GameWindow::InitializeGame()
         gameOverLabel->setAlignment(Qt::AlignCenter);
         gameOverLabel->setGeometry((width() - 300) / 2, (height() - 100) / 2, 300, 100);
         gameOverLabel->hide();
+        scoreLabel->show();
     }
 
     Niveau = 0;
@@ -81,7 +84,6 @@ void GameWindow::InitializeGame()
 
     grid->Show();
     predLabel->show();
-    scoreLabel->show();
     levelLabel->show();
 
     timer = std::make_unique<QTimer>(this);
@@ -140,7 +142,6 @@ void GameWindow::ResetUi(bool multip)
     if(multip) {
         grid = std::make_unique<GameGrid>(this, 75, 50, 30, 30);
 
-
         InitializePredictionWidget((width() - 200) / 2, (width() - 100) / 2);
         InitializeScoreWidget((width() - 200) / 2);
     }
@@ -155,6 +156,9 @@ void GameWindow::ResetUi(bool multip)
     opponentGameOverLabel = std::make_unique<QLabel>("GAME OVER", this);
     opponentGameOverLabel->hide();
     waitingOpponentLabel = std::make_unique<QLabel>("Waiting for opponent to connect...", this);
+    waitingOpponentLabel->setStyleSheet("font-size: 15px; color: white;");
+    waitingOpponentLabel->setAlignment(Qt::AlignCenter);
+    waitingOpponentLabel->setGeometry((width() - 400) / 2, 200, 400, 100);
     waitingOpponentLabel->hide();
 
     if(playerNameLabel != nullptr)
@@ -308,15 +312,33 @@ void GameWindow::FixBloc()
     GenerateBloc();
 }
 
-void GameWindow::gameOver(){
+void GameWindow::gameOver()
+{
     timer->stop();
     allowMovements = false;
 
     gameOverLabel->show();
     gameOverLabel->raise();
 
-    if(multip)
+    if(multip) {
+        opponentGameOverLabel->setText("VICTORY");
+        opponentGameOverLabel->setStyleSheet("font-size: 32px; color: green; font-weight: bold;");
+        opponentGameOverLabel->show();
         sendMessage('l');
+    }
+}
+
+void GameWindow::Victory()
+{
+    opponentGameOverLabel->show();
+    opponentGameOverLabel->raise();
+
+    timer->stop();
+    allowMovements = false;
+
+    gameOverLabel->setText("VICTORY");
+    gameOverLabel->setStyleSheet("font-size: 32px; color: green; font-weight: bold;");
+    gameOverLabel->show();
 }
 
 void GameWindow::TimerEvent()
@@ -457,6 +479,7 @@ void GameWindow::connectedToServer()
     const QString newUsername = QInputDialog::getText(this, tr("Chose Username"), tr("Username"));
     if (newUsername.isEmpty()){
         // if the user clicked cancel or typed nothing, we just disconnect from the server
+        QMessageBox::warning(this, tr("Invalid Username"), tr("Empty username"));
         return m_playerClient->disconnectFromHost();
     }
     // try to login with the given username
@@ -475,9 +498,6 @@ void GameWindow::loggedIn()
     // once we successfully log in we enable the ui to display and send messages
     ui->btnConnect->hide();
 
-    waitingOpponentLabel->setStyleSheet("font-size: 15px; color: white;");
-    waitingOpponentLabel->setAlignment(Qt::AlignCenter);
-    waitingOpponentLabel->setGeometry((width() - 400) / 2, 230, 400, 100);
     waitingOpponentLabel->show();
 
     playerNameLabel = std::make_unique<QLabel>(playerName, this);
@@ -508,11 +528,7 @@ void GameWindow::messageReceived(const QString &sender, const QString &text)
         InitializeGame();
     }
     else if(text.compare(QLatin1String("over"), Qt::CaseInsensitive) == 0) {
-        opponentGameOverLabel->show();
-        opponentGameOverLabel->raise();
-
-        timer->stop();
-        allowMovements = false;
+        Victory();
     }
     else if(text.compare(QLatin1String("penalty"), Qt::CaseInsensitive) == 0)
         AddLinePenalty();
@@ -539,10 +555,13 @@ void GameWindow::sendMessage(QChar event)
 
 void GameWindow::disconnectedFromServer()
 {
+    if(timer != nullptr)
+        timer->stop();
+    on_btnMenu_clicked();
+
     // if the client loses connection to the server
     // communicate the event to the user via a message box
     QMessageBox::warning(this, tr("Disconnected"), tr("You have been disconnected"));
-    // disable the ui to send and display messages
 }
 
 void GameWindow::userJoined(const QString &username)
@@ -560,11 +579,10 @@ void GameWindow::userJoined(const QString &username)
 void GameWindow::userLeft(const QString &username)
 {
     if(gameOverLabel->isHidden()) {
-        opponentGameOverLabel->show();
-        opponentGameOverLabel->raise();
-        timer->stop();
-        allowMovements = false;
+        Victory();
     }
+
+    waitingOpponentLabel->show();
 
     QMessageBox::information(this, tr("User Left"), tr("%1 Left").arg(username));
 }

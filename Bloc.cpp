@@ -61,7 +61,7 @@ void Bloc::RotateCounterClockwise(int *position, GameGrid *grid)
             }
         }
     }
-    }
+}
 
 QColor Bloc::GetColor() const
 {
