@@ -42,6 +42,11 @@ void MenuWindow::on_btnMultiplayer_clicked()
     }
 }
 
+void MenuWindow::on_btnTutorial_clicked()
+{
+    QDesktopServices::openUrl(QUrl("https://docs.google.com/document/d/1HVUlN8MyU3eUpjFw6cgbhAKXsJG8_OLuDwjgXCkcigI/edit?usp=sharing", QUrl::TolerantMode));
+}
+
 void MenuWindow::on_btnQuit_clicked()
 {
     this->close();

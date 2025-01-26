@@ -3,6 +3,7 @@
 
 #pragma once
 #include <QMainWindow>
+#include <QDesktopServices>
 #include "GameWindow.h"
 
 QT_BEGIN_NAMESPACE
@@ -22,6 +23,7 @@ public:
 private slots:
     void on_btnPlay_clicked();
     void on_btnMultiplayer_clicked();
+    void on_btnTutorial_clicked();
     void on_btnQuit_clicked();
 
 private:
