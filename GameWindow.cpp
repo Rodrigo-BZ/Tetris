@@ -424,6 +424,7 @@ void GameWindow::keyPressEvent(QKeyEvent *k)
                 break;
         }
     }
+    setFocus();
 }
 
 void GameWindow::ExcludeLine(int LineNumber)
@@ -436,13 +437,13 @@ void GameWindow::ExcludeLine(int LineNumber)
         }
     }
 
-    if (k == 10) { 
+    if (k == 10) {
         linesClearedatOnce += 1;
-        for (int i = 0; i < 10; i++) { 
+        for (int i = 0; i < 10; i++) {
             for (int j = LineNumber; j > 0; j--) {
                 (grid->GetLabelGrid())[i][j]->setPalette(
                     (grid->GetLabelGrid())[i][j - 1]->palette()
-                );
+                    );
             }
         }
         for (int i = 0; i < 10; i++) {

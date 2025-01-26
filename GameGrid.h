@@ -19,6 +19,7 @@ public:
 
 public slots:
     int ColorGrid(std::array<std::array<int, 4>, 4> forme, int *position, int *initialPosition, QColor color, Direction direction);
+    int AdjustRotation(std::array<std::array<int, 4>, 4> forme, std::array<std::array<int, 4>, 4> temp, int *position, QColor color);
     void UncolorGrid(std::array<std::array<int, 4>, 4> forme, int *position);
     void CopyState(QString oppState);
     void Show();
