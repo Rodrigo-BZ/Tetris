@@ -324,6 +324,9 @@ void GameWindow::keyPressEvent(QKeyEvent *k) {
         }
         break;
     case Qt::Key_Z:
+        if(currentBloc->GetLenght() == 4){
+            break;
+        }
         if(blocPosition[0] < 0){
             switch(blocPosition[0]){
             case -1:
@@ -347,6 +350,9 @@ void GameWindow::keyPressEvent(QKeyEvent *k) {
         currentBloc->RotateClockwise(blocPosition, grid);
         break;
     case Qt::Key_X:
+        if(currentBloc->GetLenght() == 4){
+            break;
+        }
         if(blocPosition[0] < 0){
             switch(blocPosition[0]){
             case -1:

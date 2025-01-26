@@ -22,6 +22,7 @@ public:
     bool FreeColumn(int columnNumber);
     std::array<std::array<int, 4>, 4> GetForme() const;
     QColor GetColor() const;
+    int GetLenght() const;
 };
 
 #endif // CLASS_BLOC
