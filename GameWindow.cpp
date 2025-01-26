@@ -162,7 +162,7 @@ void GameWindow::on_btnReset_clicked()
     UpdateScoreLabel();
     delete currentBloc;
     PredictBloc();
-  
+
     if(timer != nullptr) {
         delete timer;
         timer = nullptr;
@@ -259,24 +259,24 @@ void GameWindow::FixBloc()
         ExcludeLine(j);
     }
     switch(linesClearedatOnce) {
-        case 0:
-            break;
-        case 1:
-            Score += 40 * (Niveau + 1);
-            UpdateScoreLabel();
-            break;
-        case 2:
-            Score += 100 * (Niveau + 1);
-            UpdateScoreLabel();
-            break;
-        case 3:
-            Score += 300 * (Niveau + 1);
-            UpdateScoreLabel();
-            break;
-        case 4:
-            Score += 1200 * (Niveau + 1);
-            UpdateScoreLabel();
-            break;
+    case 0:
+        break;
+    case 1:
+        Score += 40 * (Niveau + 1);
+        UpdateScoreLabel();
+        break;
+    case 2:
+        Score += 100 * (Niveau + 1);
+        UpdateScoreLabel();
+        break;
+    case 3:
+        Score += 300 * (Niveau + 1);
+        UpdateScoreLabel();
+        break;
+    case 4:
+        Score += 1200 * (Niveau + 1);
+        UpdateScoreLabel();
+        break;
     }
     blocPosition[0] = 3;
     blocPosition[1] = 0;
@@ -295,7 +295,7 @@ void GameWindow::TimerEvent()
 {
     int difference[2] = {0, 1};
     UpdateBlocPosition(difference, DOWN);
-    }
+}
 
 void GameWindow::keyPressEvent(QKeyEvent *k) {
     int diff_left[2] = {-1,0};
@@ -304,72 +304,73 @@ void GameWindow::keyPressEvent(QKeyEvent *k) {
     int double_diff_right[2] = {2,0};
     int double_diff_left[2] = {-2,0};
     switch (k -> key()) {
-        case Qt::Key_Left:
-            UpdateBlocPosition(diff_left, LEFT);
-            break;
-        case Qt::Key_Right:
-            UpdateBlocPosition(diff_right, RIGHT);
-            break;
-        case Qt::Key_Down:
-            UpdateBlocPosition(diff_down, DOWN);
-            break;
-        case Qt::Key_Space:
-            for(int i = 1; i < 21; i++){
-                int inPosition[2] = {blocPosition[0], blocPosition[1]+i-1};
-                int afPosition[2] = {blocPosition[0], blocPosition[1]+i};
-                if(!grid->ColorGrid(currentBloc->GetForme(), afPosition, inPosition, currentBloc->GetColor(), DOWN)){
-                    FixBloc();
-                    break;
-                }
+    case Qt::Key_Left:
+        UpdateBlocPosition(diff_left, LEFT);
+        break;
+    case Qt::Key_Right:
+        UpdateBlocPosition(diff_right, RIGHT);
+        break;
+    case Qt::Key_Down:
+        UpdateBlocPosition(diff_down, DOWN);
+        break;
+    case Qt::Key_Space:
+        for(int i = 1; i < 21; i++){
+            int inPosition[2] = {blocPosition[0], blocPosition[1]+i-1};
+            int afPosition[2] = {blocPosition[0], blocPosition[1]+i};
+            if(!grid->ColorGrid(currentBloc->GetForme(), afPosition, inPosition, currentBloc->GetColor(), DOWN)){
+                FixBloc();
+                break;
             }
-            break;
-        case Qt::Key_Z:
-            if(blocPosition[0] < 0){
-                switch(blocPosition[0]){
-                case -1:
-                    UpdateBlocPosition(diff_right, RIGHT);
-                    break;
-                case -2:
-                    UpdateBlocPosition(double_diff_right, RIGHT);
-                    break;
-                }
+        }
+        break;
+    case Qt::Key_Z:
+        if(blocPosition[0] < 0){
+            switch(blocPosition[0]){
+            case -1:
+                UpdateBlocPosition(diff_right, RIGHT);
+                break;
+            case -2:
+                UpdateBlocPosition(double_diff_right, RIGHT);
+                break;
             }
-            else if(blocPosition[0] > 7){
-                switch(blocPosition[0]){
-                case 8:
-                    UpdateBlocPosition(diff_left, LEFT);
-                    break;
-                case 9:
-                    UpdateBlocPosition(double_diff_left, LEFT);
-                    break;
-                }
+        }
+        else if(blocPosition[0] > 7){
+            switch(blocPosition[0]){
+            case 8:
+                UpdateBlocPosition(diff_left, LEFT);
+                break;
+            case 9:
+                UpdateBlocPosition(double_diff_left, LEFT);
+                break;
             }
-            currentBloc->RotateClockwise(blocPosition, grid);
-            break;
-        case Qt::Key_X:
-            if(blocPosition[0] < 0){
-                switch(blocPosition[0]){
-                case -1:
-                    UpdateBlocPosition(diff_right, RIGHT);
-                    break;
-                case -2:
-                    UpdateBlocPosition(double_diff_right, RIGHT);
-                    break;
-                }
+        }
+        currentBloc->RotateClockwise(blocPosition, grid);
+        break;
+    case Qt::Key_X:
+        if(blocPosition[0] < 0){
+            switch(blocPosition[0]){
+            case -1:
+                UpdateBlocPosition(diff_right, RIGHT);
+                break;
+            case -2:
+                UpdateBlocPosition(double_diff_right, RIGHT);
+                break;
             }
-            else if(blocPosition[0] > 7){
-                switch(blocPosition[0]){
-                case 8:
-                    UpdateBlocPosition(diff_left, LEFT);
-                    break;
-                case 9:
-                    UpdateBlocPosition(double_diff_left, LEFT);
-                    break;
-                }
+        }
+        else if(blocPosition[0] > 7){
+            switch(blocPosition[0]){
+            case 8:
+                UpdateBlocPosition(diff_left, LEFT);
+                break;
+            case 9:
+                UpdateBlocPosition(double_diff_left, LEFT);
+                break;
             }
-            currentBloc->RotateCounterClockwise(blocPosition, grid);
-            break;
+        }
+        currentBloc->RotateCounterClockwise(blocPosition, grid);
+        break;
     }
+    setFocus();
 }
 
 void GameWindow::ExcludeLine(int LineNumber) {
@@ -381,13 +382,13 @@ void GameWindow::ExcludeLine(int LineNumber) {
         }
     }
 
-    if (k == 10) { 
+    if (k == 10) {
         linesClearedatOnce += 1;
-        for (int i = 0; i < 10; i++) { 
+        for (int i = 0; i < 10; i++) {
             for (int j = LineNumber; j > 0; j--) {
                 (grid->GetLabelGrid())[i][j]->setPalette(
                     (grid->GetLabelGrid())[i][j - 1]->palette()
-                );
+                    );
             }
         }
         for (int i = 0; i < 10; i++) {

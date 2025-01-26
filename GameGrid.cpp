@@ -47,6 +47,8 @@ int GameGrid::ColorGrid(std::array<std::array<int, 4>, 4> forme, int *position, 
     int toColor[4][2] = {-1};
     int k = 0;
     int blocLowerDelimiters[4] = {-1};
+    int blocRightDelimiters[4] = {-1};
+    int blocLeftDelimiters[4] = {-1};
 
     for(int a = 0; a < 4; a++) {
         for(int b = 0; b < 4; b++) {
@@ -57,6 +59,20 @@ int GameGrid::ColorGrid(std::array<std::array<int, 4>, 4> forme, int *position, 
                 }
                 else {
                     blocLowerDelimiters[a] = b;
+                }
+                if(a < 3) {
+                    if(!forme[b][a + 1])
+                        blocRightDelimiters[b] = a;
+                }
+                else {
+                    blocRightDelimiters[b] = a;
+                }
+                if(a > 0) {
+                    if(!forme[b][a - 1])
+                        blocLeftDelimiters[b] = a;
+                }
+                else {
+                    blocLeftDelimiters[b] = a;
                 }
             }
         }
@@ -79,6 +95,22 @@ int GameGrid::ColorGrid(std::array<std::array<int, 4>, 4> forme, int *position, 
                          (i == 1 && j == blocLowerDelimiters[1]) ||
                          (i == 2 && j == blocLowerDelimiters[2]) ||
                          (i == 3 && j == blocLowerDelimiters[3]))) {
+                    valid = 0;
+                    break;
+                }
+                else if(direction == RIGHT && labelGrid[i + position[0]][j + position[1]]->palette().color(QPalette::Window) != Qt::gray &&
+                         ((j == 0 && i == blocRightDelimiters[0]) ||
+                          (j == 1 && i == blocRightDelimiters[1]) ||
+                          (j == 2 && i == blocRightDelimiters[2]) ||
+                          (j == 3 && i == blocRightDelimiters[3]))) {
+                    valid = 0;
+                    break;
+                }
+                else if(direction == LEFT && labelGrid[i + position[0]][j + position[1]]->palette().color(QPalette::Window) != Qt::gray &&
+                         ((j == 0 && i == blocLeftDelimiters[0]) ||
+                          (j == 1 && i == blocLeftDelimiters[1]) ||
+                          (j == 2 && i == blocLeftDelimiters[2]) ||
+                          (j == 3 && i == blocLeftDelimiters[3]))) {
                     valid = 0;
                     break;
                 }
