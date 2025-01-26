@@ -390,10 +390,15 @@ void GameWindow::keyPressEvent(QKeyEvent *k)
                         break;
                     }
                 }
-                else if(blocPosition[0] > 7){
+                else if(blocPosition[0] > 6){
                     switch(blocPosition[0]){
                     case 8:
-                        UpdateBlocPosition(diff_left, LEFT);
+                        if(currentBloc -> GetLenght() == 16){
+                            UpdateBlocPosition(double_diff_left, LEFT);
+                        }
+                        else{
+                            UpdateBlocPosition(diff_left, LEFT);
+                        }
                         break;
                     case 9:
                         UpdateBlocPosition(double_diff_left, LEFT);
@@ -419,6 +424,9 @@ void GameWindow::keyPressEvent(QKeyEvent *k)
                 else if(blocPosition[0] > 7){
                     switch(blocPosition[0]){
                     case 8:
+                        if(currentBloc -> GetLenght() == 16){
+                            UpdateBlocPosition(double_diff_left, LEFT);
+                        }
                         UpdateBlocPosition(diff_left, LEFT);
                         break;
                     case 9:

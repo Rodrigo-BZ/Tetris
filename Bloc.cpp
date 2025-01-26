@@ -142,7 +142,7 @@ void Bloc::RotateClockwise(int *position, GameGrid *grid)
                         }
                     }
                 }
-                forme[j][3 - i] = temp[i][j];
+                forme[j][i] = temp[i][j];
             }
         }
     }
@@ -295,7 +295,7 @@ void Bloc::RotateCounterClockwise(int *position, GameGrid *grid)
                         }
                     }
                 }
-                forme[j][3 - i] = temp[i][j];
+                forme[j][i] = temp[i][j];
             }
         }
     }
