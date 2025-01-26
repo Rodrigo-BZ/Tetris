@@ -24,7 +24,7 @@ public slots:
     void disconnectFromHost();
 
 private:
-    QTcpSocket *m_clientSocket;
+    std::unique_ptr<QTcpSocket> m_clientSocket;
     bool m_loggedIn;
     void jsonReceived(const QJsonObject &doc);
 

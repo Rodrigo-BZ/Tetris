@@ -1,26 +1,26 @@
 #include "PlayerClient.h"
 
-PlayerClient::PlayerClient(QObject *parent): QObject(parent), m_clientSocket(new QTcpSocket(this)), m_loggedIn(false)
+PlayerClient::PlayerClient(QObject *parent): QObject(parent), m_clientSocket(std::make_unique<QTcpSocket>(this)), m_loggedIn(false)
 {
     // Forward the connected and disconnected signals
-    connect(m_clientSocket, &QTcpSocket::connected, this, &PlayerClient::connected);
-    connect(m_clientSocket, &QTcpSocket::disconnected, this, &PlayerClient::disconnected);
+    connect(m_clientSocket.get(), &QTcpSocket::connected, this, &PlayerClient::connected);
+    connect(m_clientSocket.get(), &QTcpSocket::disconnected, this, &PlayerClient::disconnected);
 
     // Connect readyRead() to the slot that will take care of reading the data in
-    connect(m_clientSocket, &QTcpSocket::readyRead, this, &PlayerClient::onReadyRead);
+    connect(m_clientSocket.get(), &QTcpSocket::readyRead, this, &PlayerClient::onReadyRead);
 
     // Forward the error signal, QOverload is necessary as error() is overloaded, see the Qt docs
-    connect(m_clientSocket, &QAbstractSocket::errorOccurred, this, &PlayerClient::error);
+    connect(m_clientSocket.get(), &QAbstractSocket::errorOccurred, this, &PlayerClient::error);
 
     // Reset the m_loggedIn variable when we disconnect. Since the operation is trivial we use a lambda instead of creating another slot
-    connect(m_clientSocket, &QTcpSocket::disconnected, this, [this]()->void{m_loggedIn = false;});
+    connect(m_clientSocket.get(), &QTcpSocket::disconnected, this, [this]()->void{m_loggedIn = false;});
 }
 
 void PlayerClient::login(const QString &userName)
 {
     if (m_clientSocket->state() == QAbstractSocket::ConnectedState) { // If the client is connected
         // Create a QDataStream operating on the socket
-        QDataStream clientStream(m_clientSocket);
+        QDataStream clientStream(m_clientSocket.get());
 
         // Set the version so that programs compiled with different versions of Qt can agree on how to serialise
         clientStream.setVersion(QDataStream::Qt_6_8);
@@ -41,7 +41,7 @@ void PlayerClient::sendMessage(const QString &text)
         return; // Don't send empty messages
 
     // Create a QDataStream operating on the socket
-    QDataStream clientStream(m_clientSocket);
+    QDataStream clientStream(m_clientSocket.get());
 
     // Set the version so that programs compiled with different versions of Qt can agree on how to serialise
     clientStream.setVersion(QDataStream::Qt_6_8);
@@ -121,7 +121,7 @@ void PlayerClient::onReadyRead()
     // prepare a container to hold the UTF-8 encoded JSON we receive from the socket
     QByteArray jsonData;
     // create a QDataStream operating on the socket
-    QDataStream socketStream(m_clientSocket);
+    QDataStream socketStream(m_clientSocket.get());
     // set the version so that programs compiled with different versions of Qt can agree on how to serialise
     socketStream.setVersion(QDataStream::Qt_5_7);
     // start an infinite loop

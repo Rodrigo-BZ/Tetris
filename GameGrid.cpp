@@ -36,7 +36,17 @@ void GameGrid::ConstructGrid(QWidget *gridParent, int initialX, int initialY, in
             palette.setColor(QPalette::Window, Qt::gray);
             labelGrid[i][j]->setAutoFillBackground(true);
             labelGrid[i][j]->setPalette(palette);
-            labelGrid[i][j]->setVisible(true);
+            labelGrid[i][j]->setVisible(false);
+        }
+    }
+}
+
+void GameGrid::Show()
+{
+    if(*labelGrid != nullptr) {
+        for(int i = 0; i < 10; i++) {
+            for(int j = 0; j < 21; j++)
+                labelGrid[i][j]->setVisible(true);
         }
     }
 }
@@ -174,6 +184,8 @@ QString GameGrid::SaveState()
                 saved = 'g';
             else if(color == QColor(255,0,0))
                 saved = 'r';
+            else if(color == Qt::black)
+                saved = 'B';
 
             state[j + (i * 21)] = saved;
         }
@@ -205,8 +217,32 @@ void GameGrid::CopyState(QString oppState)
                 palette.setColor(QPalette::Window, QColor(0,255,0));
             else if(received == 'r')
                 palette.setColor(QPalette::Window, QColor(255,0,0));
+            else if(received == 'B')
+                palette.setColor(QPalette::Window, Qt::black);
 
             labelGrid[i][j]->setPalette(palette);
         }
+    }
+}
+
+void GameGrid::AddLineBottom(std::array<std::array<int, 4>, 4> forme, int *position)
+{
+    for(int i = 0; i < 10; i++) {
+        for(int j = 0; j < 20; j++) {
+            bool intoBloc = false;
+            if((i >= position[0] && i <= position[0] + 3) && (j + 1 >= position[1] && j + 1 <= position[1] + 3)) { // 1 above current 4x4
+                intoBloc = forme[j+1-position[1]][i-position[0]]; // moving bloc cant be copied
+            }
+            if(!intoBloc)
+                (labelGrid[i][j]->setPalette(labelGrid[i][j + 1]->palette()));
+        }
+    }
+
+    int hole = rand() % 10;
+    for(int i = 0; i < 10; i++) {
+        if(i != hole)
+            labelGrid[i][20]->setPalette(Qt::black);
+        else
+            labelGrid[i][20]->setPalette(Qt::gray);
     }
 }
