@@ -34,6 +34,7 @@ public:
 private slots:
     void on_btnMenu_clicked();
     void on_btnReset_clicked();
+    void on_btnConnect_clicked();
     void GenerateBloc();
     void PredictBloc();
     void PlaceBloc();
@@ -43,8 +44,14 @@ private slots:
     void keyPressEvent(QKeyEvent *k);
     void focusInEvent(QFocusEvent *event);
     void ExcludeLine(int LineNumber);
+    void AddLinePenalty();
     void gameOver();
+    void Victory();
     void InitializeGame();
+    void ResetUi(bool multip);
+    void InitializePredictionWidget(int labelStartingX, int blocStartingX);
+    void InitializeScoreWidget(int startingX);
+    void UpdateScoreLabel();
 
     void attemptConnection();
     void connectedToServer();
@@ -60,29 +67,33 @@ private slots:
 
 private:
     bool multip = false;
-    Ui::GameWindow *ui;
-    QWidget *menuWindow;
-    NextBlocPred *blocPred;
-    QTimer *timer = nullptr;
-    GameGrid *grid = nullptr;
-    GameGrid *opponentGrid = nullptr;
-    Bloc *currentBloc;
-    Bloc *nextBloc;
+    bool allowMovements = false;
     int blocPosition[2] = {3, 0};
-    QTimer* keyTimer;
     int currentKey;
     int Niveau;
     int linesCleared;
     int linesClearedatOnce;
     int Score = 0;
-    QLabel *scoreLabel; 
-    QLabel *levelLabel;
-    QLabel *predLabel;
-    QLabel *gameOverLabel = nullptr;
-    QLabel *opponentGameOverLabel = nullptr;
-    void InitializeScoreWidget(); 
-    void UpdateScoreLabel();
 
-    PlayerClient *m_playerClient;
+    Ui::GameWindow *ui;
+    QWidget *menuWindow;
+    QString playerName;
+
+    std::unique_ptr<NextBlocPred> blocPred;
+    std::unique_ptr<QTimer> timer;
+    std::unique_ptr<GameGrid> grid;
+    std::unique_ptr<GameGrid> opponentGrid;
+    std::shared_ptr<Bloc> currentBloc;
+    std::shared_ptr<Bloc> nextBloc;
+    std::unique_ptr<QLabel> scoreLabel;
+    std::unique_ptr<QLabel> levelLabel;
+    std::unique_ptr<QLabel> predLabel;
+    std::unique_ptr<QLabel> gameOverLabel;
+    std::unique_ptr<QLabel> opponentGameOverLabel;
+    std::unique_ptr<QLabel> waitingOpponentLabel;
+    std::unique_ptr<QLabel> playerNameLabel;
+    std::unique_ptr<QLabel> opponentNameLabel;
+
+    std::unique_ptr<PlayerClient> m_playerClient;
 };
 #endif // GAMEWINDOW_H

@@ -22,6 +22,7 @@ public:
 private slots:
     void on_btnPlay_clicked();
     void on_btnMultiplayer_clicked();
+    void on_btnQuit_clicked();
 
 private:
     Ui::MenuWindow *ui;
