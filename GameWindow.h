@@ -46,7 +46,7 @@ private slots:
     void ExcludeLine(int LineNumber);
     void gameOver();
     void InitializeGame();
-    void ResetUi();
+    void ResetUi(bool multip);
     void InitializePredictionWidget(int labelStartingX, int blocStartingX);
     void InitializeScoreWidget(int startingX);
     void UpdateScoreLabel();
@@ -65,30 +65,33 @@ private slots:
 
 private:
     bool multip = false;
-    Ui::GameWindow *ui;
-    QWidget *menuWindow;
-    NextBlocPred *blocPred = nullptr;
-    QTimer *timer = nullptr;
-    GameGrid *grid = nullptr;
-    GameGrid *opponentGrid = nullptr;
-    Bloc *currentBloc = nullptr;
-    Bloc *nextBloc = nullptr;
+    bool allowMovements = false;
     int blocPosition[2] = {3, 0};
     int currentKey;
     int Niveau;
     int linesCleared;
     int linesClearedatOnce;
     int Score = 0;
-    QString playerName;
-    QLabel *scoreLabel = nullptr;
-    QLabel *levelLabel = nullptr;
-    QLabel *predLabel = nullptr;
-    QLabel *gameOverLabel = nullptr;
-    QLabel *opponentGameOverLabel = nullptr;
-    QLabel *waitingOpponentLabel = nullptr;
-    QLabel *playerNameLabel = nullptr;
-    QLabel *opponentNameLabel = nullptr;
 
-    PlayerClient *m_playerClient;
+    Ui::GameWindow *ui;
+    QWidget *menuWindow;
+    QString playerName;
+
+    std::unique_ptr<NextBlocPred> blocPred;
+    std::unique_ptr<QTimer> timer;
+    std::unique_ptr<GameGrid> grid;
+    std::unique_ptr<GameGrid> opponentGrid;
+    std::shared_ptr<Bloc> currentBloc;
+    std::shared_ptr<Bloc> nextBloc;
+    std::unique_ptr<QLabel> scoreLabel;
+    std::unique_ptr<QLabel> levelLabel;
+    std::unique_ptr<QLabel> predLabel;
+    std::unique_ptr<QLabel> gameOverLabel;
+    std::unique_ptr<QLabel> opponentGameOverLabel;
+    std::unique_ptr<QLabel> waitingOpponentLabel;
+    std::unique_ptr<QLabel> playerNameLabel;
+    std::unique_ptr<QLabel> opponentNameLabel;
+
+    std::unique_ptr<PlayerClient> m_playerClient;
 };
 #endif // GAMEWINDOW_H

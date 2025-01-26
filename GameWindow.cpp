@@ -8,18 +8,18 @@ void GameWindow::focusInEvent(QFocusEvent *event) {
 
 GameWindow::GameWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::GameWindow), m_playerClient(new PlayerClient(this))
+    , ui(new Ui::GameWindow), m_playerClient(std::make_unique<PlayerClient>(this))
 {
     ui->setupUi(this);
 
-    connect(m_playerClient, &PlayerClient::connected, this, &GameWindow::connectedToServer);
-    connect(m_playerClient, &PlayerClient::loggedIn, this, &GameWindow::loggedIn);
-    connect(m_playerClient, &PlayerClient::loginError, this, &GameWindow::loginFailed);
-    connect(m_playerClient, &PlayerClient::messageReceived, this, &GameWindow::messageReceived);
-    connect(m_playerClient, &PlayerClient::disconnected, this, &GameWindow::disconnectedFromServer);
-    connect(m_playerClient, &PlayerClient::error, this, &GameWindow::error);
-    connect(m_playerClient, &PlayerClient::userJoined, this, &GameWindow::userJoined);
-    connect(m_playerClient, &PlayerClient::userLeft, this, &GameWindow::userLeft);
+    connect(m_playerClient.get(), &PlayerClient::connected, this, &GameWindow::connectedToServer);
+    connect(m_playerClient.get(), &PlayerClient::loggedIn, this, &GameWindow::loggedIn);
+    connect(m_playerClient.get(), &PlayerClient::loginError, this, &GameWindow::loginFailed);
+    connect(m_playerClient.get(), &PlayerClient::messageReceived, this, &GameWindow::messageReceived);
+    connect(m_playerClient.get(), &PlayerClient::disconnected, this, &GameWindow::disconnectedFromServer);
+    connect(m_playerClient.get(), &PlayerClient::error, this, &GameWindow::error);
+    connect(m_playerClient.get(), &PlayerClient::userJoined, this, &GameWindow::userJoined);
+    connect(m_playerClient.get(), &PlayerClient::userLeft, this, &GameWindow::userLeft);
 
     setFocus();
 }
@@ -27,6 +27,8 @@ GameWindow::GameWindow(QWidget *parent)
 void GameWindow::SetMultiPlayer(bool multip)
 {
     this->multip = multip;
+
+    ResetUi(multip);
 
     if(multip) {
         ui->btnReset->hide();
@@ -45,41 +47,26 @@ void GameWindow::SetMultiPlayer(bool multip)
 void GameWindow::InitializeGame()
 {
     if(multip) {
-        grid = new GameGrid(this, 75, 50, 30, 30);
-        opponentGrid = new GameGrid(this, width() - 300 - 75, 50, 30, 30);
-
-        gameOverLabel = new QLabel("GAME OVER", this);
         gameOverLabel->setStyleSheet("font-size: 32px; color: red; font-weight: bold;");
         gameOverLabel->setAlignment(Qt::AlignCenter);
         gameOverLabel->setGeometry(75, (height() - 100) / 2, 300, 100);
         gameOverLabel->hide();
 
-        opponentGameOverLabel = new QLabel("GAME OVER", this);
         opponentGameOverLabel->setStyleSheet("font-size: 32px; color: red; font-weight: bold;");
         opponentGameOverLabel->setAlignment(Qt::AlignCenter);
         opponentGameOverLabel->setGeometry(width() - 300 - 75, (height() - 100) / 2, 300, 100);
         opponentGameOverLabel->hide();
 
-        InitializePredictionWidget((width() - 200) / 2, (width() - 100) / 2);
-
-        InitializeScoreWidget((width() - 200) / 2);
-
         waitingOpponentLabel->hide();
         playerNameLabel->show();
         opponentNameLabel->show();
+        opponentGrid->Show();
     }
     else {
-        grid = new GameGrid(this, (width() - 300) / 2, (height() - 630) / 2, 30, 30);
-
-        gameOverLabel = new QLabel("GAME OVER", this);
         gameOverLabel->setStyleSheet("font-size: 32px; color: red; font-weight: bold;");
         gameOverLabel->setAlignment(Qt::AlignCenter);
         gameOverLabel->setGeometry((width() - 300) / 2, (height() - 100) / 2, 300, 100);
         gameOverLabel->hide();
-
-        InitializePredictionWidget(width() - 300, width() - 250);
-
-        InitializeScoreWidget(width() - 300);
     }
 
     Niveau = 0;
@@ -89,42 +76,48 @@ void GameWindow::InitializeGame()
     blocPosition[1] = 0;
 
     UpdateScoreLabel();
-
     PredictBloc();
     GenerateBloc();
 
-    timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(TimerEvent()));
+    grid->Show();
+    predLabel->show();
+    scoreLabel->show();
+    levelLabel->show();
+
+    timer = std::make_unique<QTimer>(this);
+    connect(timer.get(), SIGNAL(timeout()), this, SLOT(TimerEvent()));
     timer->setInterval(600);
     timer->start();
+
+    allowMovements = true;
 }
 
 void GameWindow::InitializePredictionWidget(int labelStartingX, int blocStartingX)
 {
-    predLabel = new QLabel("NEXT BLOC", this);
+    predLabel = std::make_unique<QLabel>("NEXT BLOC", this);
     predLabel->setGeometry(labelStartingX, 270, 200, 30);
     predLabel->setFont(QFont("8514oem"));
     predLabel->setStyleSheet("font-size: 16px; color: white;");
     predLabel->setAlignment(Qt::AlignCenter);
-    predLabel->show();
-    blocPred = new NextBlocPred(this, blocStartingX, 300, 30, 30);
+    predLabel->hide();
+    blocPred = std::make_unique<NextBlocPred>(this, blocStartingX, 300, 30, 30);
 }
 
 void GameWindow::InitializeScoreWidget(int startingX)
 {
-    scoreLabel = new QLabel("Score: 0", this);
+    scoreLabel = std::make_unique<QLabel>("Score: 0", this);
     scoreLabel->setFont(QFont("8514oem"));
     scoreLabel->setGeometry(startingX, 110, 200, 30);
     scoreLabel->setStyleSheet("font-size: 22px; color: white;");
     scoreLabel->setAlignment(Qt::AlignCenter);
-    scoreLabel->show();
+    scoreLabel->hide();
 
-    levelLabel = new QLabel("Level: 0", this);
+    levelLabel = std::make_unique<QLabel>("Level: 0", this);
     levelLabel->setFont(QFont("8514oem"));
     levelLabel->setGeometry(startingX, 140, 200, 30);
     levelLabel->setStyleSheet("font-size: 22px; color: white;");
     levelLabel->setAlignment(Qt::AlignCenter);
-    levelLabel->show();
+    levelLabel->hide();
 }
 
 void GameWindow::UpdateScoreLabel() {
@@ -142,69 +135,35 @@ void GameWindow::GetMenuWindowPtr(QWidget *menuWindow)
     this->menuWindow = menuWindow;
 }
 
-void GameWindow::ResetUi()
+void GameWindow::ResetUi(bool multip)
 {
-    if(timer != nullptr) {
-        delete timer;
-        timer = nullptr;
+    if(multip) {
+        grid = std::make_unique<GameGrid>(this, 75, 50, 30, 30);
+        opponentGrid = std::make_unique<GameGrid>(this, width() - 300 - 75, 50, 30, 30);
+        opponentGameOverLabel = std::make_unique<QLabel>("GAME OVER", this);
+        opponentGameOverLabel->hide();
+        waitingOpponentLabel = std::make_unique<QLabel>("Waiting for opponent to connect...", this);
+        waitingOpponentLabel->hide();
+
+        InitializePredictionWidget((width() - 200) / 2, (width() - 100) / 2);
+        InitializeScoreWidget((width() - 200) / 2);
     }
-    if(grid != nullptr) {
-        delete grid;
-        grid = nullptr;
+    else {
+        grid = std::make_unique<GameGrid>(this, (width() - 300) / 2, (height() - 630) / 2, 30, 30);
+
+        InitializePredictionWidget(width() - 300, width() - 250);
+        InitializeScoreWidget(width() - 300);
     }
-    if(opponentGrid != nullptr) {
-        delete opponentGrid;
-        opponentGrid = nullptr;
-    }
-    if(gameOverLabel != nullptr) {
-        delete gameOverLabel;
-        gameOverLabel = nullptr;
-    }
-    if(opponentGameOverLabel != nullptr) {
-        delete opponentGameOverLabel;
-        opponentGameOverLabel = nullptr;
-    }
-    if(predLabel != nullptr) {
-        delete predLabel;
-        predLabel = nullptr;
-    }
-    if(currentBloc != nullptr) {
-        delete currentBloc;
-        currentBloc = nullptr;
-    }
-    if(nextBloc != nullptr) {
-        delete nextBloc;
-        nextBloc = nullptr;
-    }
-    if(blocPred != nullptr) {
-        delete blocPred;
-        blocPred = nullptr;
-    }
-    if(scoreLabel != nullptr) {
-        delete scoreLabel;
-        scoreLabel = nullptr;
-    }
-    if(levelLabel != nullptr) {
-        delete levelLabel;
-        levelLabel = nullptr;
-    }
-    if(waitingOpponentLabel != nullptr) {
-        delete waitingOpponentLabel;
-        waitingOpponentLabel = nullptr;
-    }
-    if(playerNameLabel != nullptr) {
-        delete playerNameLabel;
-        playerNameLabel = nullptr;
-    }
-    if(opponentNameLabel != nullptr) {
-        delete opponentNameLabel;
-        opponentNameLabel = nullptr;
-    }
+
+    gameOverLabel = std::make_unique<QLabel>("GAME OVER", this);
+    gameOverLabel->hide();
 }
 
 void GameWindow::on_btnMenu_clicked()
 {
-    ResetUi();
+    if(timer != nullptr)
+        timer->stop();
+    allowMovements = false;
 
     if(multip)
         m_playerClient->disconnectFromHost();
@@ -215,7 +174,7 @@ void GameWindow::on_btnMenu_clicked()
 
 void GameWindow::on_btnReset_clicked()
 {
-    ResetUi();
+    ResetUi(multip);
     InitializeGame();
 }
 
@@ -229,25 +188,25 @@ void GameWindow::PredictBloc()
     int blocType = rand() % 7;
     switch(blocType) {
     case 0:
-        nextBloc = new BlocL();
+        nextBloc = std::make_shared<BlocL>();
         break;
     case 1:
-        nextBloc = new BlocI();
+        nextBloc = std::make_shared<BlocI>();
         break;
     case 2:
-        nextBloc = new BlocO();
+        nextBloc = std::make_shared<BlocO>();
         break;
     case 3:
-        nextBloc = new BlocT();
+        nextBloc = std::make_shared<BlocT>();
         break;
     case 4:
-        nextBloc = new BlocJ();
+        nextBloc = std::make_shared<BlocJ>();
         break;
     case 5:
-        nextBloc = new BlocS();
+        nextBloc = std::make_shared<BlocS>();
         break;
     case 6:
-        nextBloc = new BlocZ();
+        nextBloc = std::make_shared<BlocZ>();
         break;
     }
     blocPred->SetNextBloc(nextBloc->GetForme(),nextBloc->GetColor());
@@ -264,14 +223,17 @@ void GameWindow::GenerateBloc()
 void GameWindow::PlaceBloc()
 {
     if(!grid->ColorGrid(currentBloc->GetForme(), blocPosition, blocPosition, currentBloc->GetColor(),DOWN)) {
-        timer->stop();
+        gameOver();
+        if(multip)
+            sendMessage('l');
     }
 
     if(multip)
         sendMessage(' ');
 }
 
-void GameWindow::UpdateBlocPosition(int *difference, Direction direction) {
+void GameWindow::UpdateBlocPosition(int *difference, Direction direction)
+{
     int initialPosition[2] = {blocPosition[0], blocPosition[1]};
     blocPosition[0] += difference[0];
     blocPosition[1] += difference[1];
@@ -325,8 +287,9 @@ void GameWindow::FixBloc()
 
 void GameWindow::gameOver(){
     timer->stop();
+    allowMovements = false;
+
     gameOverLabel->show();
-    //gameOverLabel->activateWindow();
     gameOverLabel->raise();
 
     if(multip)
@@ -337,80 +300,84 @@ void GameWindow::TimerEvent()
 {
     int difference[2] = {0, 1};
     UpdateBlocPosition(difference, DOWN);
-    }
+}
 
-void GameWindow::keyPressEvent(QKeyEvent *k) {
-    int diff_left[2] = {-1,0};
-    int diff_right[2] = {1,0};
-    int diff_down[2] = {0,1};
-    int double_diff_right[2] = {2,0};
-    int double_diff_left[2] = {-2,0};
-    switch (k -> key()) {
-        case Qt::Key_Left:
-            UpdateBlocPosition(diff_left, LEFT);
-            break;
-        case Qt::Key_Right:
-            UpdateBlocPosition(diff_right, RIGHT);
-            break;
-        case Qt::Key_Down:
-            UpdateBlocPosition(diff_down, DOWN);
-            break;
-        case Qt::Key_Space:
-            for(int i = 1; i < 21; i++){
-                int inPosition[2] = {blocPosition[0], blocPosition[1]+i-1};
-                int afPosition[2] = {blocPosition[0], blocPosition[1]+i};
-                if(!grid->ColorGrid(currentBloc->GetForme(), afPosition, inPosition, currentBloc->GetColor(), DOWN)){
-                    FixBloc();
-                    break;
+void GameWindow::keyPressEvent(QKeyEvent *k)
+{
+    if(allowMovements) {
+        int diff_left[2] = {-1,0};
+        int diff_right[2] = {1,0};
+        int diff_down[2] = {0,1};
+        int double_diff_right[2] = {2,0};
+        int double_diff_left[2] = {-2,0};
+
+        switch (k -> key()) {
+            case Qt::Key_Left:
+                UpdateBlocPosition(diff_left, LEFT);
+                break;
+            case Qt::Key_Right:
+                UpdateBlocPosition(diff_right, RIGHT);
+                break;
+            case Qt::Key_Down:
+                UpdateBlocPosition(diff_down, DOWN);
+                break;
+            case Qt::Key_Space:
+                for(int i = 1; i < 21; i++){
+                    int inPosition[2] = {blocPosition[0], blocPosition[1]+i-1};
+                    int afPosition[2] = {blocPosition[0], blocPosition[1]+i};
+                    if(!grid->ColorGrid(currentBloc->GetForme(), afPosition, inPosition, currentBloc->GetColor(), DOWN)){
+                        FixBloc();
+                        break;
+                    }
                 }
-            }
-            break;
-        case Qt::Key_Z:
-            if(blocPosition[0] < 0){
-                switch(blocPosition[0]){
-                case -1:
-                    UpdateBlocPosition(diff_right, RIGHT);
-                    break;
-                case -2:
-                    UpdateBlocPosition(double_diff_right, RIGHT);
-                    break;
+                break;
+            case Qt::Key_Z:
+                if(blocPosition[0] < 0){
+                    switch(blocPosition[0]){
+                    case -1:
+                        UpdateBlocPosition(diff_right, RIGHT);
+                        break;
+                    case -2:
+                        UpdateBlocPosition(double_diff_right, RIGHT);
+                        break;
+                    }
                 }
-            }
-            else if(blocPosition[0] > 7){
-                switch(blocPosition[0]){
-                case 8:
-                    UpdateBlocPosition(diff_left, LEFT);
-                    break;
-                case 9:
-                    UpdateBlocPosition(double_diff_left, LEFT);
-                    break;
+                else if(blocPosition[0] > 7){
+                    switch(blocPosition[0]){
+                    case 8:
+                        UpdateBlocPosition(diff_left, LEFT);
+                        break;
+                    case 9:
+                        UpdateBlocPosition(double_diff_left, LEFT);
+                        break;
+                    }
                 }
-            }
-            currentBloc->RotateClockwise(blocPosition, grid);
-            break;
-        case Qt::Key_X:
-            if(blocPosition[0] < 0){
-                switch(blocPosition[0]){
-                case -1:
-                    UpdateBlocPosition(diff_right, RIGHT);
-                    break;
-                case -2:
-                    UpdateBlocPosition(double_diff_right, RIGHT);
-                    break;
+                currentBloc->RotateClockwise(blocPosition, grid.get());
+                break;
+            case Qt::Key_X:
+                if(blocPosition[0] < 0){
+                    switch(blocPosition[0]){
+                    case -1:
+                        UpdateBlocPosition(diff_right, RIGHT);
+                        break;
+                    case -2:
+                        UpdateBlocPosition(double_diff_right, RIGHT);
+                        break;
+                    }
                 }
-            }
-            else if(blocPosition[0] > 7){
-                switch(blocPosition[0]){
-                case 8:
-                    UpdateBlocPosition(diff_left, LEFT);
-                    break;
-                case 9:
-                    UpdateBlocPosition(double_diff_left, LEFT);
-                    break;
+                else if(blocPosition[0] > 7){
+                    switch(blocPosition[0]){
+                    case 8:
+                        UpdateBlocPosition(diff_left, LEFT);
+                        break;
+                    case 9:
+                        UpdateBlocPosition(double_diff_left, LEFT);
+                        break;
+                    }
                 }
-            }
-            currentBloc->RotateCounterClockwise(blocPosition, grid);
-            break;
+                currentBloc->RotateCounterClockwise(blocPosition, grid.get());
+                break;
+        }
     }
 }
 
@@ -480,13 +447,12 @@ void GameWindow::loggedIn()
     // once we successfully log in we enable the ui to display and send messages
     ui->btnConnect->hide();
 
-    waitingOpponentLabel = new QLabel("Waiting for opponent to connect...", this);
     waitingOpponentLabel->setStyleSheet("font-size: 15px; color: white;");
     waitingOpponentLabel->setAlignment(Qt::AlignCenter);
     waitingOpponentLabel->setGeometry((width() - 400) / 2, 230, 400, 100);
     waitingOpponentLabel->show();
 
-    playerNameLabel = new QLabel(playerName, this);
+    playerNameLabel = std::make_unique<QLabel>(playerName, this);
     playerNameLabel->setStyleSheet("font-size: 30px; color: white;");
     playerNameLabel->setAlignment(Qt::AlignCenter);
     playerNameLabel->setGeometry(75, 0, 300, 50);
@@ -505,7 +471,7 @@ void GameWindow::loginFailed(const QString &reason)
 void GameWindow::messageReceived(const QString &sender, const QString &text)
 {
     if(text.compare(QLatin1String("start"), Qt::CaseInsensitive) == 0) {
-        opponentNameLabel = new QLabel(sender, this);
+        opponentNameLabel = std::make_unique<QLabel>(sender, this);
         opponentNameLabel->setStyleSheet("font-size: 30px; color: white;");
         opponentNameLabel->setAlignment(Qt::AlignCenter);
         opponentNameLabel->setGeometry(width() - 300 - 75, 0, 300, 50);
@@ -515,10 +481,10 @@ void GameWindow::messageReceived(const QString &sender, const QString &text)
     }
     else if(text.compare(QLatin1String("over"), Qt::CaseInsensitive) == 0) {
         opponentGameOverLabel->show();
-        opponentGameOverLabel->activateWindow();
         opponentGameOverLabel->raise();
 
         timer->stop();
+        allowMovements = false;
     }
     else
         opponentGrid->CopyState(text);
@@ -545,13 +511,11 @@ void GameWindow::disconnectedFromServer()
     // communicate the event to the user via a message box
     QMessageBox::warning(this, tr("Disconnected"), tr("You have been disconnected"));
     // disable the ui to send and display messages
-
-    //on_btnMenu_clicked();
 }
 
 void GameWindow::userJoined(const QString &username)
 {
-    opponentNameLabel = new QLabel(username, this);
+    opponentNameLabel = std::make_unique<QLabel>(username, this);
     opponentNameLabel->setStyleSheet("font-size: 30px; color: white;");
     opponentNameLabel->setAlignment(Qt::AlignCenter);
     opponentNameLabel->setGeometry(width() - 300 - 75, 0, 300, 50);
@@ -563,6 +527,13 @@ void GameWindow::userJoined(const QString &username)
 
 void GameWindow::userLeft(const QString &username)
 {
+    if(gameOverLabel->isHidden()) {
+        opponentGameOverLabel->show();
+        opponentGameOverLabel->raise();
+        timer->stop();
+        allowMovements = false;
+    }
+
     QMessageBox::information(this, tr("User Left"), tr("%1 Left").arg(username));
 }
 
@@ -619,6 +590,4 @@ void GameWindow::error(QAbstractSocket::SocketError socketError)
     default:
         Q_UNREACHABLE();
     }
-
-    //on_btnMenu_clicked();
 }

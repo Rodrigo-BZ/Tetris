@@ -36,7 +36,17 @@ void GameGrid::ConstructGrid(QWidget *gridParent, int initialX, int initialY, in
             palette.setColor(QPalette::Window, Qt::gray);
             labelGrid[i][j]->setAutoFillBackground(true);
             labelGrid[i][j]->setPalette(palette);
-            labelGrid[i][j]->setVisible(true);
+            labelGrid[i][j]->setVisible(false);
+        }
+    }
+}
+
+void GameGrid::Show()
+{
+    if(*labelGrid != nullptr) {
+        for(int i = 0; i < 10; i++) {
+            for(int j = 0; j < 21; j++)
+                labelGrid[i][j]->setVisible(true);
         }
     }
 }

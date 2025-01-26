@@ -8,7 +8,7 @@ void CentralServer::incomingConnection(qintptr socketDescriptor)
     // We create an object that will take care of the communication with this client
     ServerWorker *worker = new ServerWorker(this);
     // we attempt to bind the worker to the client
-    if (!worker->setSocketDescriptor(socketDescriptor)) {
+    if (!worker->setSocketDescriptor(socketDescriptor) || m_clients.count() == 2) {
         // if we fail we clean up
         worker->deleteLater();
         return;
