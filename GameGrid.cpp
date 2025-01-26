@@ -12,7 +12,11 @@ GameGrid::GameGrid(QWidget *gridParent, int initialX, int initialY, int cellWidt
 
 GameGrid::~GameGrid()
 {
-
+    for(int i = 0; i < 10; i++) {
+        for(int j = 0; j < 21; j++) {
+            delete labelGrid[i][j];
+        }
+    }
 }
 
 QLabel* (*GameGrid::GetLabelGrid())[21] {
@@ -43,6 +47,8 @@ int GameGrid::ColorGrid(std::array<std::array<int, 4>, 4> forme, int *position, 
     int toColor[4][2] = {-1};
     int k = 0;
     int blocLowerDelimiters[4] = {-1};
+    int blocRightDelimiters[4] = {-1};
+    int blocLeftDelimiters[4] = {-1};
 
     for(int a = 0; a < 4; a++) {
         for(int b = 0; b < 4; b++) {
@@ -53,6 +59,20 @@ int GameGrid::ColorGrid(std::array<std::array<int, 4>, 4> forme, int *position, 
                 }
                 else {
                     blocLowerDelimiters[a] = b;
+                }
+                if(a < 3) {
+                    if(!forme[b][a + 1])
+                        blocRightDelimiters[b] = a;
+                }
+                else {
+                    blocRightDelimiters[b] = a;
+                }
+                if(a > 0) {
+                    if(!forme[b][a - 1])
+                        blocLeftDelimiters[b] = a;
+                }
+                else {
+                    blocLeftDelimiters[b] = a;
                 }
             }
         }
@@ -75,6 +95,22 @@ int GameGrid::ColorGrid(std::array<std::array<int, 4>, 4> forme, int *position, 
                          (i == 1 && j == blocLowerDelimiters[1]) ||
                          (i == 2 && j == blocLowerDelimiters[2]) ||
                          (i == 3 && j == blocLowerDelimiters[3]))) {
+                    valid = 0;
+                    break;
+                }
+                else if(direction == RIGHT && labelGrid[i + position[0]][j + position[1]]->palette().color(QPalette::Window) != Qt::gray &&
+                         ((j == 0 && i == blocRightDelimiters[0]) ||
+                          (j == 1 && i == blocRightDelimiters[1]) ||
+                          (j == 2 && i == blocRightDelimiters[2]) ||
+                          (j == 3 && i == blocRightDelimiters[3]))) {
+                    valid = 0;
+                    break;
+                }
+                else if(direction == LEFT && labelGrid[i + position[0]][j + position[1]]->palette().color(QPalette::Window) != Qt::gray &&
+                         ((j == 0 && i == blocLeftDelimiters[0]) ||
+                          (j == 1 && i == blocLeftDelimiters[1]) ||
+                          (j == 2 && i == blocLeftDelimiters[2]) ||
+                          (j == 3 && i == blocLeftDelimiters[3]))) {
                     valid = 0;
                     break;
                 }
@@ -108,6 +144,69 @@ void GameGrid::UncolorGrid(std::array<std::array<int, 4>, 4> forme, int *positio
         for(int j = 0; j < 4; j++) {
             if(forme[j][i])
                 labelGrid[i + position[0]][j + position[1]]->setPalette(Qt::gray);
+        }
+    }
+}
+
+QString GameGrid::SaveState()
+{
+    QString state;
+    state.resize(210, ' ');
+
+    for(int i = 0; i < 10; i++) {
+        for(int j = 0; j < 21; j++) {
+            QChar saved;
+            QColor color = labelGrid[i][j]->palette().color(QPalette::Window);
+
+            if(color == Qt::gray)
+                saved = 'G';
+            else if(color == QColor(255,165,0))
+                saved = 'o';
+            else if(color == QColor(0,255,255))
+                saved = 'c';
+            else if(color == QColor(255,255,0))
+                saved = 'y';
+            else if(color == QColor(128,0,128))
+                saved = 'p';
+            else if(color == QColor(0,0,255))
+                saved = 'b';
+            else if(color == QColor(0,255,0))
+                saved = 'g';
+            else if(color == QColor(255,0,0))
+                saved = 'r';
+
+            state[j + (i * 21)] = saved;
+        }
+    }
+
+    return state;
+}
+
+void GameGrid::CopyState(QString oppState)
+{
+    for(int i = 0; i < 10; i++) {
+        for(int j = 0; j < 21; j++) {
+            QPalette palette = labelGrid[i][j]->palette();
+            QChar received = oppState[j + (i * 21)];
+
+            if(received == 'G')
+                palette.setColor(QPalette::Window, Qt::gray);
+            else if(received == 'o')
+                palette.setColor(QPalette::Window, QColor(255,165,0));
+            else if(received == 'c')
+                palette.setColor(QPalette::Window, QColor(0,255,255));
+            else if(received == 'y')
+                palette.setColor(QPalette::Window, QColor(255,255,0));
+            else if(received == 'p')
+                palette.setColor(QPalette::Window, QColor(128,0,128));
+            else if(received == 'b')
+                palette.setColor(QPalette::Window, QColor(0,0,255));
+            else if(received == 'g')
+                palette.setColor(QPalette::Window, QColor(0,255,0));
+            else if(received == 'r')
+                palette.setColor(QPalette::Window, QColor(255,0,0));
+
+            labelGrid[i][j]->setPalette(palette);
         }
     }
 }

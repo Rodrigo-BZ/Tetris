@@ -12,6 +12,9 @@
 #include "BlocTypes.h"
 #include <QDebug>
 #include "NextBlocPred.h"
+#include "PlayerClient.h"
+#include <QMessageBox>
+#include <QInputDialog>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class GameWindow; }
@@ -26,11 +29,11 @@ public:
     ~GameWindow();
 
     void GetMenuWindowPtr(QWidget *menuWindow);
+    void SetMultiPlayer(bool multip);
 
 private slots:
     void on_btnMenu_clicked();
     void on_btnReset_clicked();
-    void showEvent(QShowEvent* event);
     void GenerateBloc();
     void PredictBloc();
     void PlaceBloc();
@@ -41,13 +44,28 @@ private slots:
     void focusInEvent(QFocusEvent *event);
     void ExcludeLine(int LineNumber);
     void gameOver();
+    void InitializeGame();
+
+    void attemptConnection();
+    void connectedToServer();
+    void attemptLogin(const QString &userName);
+    void loggedIn();
+    void loginFailed(const QString &reason);
+    void messageReceived(const QString &sender, const QString &text);
+    void sendMessage(QChar event);
+    void disconnectedFromServer();
+    void userJoined(const QString &username);
+    void userLeft(const QString &username);
+    void error(QAbstractSocket::SocketError socketError);
 
 private:
+    bool multip = false;
     Ui::GameWindow *ui;
     QWidget *menuWindow;
-    QTimer *timer;
-    GameGrid *grid;
     NextBlocPred *blocPred;
+    QTimer *timer = nullptr;
+    GameGrid *grid = nullptr;
+    GameGrid *opponentGrid = nullptr;
     Bloc *currentBloc;
     Bloc *nextBloc;
     int blocPosition[2] = {3, 0};
@@ -60,7 +78,11 @@ private:
     QLabel *scoreLabel; 
     QLabel *levelLabel;
     QLabel *predLabel;
+    QLabel *gameOverLabel = nullptr;
+    QLabel *opponentGameOverLabel = nullptr;
     void InitializeScoreWidget(); 
     void UpdateScoreLabel();
+
+    PlayerClient *m_playerClient;
 };
 #endif // GAMEWINDOW_H

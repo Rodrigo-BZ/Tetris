@@ -15,7 +15,7 @@ MenuWindow::~MenuWindow()
     delete ui;
 }
 
-void MenuWindow::GetGameWindowPtr(QWidget *gameWindow)
+void MenuWindow::GetGameWindowPtr(GameWindow *gameWindow)
 {
     this->gameWindow = gameWindow;
 }
@@ -23,6 +23,7 @@ void MenuWindow::GetGameWindowPtr(QWidget *gameWindow)
 void MenuWindow::on_btnPlay_clicked()
 {
     if (gameWindow) {
+        gameWindow->SetMultiPlayer(false);
         gameWindow->show();
         this->close();
     } else {
@@ -30,3 +31,13 @@ void MenuWindow::on_btnPlay_clicked()
     }
 }
 
+void MenuWindow::on_btnMultiplayer_clicked()
+{
+    if (gameWindow) {
+        gameWindow->SetMultiPlayer(true);
+        gameWindow->show();
+        this->close();
+    } else {
+        qDebug() << "GameWindow not initialized!";
+    }
+}
