@@ -1,0 +1,152 @@
+\doxysection{Bloc Class Reference}
+\hypertarget{class_bloc}{}\label{class_bloc}\index{Bloc@{Bloc}}
+
+
+This class represents the \doxylink{class_bloc}{Bloc} piece. It handles all actions that are performed by all \doxylink{class_bloc}{Bloc} types.  
+
+
+
+
+{\ttfamily \#include $<$Bloc.\+h$>$}
+
+Inheritance diagram for Bloc\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_bloc}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_bloc_a1793a48a92eadc91075e89542f4098b9}\label{class_bloc_a1793a48a92eadc91075e89542f4098b9} 
+{\bfseries Bloc} (QColor c)
+\item 
+void \mbox{\hyperlink{class_bloc_a3a2bd8ccc58d5f30ad1a2075ab31f016}{Rotate\+Clockwise}} (int \texorpdfstring{$\ast$}{*}position, \mbox{\hyperlink{class_game_grid}{Game\+Grid}} \texorpdfstring{$\ast$}{*}grid)
+\begin{DoxyCompactList}\small\item\em This function rotates a \doxylink{class_bloc}{Bloc} pieace 90 degrees clockwise. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_bloc_acfc01d505a4eb8f4e08cca2612ef9b86}{Rotate\+Counter\+Clockwise}} (int \texorpdfstring{$\ast$}{*}position, \mbox{\hyperlink{class_game_grid}{Game\+Grid}} \texorpdfstring{$\ast$}{*}grid)
+\begin{DoxyCompactList}\small\item\em This function rotates a \doxylink{class_bloc}{Bloc} pieace 90 degrees clockwise. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_bloc_a603f495af722a055aee8f492d747bb89}{Free\+Column}} (int column\+Number)
+\begin{DoxyCompactList}\small\item\em This function checks if a specific column in the \doxylink{class_bloc}{Bloc} piece matrix is free (only 0\textquotesingle{}s). \end{DoxyCompactList}\item 
+std\+::array$<$ std\+::array$<$ int, 4 $>$, 4 $>$ \mbox{\hyperlink{class_bloc_a01a150de91267ac8d9ae10f912f3ecca}{Get\+Forme}} () const
+\begin{DoxyCompactList}\small\item\em This function returns an int array that represents the shape of the \doxylink{class_bloc}{Bloc} piece. \end{DoxyCompactList}\item 
+QColor \mbox{\hyperlink{class_bloc_aec0bdbc76df0a4a57f09269440c1ca2d}{Get\+Color}} () const
+\begin{DoxyCompactList}\small\item\em This function returns the QColor value of a \doxylink{class_bloc}{Bloc} piece. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_bloc_a70bc4087a503c3b6782d3521b02b911a}{Get\+Lenght}} () const
+\begin{DoxyCompactList}\small\item\em This function returns the "{}length"{} of the \doxylink{class_bloc}{Bloc} piece. This corresponds to the matrix size necessary for representing the piece. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_bloc_aa2430d696c0b2ae6dd944a1fe0496363}\label{class_bloc_aa2430d696c0b2ae6dd944a1fe0496363} 
+std\+::array$<$ std\+::array$<$ int, 4 $>$, 4 $>$ {\bfseries forme} = \{0\}
+\begin{DoxyCompactList}\small\item\em The int array that represents the \doxylink{class_bloc}{Bloc} piece shape. \end{DoxyCompactList}\item 
+\Hypertarget{class_bloc_a4ab2d5e72978af0d66489811454118c7}\label{class_bloc_a4ab2d5e72978af0d66489811454118c7} 
+QColor {\bfseries color}
+\begin{DoxyCompactList}\small\item\em The QColor attribute to indicate the color of the \doxylink{class_bloc}{Bloc} piece. \end{DoxyCompactList}\item 
+\Hypertarget{class_bloc_affa061e50da8818f5914df0bd243aea3}\label{class_bloc_affa061e50da8818f5914df0bd243aea3} 
+int {\bfseries lenght}
+\begin{DoxyCompactList}\small\item\em This corresponds to the matrix size necessary for representing the piece. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class represents the \doxylink{class_bloc}{Bloc} piece. It handles all actions that are performed by all \doxylink{class_bloc}{Bloc} types. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_bloc_a603f495af722a055aee8f492d747bb89}\index{Bloc@{Bloc}!FreeColumn@{FreeColumn}}
+\index{FreeColumn@{FreeColumn}!Bloc@{Bloc}}
+\doxysubsubsection{\texorpdfstring{FreeColumn()}{FreeColumn()}}
+{\footnotesize\ttfamily \label{class_bloc_a603f495af722a055aee8f492d747bb89} 
+bool Bloc\+::\+Free\+Column (\begin{DoxyParamCaption}\item[{int}]{column\+Number}{}\end{DoxyParamCaption})}
+
+
+
+This function checks if a specific column in the \doxylink{class_bloc}{Bloc} piece matrix is free (only 0\textquotesingle{}s). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em column\+Number} & The column to be checked. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true 
+
+false 
+\end{DoxyReturn}
+\Hypertarget{class_bloc_aec0bdbc76df0a4a57f09269440c1ca2d}\index{Bloc@{Bloc}!GetColor@{GetColor}}
+\index{GetColor@{GetColor}!Bloc@{Bloc}}
+\doxysubsubsection{\texorpdfstring{GetColor()}{GetColor()}}
+{\footnotesize\ttfamily \label{class_bloc_aec0bdbc76df0a4a57f09269440c1ca2d} 
+QColor Bloc\+::\+Get\+Color (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+This function returns the QColor value of a \doxylink{class_bloc}{Bloc} piece. 
+
+\begin{DoxyReturn}{Returns}
+QColor 
+\end{DoxyReturn}
+\Hypertarget{class_bloc_a01a150de91267ac8d9ae10f912f3ecca}\index{Bloc@{Bloc}!GetForme@{GetForme}}
+\index{GetForme@{GetForme}!Bloc@{Bloc}}
+\doxysubsubsection{\texorpdfstring{GetForme()}{GetForme()}}
+{\footnotesize\ttfamily \label{class_bloc_a01a150de91267ac8d9ae10f912f3ecca} 
+std\+::array$<$ std\+::array$<$ int, 4 $>$, 4 $>$ Bloc\+::\+Get\+Forme (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+This function returns an int array that represents the shape of the \doxylink{class_bloc}{Bloc} piece. 
+
+\begin{DoxyReturn}{Returns}
+std\+::array\texorpdfstring{$<$}{<}std\+::array$<$int, 4$>$, 4\texorpdfstring{$>$}{>} 
+\end{DoxyReturn}
+\Hypertarget{class_bloc_a70bc4087a503c3b6782d3521b02b911a}\index{Bloc@{Bloc}!GetLenght@{GetLenght}}
+\index{GetLenght@{GetLenght}!Bloc@{Bloc}}
+\doxysubsubsection{\texorpdfstring{GetLenght()}{GetLenght()}}
+{\footnotesize\ttfamily \label{class_bloc_a70bc4087a503c3b6782d3521b02b911a} 
+int Bloc\+::\+Get\+Lenght (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+This function returns the "{}length"{} of the \doxylink{class_bloc}{Bloc} piece. This corresponds to the matrix size necessary for representing the piece. 
+
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\Hypertarget{class_bloc_a3a2bd8ccc58d5f30ad1a2075ab31f016}\index{Bloc@{Bloc}!RotateClockwise@{RotateClockwise}}
+\index{RotateClockwise@{RotateClockwise}!Bloc@{Bloc}}
+\doxysubsubsection{\texorpdfstring{RotateClockwise()}{RotateClockwise()}}
+{\footnotesize\ttfamily \label{class_bloc_a3a2bd8ccc58d5f30ad1a2075ab31f016} 
+void Bloc\+::\+Rotate\+Clockwise (\begin{DoxyParamCaption}\item[{int \texorpdfstring{$\ast$}{*}}]{position}{, }\item[{\mbox{\hyperlink{class_game_grid}{Game\+Grid}} \texorpdfstring{$\ast$}{*}}]{grid}{}\end{DoxyParamCaption})}
+
+
+
+This function rotates a \doxylink{class_bloc}{Bloc} pieace 90 degrees clockwise. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The position \mbox{[}x, y\mbox{]} of the current falling \doxylink{class_bloc}{Bloc} piece \\
+\hline
+{\em grid} & A pointer to the game Grid object \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_bloc_acfc01d505a4eb8f4e08cca2612ef9b86}\index{Bloc@{Bloc}!RotateCounterClockwise@{RotateCounterClockwise}}
+\index{RotateCounterClockwise@{RotateCounterClockwise}!Bloc@{Bloc}}
+\doxysubsubsection{\texorpdfstring{RotateCounterClockwise()}{RotateCounterClockwise()}}
+{\footnotesize\ttfamily \label{class_bloc_acfc01d505a4eb8f4e08cca2612ef9b86} 
+void Bloc\+::\+Rotate\+Counter\+Clockwise (\begin{DoxyParamCaption}\item[{int \texorpdfstring{$\ast$}{*}}]{position}{, }\item[{\mbox{\hyperlink{class_game_grid}{Game\+Grid}} \texorpdfstring{$\ast$}{*}}]{grid}{}\end{DoxyParamCaption})}
+
+
+
+This function rotates a \doxylink{class_bloc}{Bloc} pieace 90 degrees clockwise. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The position \mbox{[}x, y\mbox{]} of the current falling \doxylink{class_bloc}{Bloc} piece \\
+\hline
+{\em grid} & A pointer to the game Grid object \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/rodri/\+One\+Drive/\+Documentos/\+ENSTA/2\+A/\+POO/\+Tetris/\mbox{\hyperlink{_bloc_8h}{Bloc.\+h}}\item 
+C\+:/\+Users/rodri/\+One\+Drive/\+Documentos/\+ENSTA/2\+A/\+POO/\+Tetris/\mbox{\hyperlink{_bloc_8cpp}{Bloc.\+cpp}}\end{DoxyCompactItemize}

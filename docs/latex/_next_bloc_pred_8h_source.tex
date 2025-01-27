@@ -1,0 +1,31 @@
+\doxysection{C\+:/\+Users/rodri/\+One\+Drive/\+Documentos/\+ENSTA/2\+A/\+POO/\+Tetris/\+Next\+Bloc\+Pred.h}
+\hypertarget{_next_bloc_pred_8h_source}{}\label{_next_bloc_pred_8h_source}\mbox{\hyperlink{_next_bloc_pred_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#ifndef\ NEXTBLOCPRED\_H}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ NEXTBLOCPRED\_H}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <QWidget>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <QLabel>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <QColor>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <array>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <QDebug>}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }NextBlocPred}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00022\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \ \ NextBlocPred(QWidget\ *gridParent,\ \textcolor{keywordtype}{int}\ initialX,\ \textcolor{keywordtype}{int}\ initialY,\ \textcolor{keywordtype}{int}\ cellWidth,\ \textcolor{keywordtype}{int}\ cellHeight);}
+\DoxyCodeLine{00024\ \ \ \ \ \string~NextBlocPred();}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_next_bloc_pred_a15e5701f67eb6fd438330ade65d8e1fe}{SetNextBloc}}(std::array<std::array<int,\ 4>,\ 4>\ bloc,\ QColor\ color);}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_next_bloc_pred_add95cc404f29d56069f823fc898bfcbc}{ClearGrid}}();}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_next_bloc_pred_a992d36ee9f001b399045bb72aa40a4d3}{ConstructGrid}}(QWidget\ *gridParent,\ \textcolor{keywordtype}{int}\ initialX,\ \textcolor{keywordtype}{int}\ initialY,\ \textcolor{keywordtype}{int}\ cellWidth,\ \textcolor{keywordtype}{int}\ cellHeight);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00033\ \ \ \ \ QLabel\ *\mbox{\hyperlink{class_next_bloc_pred_a7a51c40964adf08e066c837daaaab269}{labelGrid}}[4][4];}
+\DoxyCodeLine{00034\ \};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ NEXTBLOCPRED\_H}}
+
+\end{DoxyCode}

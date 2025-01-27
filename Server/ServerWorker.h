@@ -1,3 +1,9 @@
+/**
+ * @file ServerWorker.h
+ * @brief Header file for the ServerWorker class
+ * @version 0.1
+ * 
+ */
 #ifndef SERVERWORKER_H
 #define SERVERWORKER_H
 
@@ -8,6 +14,10 @@
 #include <QJsonParseError>
 #include <QJsonObject>
 
+/**
+ * @brief This class represents the server worker. It handles the communications from one client to the server.
+ * 
+ */
 class ServerWorker : public QObject
 {
     Q_OBJECT
@@ -24,7 +34,9 @@ public slots:
     void disconnectFromClient();
 
 private:
+    /// @brief A pointer to the server socket object.
     QTcpSocket *m_serverSocket;
+    /// @brief The user name of the client being handled by the server worker.
     QString m_userName;
 
 private slots:

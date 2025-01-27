@@ -1,3 +1,9 @@
+/**
+ * @file CentralServer.h
+ * @brief Header file for the CentralServer class.
+ * @version 0.1
+ * 
+ */
 #ifndef CENTRALSERVER_H
 #define CENTRALSERVER_H
 
@@ -9,6 +15,10 @@
 #include <QTimer>
 #include "serverworker.h"
 
+/**
+ * @brief This class represents the central server unit. It manages all server workers and communications from and to clients.
+ * 
+ */
 class CentralServer : public QTcpServer
 {
     Q_OBJECT
@@ -27,6 +37,7 @@ private:
     void jsonFromLoggedOut(ServerWorker *sender, const QJsonObject &doc);
     void jsonFromLoggedIn(ServerWorker *sender, const QJsonObject &doc);
     void sendJson(ServerWorker *destination, const QJsonObject &message);
+    /// @brief A QVector containing server workers.
     QVector<ServerWorker *> m_clients;
 
 private slots:

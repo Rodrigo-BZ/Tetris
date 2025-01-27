@@ -1,3 +1,9 @@
+/**
+ * @file GameWindow.cpp
+ * @brief This file implements the functions for the GameWindow class
+ * @version 0.1
+ * 
+ */
 #include "GameWindow.h"
 #include "./ui_GameWindow.h"
 
@@ -6,6 +12,11 @@ void GameWindow::focusInEvent(QFocusEvent *event) {
     QMainWindow::focusInEvent(event);
 }
 
+/**
+ * @brief Construct a new Game Window:: Game Window object and connect all signals from PlayerClient object to appropriate functions.
+ * 
+ * @param parent 
+ */
 GameWindow::GameWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::GameWindow), m_playerClient(std::make_unique<PlayerClient>(this))
@@ -24,6 +35,11 @@ GameWindow::GameWindow(QWidget *parent)
     setFocus();
 }
 
+/**
+ * @brief This function sets the value of the multip boolean and follows with appropriate measures.
+ * 
+ * @param multip Boolean value that indicates if the current game is singleplayer or multiplayer.
+ */
 void GameWindow::SetMultiPlayer(bool multip)
 {
     this->multip = multip;
@@ -44,6 +60,10 @@ void GameWindow::SetMultiPlayer(bool multip)
     }
 }
 
+/**
+ * @brief This function does everything necessary to initialize a new game.
+ * 
+ */
 void GameWindow::InitializeGame()
 {
     ResetUi(multip);
@@ -94,6 +114,12 @@ void GameWindow::InitializeGame()
     allowMovements = true;
 }
 
+/**
+ * @brief This function initializes the prediction QLabel and NextBlocPred objects.
+ * 
+ * @param labelStartingX The starting X position for displaying the label.
+ * @param blocStartingX The starting X position for displaying the bloc.
+ */
 void GameWindow::InitializePredictionWidget(int labelStartingX, int blocStartingX)
 {
     predLabel = std::make_unique<QLabel>("NEXT BLOC", this);
@@ -105,6 +131,11 @@ void GameWindow::InitializePredictionWidget(int labelStartingX, int blocStarting
     blocPred = std::make_unique<NextBlocPred>(this, blocStartingX, 300, 30, 30);
 }
 
+/**
+ * @brief This function initializes the score and level Qlabel's.
+ * 
+ * @param startingX The starting X position for both labels.
+ */
 void GameWindow::InitializeScoreWidget(int startingX)
 {
     scoreLabel = std::make_unique<QLabel>("Score: 0", this);
@@ -122,6 +153,10 @@ void GameWindow::InitializeScoreWidget(int startingX)
     levelLabel->hide();
 }
 
+/**
+ * @brief This function updates the score and level QLabel's with the current values of score an level of the game.
+ * 
+ */
 void GameWindow::UpdateScoreLabel() {
     scoreLabel->setText("Score: " + QString::number(Score));
     levelLabel->setText("Level: " + QString::number(Niveau));
@@ -132,11 +167,21 @@ GameWindow::~GameWindow()
     delete ui;
 }
 
+/**
+ * @brief This function sets the value of the pointer to the menu window object.
+ * 
+ * @param menuWindow Pointer to an object of the class MenuWindow.
+ */
 void GameWindow::GetMenuWindowPtr(QWidget *menuWindow)
 {
     this->menuWindow = menuWindow;
 }
 
+/**
+ * @brief This function resets all visual elements in the game window.
+ * 
+ * @param multip Boolean value that indicates if the current game is singleplayer or multiplayer.
+ */
 void GameWindow::ResetUi(bool multip)
 {
     if(multip) {
@@ -170,6 +215,10 @@ void GameWindow::ResetUi(bool multip)
     gameOverLabel->hide();
 }
 
+/**
+ * @brief This function is activated on the click of the menu button. It stops the game, disconnects from server and leaves to menu window.
+ * 
+ */
 void GameWindow::on_btnMenu_clicked()
 {
     if(timer != nullptr)
@@ -183,17 +232,29 @@ void GameWindow::on_btnMenu_clicked()
     this->close();
 }
 
+/**
+ * @brief This function is activated on the click of the reset button. It resets the current game.
+ * 
+ */
 void GameWindow::on_btnReset_clicked()
 {
     ResetUi(multip);
     InitializeGame();
 }
 
+/**
+ * @brief This function is activated on the click of the connect button. It calls the attemptConnection() function.
+ * 
+ */
 void GameWindow::on_btnConnect_clicked()
 {
     attemptConnection();
 }
 
+/**
+ * @brief This function generates a new Bloc object and stores it in the nextBloc attribute.
+ * 
+ */
 void GameWindow::PredictBloc()
 {
     int blocType = rand() % 7;
@@ -223,6 +284,10 @@ void GameWindow::PredictBloc()
     blocPred->SetNextBloc(nextBloc->GetForme(),nextBloc->GetColor());
 }
 
+/**
+ * @brief This function generates a new Bloc.
+ * 
+ */
 void GameWindow::GenerateBloc()
 {
     currentBloc = nextBloc;
@@ -231,6 +296,10 @@ void GameWindow::GenerateBloc()
     setFocus();
 }
 
+/**
+ * @brief This function places a Bloc on the grid.
+ * 
+ */
 void GameWindow::PlaceBloc()
 {
     if(!grid->ColorGrid(currentBloc->GetForme(), blocPosition, blocPosition, currentBloc->GetColor(),DOWN)) {
@@ -243,6 +312,12 @@ void GameWindow::PlaceBloc()
         sendMessage(' ');
 }
 
+/**
+ * @brief This function is used for updating the Bloc's position.
+ * 
+ * @param difference Int vector that representes the Bloc's dislocation in both directions.
+ * @param direction The direction of the BLoc's movement.
+ */
 void GameWindow::UpdateBlocPosition(int *difference, Direction direction)
 {
     int initialPosition[2] = {blocPosition[0], blocPosition[1]};
@@ -265,6 +340,10 @@ void GameWindow::UpdateBlocPosition(int *difference, Direction direction)
         sendMessage(' ');
 }
 
+/**
+ * @brief This function fixates the Bloc in it's place and handles appropriate measures after.
+ * 
+ */
 void GameWindow::FixBloc()
 {
     linesClearedatOnce = 0;
@@ -312,6 +391,10 @@ void GameWindow::FixBloc()
     GenerateBloc();
 }
 
+/**
+ * @brief This function ends the game, displaying the current player's loss.
+ * 
+ */
 void GameWindow::gameOver()
 {
     timer->stop();
@@ -328,6 +411,10 @@ void GameWindow::gameOver()
     }
 }
 
+/**
+ * @brief This function ends the game, displaying the current player's victory.
+ * 
+ */
 void GameWindow::Victory()
 {
     opponentGameOverLabel->show();
@@ -341,12 +428,21 @@ void GameWindow::Victory()
     gameOverLabel->show();
 }
 
+/**
+ * @brief This function is called each time the timer is activated. It moves the current Bloc down by 1 cell in the grid.
+ * 
+ */
 void GameWindow::TimerEvent()
 {
     int difference[2] = {0, 1};
     UpdateBlocPosition(difference, DOWN);
 }
 
+/**
+ * @brief This function is called when the player presses a key on the keyboard. It handles the possible movements.
+ * 
+ * @param k 
+ */
 void GameWindow::keyPressEvent(QKeyEvent *k)
 {
     if(allowMovements) {
@@ -440,6 +536,11 @@ void GameWindow::keyPressEvent(QKeyEvent *k)
     }
 }
 
+/**
+ * @brief This function excludes a line from the game grid.
+ * 
+ * @param LineNumber The line to be excluded.
+ */
 void GameWindow::ExcludeLine(int LineNumber)
 {
     int k = 0;
@@ -474,11 +575,19 @@ void GameWindow::ExcludeLine(int LineNumber)
     }
 }
 
+/**
+ * @brief This functions adds a line as a penalty for the current player.
+ * 
+ */
 void GameWindow::AddLinePenalty()
 {
     grid->AddLineBottom(currentBloc->GetForme(), blocPosition);
 }
 
+/**
+ * @brief This function connects the player to the server at the desired address.
+ * 
+ */
 void GameWindow::attemptConnection()
 {
     // We use 127.0.0.1 (localhost)
@@ -487,6 +596,10 @@ void GameWindow::attemptConnection()
     m_playerClient->connectToServer(QHostAddress(hostAddress), 7777);
 }
 
+/**
+ * @brief This function is called when the player is connected to server. It pops up a prompt asking for the player's username.
+ * 
+ */
 void GameWindow::connectedToServer()
 {
     // once we connected to the server we ask the user for what username they would like to use
@@ -500,6 +613,11 @@ void GameWindow::connectedToServer()
     attemptLogin(newUsername);
 }
 
+/**
+ * @brief This function attempts to login the player with the given username.
+ * 
+ * @param userName QString that holds the desired username.
+ */
 void GameWindow::attemptLogin(const QString &userName)
 {
     // use the client to attempt a log in with the given username
@@ -507,6 +625,10 @@ void GameWindow::attemptLogin(const QString &userName)
     playerName = userName;
 }
 
+/**
+ * @brief This function is called when the player is succesfully logged in. It handles visual changes.
+ * 
+ */
 void GameWindow::loggedIn()
 {
     // once we successfully log in we enable the ui to display and send messages
@@ -521,6 +643,11 @@ void GameWindow::loggedIn()
     playerNameLabel->hide();
 }
 
+/**
+ * @brief This function is called when the login failed. It displays an error message and tries to connect the user again.
+ * 
+ * @param reason 
+ */
 void GameWindow::loginFailed(const QString &reason)
 {
     // the server rejected the login attempt
@@ -530,6 +657,12 @@ void GameWindow::loginFailed(const QString &reason)
     connectedToServer();
 }
 
+/**
+ * @brief This function is called when the player receives a message from the server. It handles the consequences for each message.
+ * 
+ * @param sender QSrtring containing the username of the message's sender.
+ * @param text QSrtring containing the message's content.
+ */
 void GameWindow::messageReceived(const QString &sender, const QString &text)
 {
     if(text.compare(QLatin1String("start"), Qt::CaseInsensitive) == 0) {
@@ -550,6 +683,11 @@ void GameWindow::messageReceived(const QString &sender, const QString &text)
         opponentGrid->CopyState(text);
 }
 
+/**
+ * @brief This function sends a message that will be broadcasted by the server.
+ * 
+ * @param event QChar that contains a letter if there is a specific event to transmit. Is empty space if just for tranferring grid state.
+ */
 void GameWindow::sendMessage(QChar event)
 {
     QString message;
@@ -567,6 +705,10 @@ void GameWindow::sendMessage(QChar event)
     m_playerClient->sendMessage(message);
 }
 
+/**
+ * @brief This function is called when the player is disconneted from the server. It emits a warning message and stops the game.
+ * 
+ */
 void GameWindow::disconnectedFromServer()
 {
     if(timer != nullptr)
@@ -578,6 +720,11 @@ void GameWindow::disconnectedFromServer()
     QMessageBox::warning(this, tr("Disconnected"), tr("You have been disconnected"));
 }
 
+/**
+ * @brief This function is called when another user joins the server. It starts the game.
+ * 
+ * @param username QString containing the username of the player that joined the server.
+ */
 void GameWindow::userJoined(const QString &username)
 {
     opponentNameLabel = std::make_unique<QLabel>(username, this);
@@ -590,6 +737,11 @@ void GameWindow::userJoined(const QString &username)
     InitializeGame();
 }
 
+/**
+ * @brief This function is called when another user leaves the server. It ends the game if it hasn't already ended.
+ * 
+ * @param username QString containing the username of the player that left the server. 
+ */
 void GameWindow::userLeft(const QString &username)
 {
     if(gameOverLabel->isHidden()) {
@@ -601,6 +753,11 @@ void GameWindow::userLeft(const QString &username)
     QMessageBox::information(this, tr("User Left"), tr("%1 Left").arg(username));
 }
 
+/**
+ * @brief This function handles possible errors in server communications.
+ * 
+ * @param socketError The error received.
+ */
 void GameWindow::error(QAbstractSocket::SocketError socketError)
 {
     // show a message to the user that informs of what kind of error occurred

@@ -1,0 +1,102 @@
+\doxysection{C\+:/\+Users/rodri/\+One\+Drive/\+Documentos/\+ENSTA/2\+A/\+POO/\+Tetris/\+Game\+Window.h}
+\hypertarget{_game_window_8h_source}{}\label{_game_window_8h_source}\mbox{\hyperlink{_game_window_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#ifndef\ GAMEWINDOW\_H}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ GAMEWINDOW\_H}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <QMainWindow>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <QLabel>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <QFrame>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <QPalette>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <QTimer>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <cstdlib>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <QKeyEvent>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_game_grid_8h}{GameGrid.h}}"{}}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_bloc_types_8h}{BlocTypes.h}}"{}}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <QDebug>}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_next_bloc_pred_8h}{NextBlocPred.h}}"{}}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_player_client_8h}{PlayerClient.h}}"{}}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <QMessageBox>}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <QInputDialog>}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ QT\_BEGIN\_NAMESPACE}
+\DoxyCodeLine{00026\ \textcolor{keyword}{namespace\ }Ui\ \{\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_ui_1_1_game_window}{GameWindow}};\ \}}
+\DoxyCodeLine{00027\ QT\_END\_NAMESPACE}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_game_window_ac3eeb92ff59cb36fd579f290013db4d5}{GameWindow}}\ :\ \textcolor{keyword}{public}\ QMainWindow}
+\DoxyCodeLine{00034\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{class_game_window_ac3eeb92ff59cb36fd579f290013db4d5}{GameWindow}}(QWidget\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{class_game_window_ac3eeb92ff59cb36fd579f290013db4d5}{\string~GameWindow}}();}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_window_a414401497b4c72b99bfc707c2de5dfaa}{GetMenuWindowPtr}}(QWidget\ *\mbox{\hyperlink{class_game_window_a308f83ec2191fd99b379d0a358d55b6d}{menuWindow}});}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_window_aa781515e0e0c896544de8e431186445b}{SetMultiPlayer}}(\textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_game_window_a8d221d87186a60ad24fc698bd375fc74}{multip}});}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{keyword}{private}\ slots:}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_window_a11c52879d0892baf57851575d6cb34f2}{on\_btnMenu\_clicked}}();}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_window_a2d804bc10a3d19759b641e876f16e8be}{on\_btnReset\_clicked}}();}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_window_a150ab2d821aa2ea449e30f566241880b}{on\_btnConnect\_clicked}}();}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_window_a87af1765f9a060648a75aa7325ff3a62}{GenerateBloc}}();}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_window_ad6dcafc7eeb652b594b71239156a4c2a}{PredictBloc}}();}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_window_a8c5076658b54a6b9be76a71be29cf38e}{PlaceBloc}}();}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_window_a79970e77edd38c92f59c4af96579684b}{UpdateBlocPosition}}(\textcolor{keywordtype}{int}\ *difference,\ Direction\ direction);}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_window_a15b5de212a47dead8c434eda50bf604d}{FixBloc}}();}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_window_ac72d0c1c49cb70cdca886003e33829f7}{TimerEvent}}();}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_window_aa66b8cec64c0065d4d506cf910b8a66d}{keyPressEvent}}(QKeyEvent\ *k);}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{void}\ focusInEvent(QFocusEvent\ *event);}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_window_ac4296a2c7589438b1d81c35600a67664}{ExcludeLine}}(\textcolor{keywordtype}{int}\ LineNumber);}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_window_a41e74428d80235b22793b1befa7db1c3}{AddLinePenalty}}();}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_window_af6ffeffa886479bf31e777e2f62e8efe}{gameOver}}();}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_window_a24cc7f99c8f97bbf2ae4bd95d8027e72}{Victory}}();}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_window_a963d02340f5172fb50c5b55002fae18b}{InitializeGame}}();}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_window_a9b17d31766df9a82cb30e69e62b421be}{ResetUi}}(\textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_game_window_a8d221d87186a60ad24fc698bd375fc74}{multip}});}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_window_a39df08102c30eab1b1573d7cde845c3f}{InitializePredictionWidget}}(\textcolor{keywordtype}{int}\ labelStartingX,\ \textcolor{keywordtype}{int}\ blocStartingX);}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_window_ad470458e6d12e4ba681d23eaa563aaac}{InitializeScoreWidget}}(\textcolor{keywordtype}{int}\ startingX);}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_window_a07e0504ecf8ceecd3590ffc1702aec2c}{UpdateScoreLabel}}();}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_window_a035ce657aa4bdad0030b8a590ced2ea1}{attemptConnection}}();}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_window_ae05f67a7b693443b07c80225baa17858}{connectedToServer}}();}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_window_adaa1afe4d71da838759508c85d393623}{attemptLogin}}(\textcolor{keyword}{const}\ QString\ \&userName);}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_window_a38e404dc760defc86e32c19f2f0cd92f}{loggedIn}}();}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_window_a3bddd97b7e4b245a13cc7fce93ee8831}{loginFailed}}(\textcolor{keyword}{const}\ QString\ \&reason);}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_window_a1b3ca2c1966bb786d40814de5527d51f}{messageReceived}}(\textcolor{keyword}{const}\ QString\ \&sender,\ \textcolor{keyword}{const}\ QString\ \&text);}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_window_a5108b7dce44468ae2bfa60fb772c910f}{sendMessage}}(QChar\ event);}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_window_ab22af65ced3f4ad81c1293431e9fba61}{disconnectedFromServer}}();}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_window_a9dbe703363f0c8a1de239c3941cb243c}{userJoined}}(\textcolor{keyword}{const}\ QString\ \&username);}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_window_af3ea80ab55224c875a75f381bc3cc3e0}{userLeft}}(\textcolor{keyword}{const}\ QString\ \&username);}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_window_a30495f09f609ff2d0106e8e6630b68dc}{error}}(QAbstractSocket::SocketError\ socketError);}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_game_window_a8d221d87186a60ad24fc698bd375fc74}{multip}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_game_window_ab707effb23e12debbe5fd5d7f42fe577}{allowMovements}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_game_window_ae380ced8aee2a068e598c7146492dd53}{blocPosition}}[2]\ =\ \{3,\ 0\};}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{int}\ currentKey;}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_game_window_a7fc2005f1b65c921cc4bc5bceb3f48cd}{Niveau}};}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_game_window_ac399547296d66d1b2a785206e858e738}{linesCleared}};}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_game_window_a688ee6c11bdac39a5ccea25afc7e4060}{linesClearedatOnce}};}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_game_window_a496581228425fe58fc846a1af7267907}{Score}}\ =\ 0;}
+\DoxyCodeLine{00095\ \ \ \ \ \mbox{\hyperlink{class_ui_1_1_game_window}{Ui::GameWindow}}\ *\mbox{\hyperlink{class_game_window_ab55293cef16c4d14fa1add3e6ccb382f}{ui}};}
+\DoxyCodeLine{00097\ \ \ \ \ QWidget\ *\mbox{\hyperlink{class_game_window_a308f83ec2191fd99b379d0a358d55b6d}{menuWindow}};}
+\DoxyCodeLine{00099\ \ \ \ \ QString\ \mbox{\hyperlink{class_game_window_ab6c36f79eb590e208d09ecabc154d183}{playerName}};}
+\DoxyCodeLine{00101\ \ \ \ \ std::unique\_ptr<NextBlocPred>\ \mbox{\hyperlink{class_game_window_ac48cb3202cba923c23d48cac61745205}{blocPred}};}
+\DoxyCodeLine{00103\ \ \ \ \ std::unique\_ptr<QTimer>\ \mbox{\hyperlink{class_game_window_abc1877c094084f7b78868228048b4c5e}{timer}};}
+\DoxyCodeLine{00105\ \ \ \ \ std::unique\_ptr<GameGrid>\ \mbox{\hyperlink{class_game_window_aa413be53da060dbf2ad6bb577da445ef}{grid}};}
+\DoxyCodeLine{00107\ \ \ \ \ std::unique\_ptr<GameGrid>\ \mbox{\hyperlink{class_game_window_aa79367fbf1c6da4cb54db34f82487348}{opponentGrid}};}
+\DoxyCodeLine{00109\ \ \ \ \ std::shared\_ptr<Bloc>\ \mbox{\hyperlink{class_game_window_af572796f79f8e651b295385860bc0926}{currentBloc}};}
+\DoxyCodeLine{00111\ \ \ \ \ std::shared\_ptr<Bloc>\ \mbox{\hyperlink{class_game_window_a518f33ba308809fca7a7a90f9495ba86}{nextBloc}};}
+\DoxyCodeLine{00113\ \ \ \ \ std::unique\_ptr<QLabel>\ \mbox{\hyperlink{class_game_window_af992555ffb5ddfade2a981231d9a2bb5}{scoreLabel}};}
+\DoxyCodeLine{00115\ \ \ \ \ std::unique\_ptr<QLabel>\ \mbox{\hyperlink{class_game_window_a15d1299fe6f0d8d9764eb14d153f7efd}{levelLabel}};}
+\DoxyCodeLine{00117\ \ \ \ \ std::unique\_ptr<QLabel>\ \mbox{\hyperlink{class_game_window_a105e3c649d2dc589a0a13f1bb8503d54}{predLabel}};}
+\DoxyCodeLine{00119\ \ \ \ \ std::unique\_ptr<QLabel>\ \mbox{\hyperlink{class_game_window_aea13818fc10cc2f9e67d31fbf1902bb6}{gameOverLabel}};}
+\DoxyCodeLine{00121\ \ \ \ \ std::unique\_ptr<QLabel>\ \mbox{\hyperlink{class_game_window_a1792ab31fc8df3a0e52935291a95bc98}{opponentGameOverLabel}};}
+\DoxyCodeLine{00123\ \ \ \ \ std::unique\_ptr<QLabel>\ \mbox{\hyperlink{class_game_window_a81abcc1066b83fff07140d1686cc3afc}{waitingOpponentLabel}};}
+\DoxyCodeLine{00125\ \ \ \ \ std::unique\_ptr<QLabel>\ \mbox{\hyperlink{class_game_window_a46c4c3e28d4b453bfc78c1fb5bc61551}{playerNameLabel}};}
+\DoxyCodeLine{00127\ \ \ \ \ std::unique\_ptr<QLabel>\ \mbox{\hyperlink{class_game_window_a61f384409a55f376536abc5ac1868597}{opponentNameLabel}};}
+\DoxyCodeLine{00129\ \ \ \ \ std::unique\_ptr<PlayerClient>\ \mbox{\hyperlink{class_game_window_af244a3e8a8bcde3d4200abfdb5322b34}{m\_playerClient}};}
+\DoxyCodeLine{00130\ \};}
+\DoxyCodeLine{00131\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ GAMEWINDOW\_H}}
+
+\end{DoxyCode}

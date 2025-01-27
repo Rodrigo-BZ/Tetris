@@ -1,7 +1,18 @@
+/**
+ * @file CentralServer.cpp
+ * @brief This file implements the functions for the CentralServer class
+ * @version 0.1
+ * 
+ */
 #include "CentralServer.h"
 
 CentralServer::CentralServer(QObject *parent) : QTcpServer(parent) {}
 
+/**
+ * @brief This function is called when a client attempts to connect to the server. It verifies the validity of the connection and takes the appopriate measure.
+ * 
+ * @param socketDescriptor 
+ */
 void CentralServer::incomingConnection(qintptr socketDescriptor)
 {
     // This method will get called every time a client tries to connect.
@@ -25,12 +36,24 @@ void CentralServer::incomingConnection(qintptr socketDescriptor)
     emit logMessage(QStringLiteral("New client Connected"));
 }
 
+/**
+ * @brief This function send a Json to a client.
+ * 
+ * @param destination The client that will receive the Json.
+ * @param message The Json message's content.
+ */
 void CentralServer::sendJson(ServerWorker *destination, const QJsonObject &message)
 {
     Q_ASSERT(destination); // make sure destination is not null
     destination->sendJson(message); // call directly the worker method
 }
 
+/**
+ * @brief This function sends a Json to all clients connected except for the excluded one.
+ * 
+ * @param message The Json message's content.
+ * @param exclude The client that will not receive the Json.
+ */
 void CentralServer::broadcast(const QJsonObject &message, ServerWorker *exclude)
 {
     // iterate over all the workers that interact with the clients
@@ -41,6 +64,12 @@ void CentralServer::broadcast(const QJsonObject &message, ServerWorker *exclude)
     }
 }
 
+/**
+ * @brief This function is called when the server receives a Json. It calls the appropriate function to handle the messade.
+ * 
+ * @param sender The message's sender.
+ * @param doc the Json object containing the message.
+ */
 void CentralServer::jsonReceived(ServerWorker *sender, const QJsonObject &doc)
 {
     Q_ASSERT(sender);
@@ -50,6 +79,11 @@ void CentralServer::jsonReceived(ServerWorker *sender, const QJsonObject &doc)
     jsonFromLoggedIn(sender, doc);
 }
 
+/**
+ * @brief This function is called when a user is disconnected from the server. It removes the server worker.
+ * 
+ * @param sender The disconnected client.
+ */
 void CentralServer::userDisconnected(ServerWorker *sender)
 {
     m_clients.removeAll(sender);
@@ -64,12 +98,21 @@ void CentralServer::userDisconnected(ServerWorker *sender)
     sender->deleteLater();
 }
 
+/**
+ * @brief This function emits an error from a client.
+ * 
+ * @param sender The client emiting the error.
+ */
 void CentralServer::userError(ServerWorker *sender)
 {
     Q_UNUSED(sender)
     emit logMessage(QLatin1String("Error from ") + sender->userName());
 }
 
+/**
+ * @brief This function stops the server.
+ * 
+ */
 void CentralServer::stopServer()
 {
     for (ServerWorker *worker : m_clients) {
@@ -78,6 +121,12 @@ void CentralServer::stopServer()
     close();
 }
 
+/**
+ * @brief This function handles the Json messages from logged out clients.
+ * 
+ * @param sender The client.
+ * @param docObj The message.
+ */
 void CentralServer::jsonFromLoggedOut(ServerWorker *sender, const QJsonObject &docObj)
 {
     Q_ASSERT(sender);
@@ -115,6 +164,12 @@ void CentralServer::jsonFromLoggedOut(ServerWorker *sender, const QJsonObject &d
     broadcast(connectedMessage, sender);
 }
 
+/**
+ * @brief This function handles the Json messages from logged in clients.
+ * 
+ * @param sender The client.
+ * @param docObj The message.
+ */
 void CentralServer::jsonFromLoggedIn(ServerWorker *sender, const QJsonObject &docObj)
 {
     Q_ASSERT(sender);

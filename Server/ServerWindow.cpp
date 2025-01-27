@@ -1,3 +1,9 @@
+/**
+ * @file ServerWindow.cpp
+ * @brief This file implements the functions for the ServerWindow class
+ * @version 0.1
+ * 
+ */
 #include "ServerWindow.h"
 #include "./ui_ServerWindow.h"
 
@@ -16,6 +22,10 @@ ServerWindow::~ServerWindow()
     delete ui;
 }
 
+/**
+ * @brief This function is called the the button is pressed. It toggles the server between started and stopped states.
+ * 
+ */
 void ServerWindow::toggleStartServer()
 {
     if (m_centralServer->isListening()) {
@@ -32,6 +42,11 @@ void ServerWindow::toggleStartServer()
     }
 }
 
+/**
+ * @brief This function logs a message in the server window.
+ * 
+ * @param msg The message being recorded.
+ */
 void ServerWindow::logMessage(const QString &msg)
 {
     ui->logEditor->appendPlainText(msg + QLatin1Char('\n'));

@@ -1,0 +1,174 @@
+\doxysection{Player\+Client Class Reference}
+\hypertarget{class_player_client}{}\label{class_player_client}\index{PlayerClient@{PlayerClient}}
+
+
+This class represents the client that communicates with the server. It handles all multiplayer communications.  
+
+
+
+
+{\ttfamily \#include $<$Player\+Client.\+h$>$}
+
+Inheritance diagram for Player\+Client\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_player_client}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_player_client_abe7bab6c08559c3f53301dc80dd93b31}{connect\+To\+Server}} (const QHost\+Address \&address, quint16 port)
+\begin{DoxyCompactList}\small\item\em This function connects the clien to the server. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_client_a9336547ff8a279dbd7fbb101dcda22b9}{login}} (const QString \&user\+Name)
+\begin{DoxyCompactList}\small\item\em This function attempts to log in the client with a given username. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_client_a11388855a5f97a4e5e84617bcc07ade8}{send\+Message}} (const QString \&text)
+\begin{DoxyCompactList}\small\item\em This function attempts to send a message from the user to the server. \end{DoxyCompactList}\item 
+\Hypertarget{class_player_client_a7a66ba981fed1337bd024d846e306adb}\label{class_player_client_a7a66ba981fed1337bd024d846e306adb} 
+void {\bfseries disconnect\+From\+Host} ()
+\begin{DoxyCompactList}\small\item\em This function disconnects the client from the server. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_player_client_a8cc83d26a78a2074a1c6d1bfd5b34634}\label{class_player_client_a8cc83d26a78a2074a1c6d1bfd5b34634} 
+void {\bfseries connected} ()
+\item 
+\Hypertarget{class_player_client_a4ae1d5c127d480d639bc09cad99ccdc9}\label{class_player_client_a4ae1d5c127d480d639bc09cad99ccdc9} 
+void {\bfseries logged\+In} ()
+\item 
+\Hypertarget{class_player_client_a764bc3a3df857e6c7c5dc6925cd01e29}\label{class_player_client_a764bc3a3df857e6c7c5dc6925cd01e29} 
+void {\bfseries login\+Error} (const QString \&reason)
+\item 
+\Hypertarget{class_player_client_aa172873ef56b06fb011cb4874b133a09}\label{class_player_client_aa172873ef56b06fb011cb4874b133a09} 
+void {\bfseries disconnected} ()
+\item 
+\Hypertarget{class_player_client_a45885ef2c4d0d4e8094063b9660151d7}\label{class_player_client_a45885ef2c4d0d4e8094063b9660151d7} 
+void {\bfseries message\+Received} (const QString \&sender, const QString \&text)
+\item 
+\Hypertarget{class_player_client_a561171581c6bc7837d12a4b88bab39ea}\label{class_player_client_a561171581c6bc7837d12a4b88bab39ea} 
+void {\bfseries error} (QAbstract\+Socket\+::\+Socket\+Error socket\+Error)
+\item 
+\Hypertarget{class_player_client_acaa544209004635922ff754cd53da3e6}\label{class_player_client_acaa544209004635922ff754cd53da3e6} 
+void {\bfseries user\+Joined} (const QString \&username)
+\item 
+\Hypertarget{class_player_client_a840012c32cad5819cb6e7b04e38419a7}\label{class_player_client_a840012c32cad5819cb6e7b04e38419a7} 
+void {\bfseries user\+Left} (const QString \&username)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_player_client_a0514fcbc26e9dfdc349929e85990bd14}{Player\+Client}} (QObject \texorpdfstring{$\ast$}{*}parent=nullptr)
+\begin{DoxyCompactList}\small\item\em Construct a new Player Client\+:\+: Player Client object and Connect signals to socket. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_player_client_a267d6282c87259fef3e246515af5fdc2}\label{class_player_client_a267d6282c87259fef3e246515af5fdc2} 
+void {\bfseries on\+Ready\+Read} ()
+\begin{DoxyCompactList}\small\item\em This function is called when client is available to receive a new Json. It attempts to read a new received Json. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_player_client_ab5f9a9835893567b4c304f44bf2b8522}{json\+Received}} (const QJson\+Object \&doc)
+\begin{DoxyCompactList}\small\item\em This function is acvtivated when the user receives a Json from the server. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_player_client_ad2ef5ade109063b7ce275bcdeb76f9f2}\label{class_player_client_ad2ef5ade109063b7ce275bcdeb76f9f2} 
+std\+::unique\+\_\+ptr$<$ QTcp\+Socket $>$ {\bfseries m\+\_\+client\+Socket}
+\begin{DoxyCompactList}\small\item\em Smart unique pointer of the class QTcp\+Socket. It contains the TCP socket for the client. \end{DoxyCompactList}\item 
+\Hypertarget{class_player_client_ac152ca0fde5f61c6f54a2e5cdee8c49e}\label{class_player_client_ac152ca0fde5f61c6f54a2e5cdee8c49e} 
+bool {\bfseries m\+\_\+logged\+In}
+\begin{DoxyCompactList}\small\item\em Boolean value that indicates if the client is logged in or not. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class represents the client that communicates with the server. It handles all multiplayer communications. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_player_client_a0514fcbc26e9dfdc349929e85990bd14}\index{PlayerClient@{PlayerClient}!PlayerClient@{PlayerClient}}
+\index{PlayerClient@{PlayerClient}!PlayerClient@{PlayerClient}}
+\doxysubsubsection{\texorpdfstring{PlayerClient()}{PlayerClient()}}
+{\footnotesize\ttfamily \label{class_player_client_a0514fcbc26e9dfdc349929e85990bd14} 
+Player\+Client\+::\+Player\+Client (\begin{DoxyParamCaption}\item[{QObject \texorpdfstring{$\ast$}{*}}]{parent}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Construct a new Player Client\+:\+: Player Client object and Connect signals to socket. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & Object that contains this client. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_player_client_abe7bab6c08559c3f53301dc80dd93b31}\index{PlayerClient@{PlayerClient}!connectToServer@{connectToServer}}
+\index{connectToServer@{connectToServer}!PlayerClient@{PlayerClient}}
+\doxysubsubsection{\texorpdfstring{connectToServer}{connectToServer}}
+{\footnotesize\ttfamily \label{class_player_client_abe7bab6c08559c3f53301dc80dd93b31} 
+void Player\+Client\+::connect\+To\+Server (\begin{DoxyParamCaption}\item[{const QHost\+Address \&}]{address}{, }\item[{quint16}]{port}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+This function connects the clien to the server. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & Address o attempted connection. \\
+\hline
+{\em port} & Port of attemped connection. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_player_client_ab5f9a9835893567b4c304f44bf2b8522}\index{PlayerClient@{PlayerClient}!jsonReceived@{jsonReceived}}
+\index{jsonReceived@{jsonReceived}!PlayerClient@{PlayerClient}}
+\doxysubsubsection{\texorpdfstring{jsonReceived()}{jsonReceived()}}
+{\footnotesize\ttfamily \label{class_player_client_ab5f9a9835893567b4c304f44bf2b8522} 
+void Player\+Client\+::json\+Received (\begin{DoxyParamCaption}\item[{const QJson\+Object \&}]{doc\+Obj}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+This function is acvtivated when the user receives a Json from the server. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em doc\+Obj} & The Json object received. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_player_client_a9336547ff8a279dbd7fbb101dcda22b9}\index{PlayerClient@{PlayerClient}!login@{login}}
+\index{login@{login}!PlayerClient@{PlayerClient}}
+\doxysubsubsection{\texorpdfstring{login}{login}}
+{\footnotesize\ttfamily \label{class_player_client_a9336547ff8a279dbd7fbb101dcda22b9} 
+void Player\+Client\+::login (\begin{DoxyParamCaption}\item[{const QString \&}]{user\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+This function attempts to log in the client with a given username. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em user\+Name} & The client\textquotesingle{}s desired username. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_player_client_a11388855a5f97a4e5e84617bcc07ade8}\index{PlayerClient@{PlayerClient}!sendMessage@{sendMessage}}
+\index{sendMessage@{sendMessage}!PlayerClient@{PlayerClient}}
+\doxysubsubsection{\texorpdfstring{sendMessage}{sendMessage}}
+{\footnotesize\ttfamily \label{class_player_client_a11388855a5f97a4e5e84617bcc07ade8} 
+void Player\+Client\+::send\+Message (\begin{DoxyParamCaption}\item[{const QString \&}]{text}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+This function attempts to send a message from the user to the server. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em text} & The message\textquotesingle{}s content. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/rodri/\+One\+Drive/\+Documentos/\+ENSTA/2\+A/\+POO/\+Tetris/\mbox{\hyperlink{_player_client_8h}{Player\+Client.\+h}}\item 
+C\+:/\+Users/rodri/\+One\+Drive/\+Documentos/\+ENSTA/2\+A/\+POO/\+Tetris/build/\+Desktop\+\_\+\+Qt\+\_\+6\+\_\+8\+\_\+1\+\_\+\+Min\+GW\+\_\+64\+\_\+bit-\/\+Debug/\+Tetris\+\_\+autogen/\+EWIEGA46\+WW/moc\+\_\+\+Player\+Client.\+cpp\item 
+C\+:/\+Users/rodri/\+One\+Drive/\+Documentos/\+ENSTA/2\+A/\+POO/\+Tetris/\mbox{\hyperlink{_player_client_8cpp}{Player\+Client.\+cpp}}\end{DoxyCompactItemize}

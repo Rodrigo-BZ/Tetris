@@ -1,0 +1,47 @@
+\doxysection{Server\+Worker.\+h}
+\hypertarget{_server_worker_8h_source}{}\label{_server_worker_8h_source}\index{C:/Users/rodri/OneDrive/Documentos/ENSTA/2A/POO/Tetris/Server/ServerWorker.h@{C:/Users/rodri/OneDrive/Documentos/ENSTA/2A/POO/Tetris/Server/ServerWorker.h}}
+\mbox{\hyperlink{_server_worker_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#ifndef\ SERVERWORKER\_H}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ SERVERWORKER\_H}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <QObject>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <QTcpSocket>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <QDataStream>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <QJsonDocument>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <QJsonParseError>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <QJsonObject>}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }ServerWorker\ :\ \textcolor{keyword}{public}\ QObject}
+\DoxyCodeLine{00022\ \{}
+\DoxyCodeLine{00023\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00024\ \ \ \ \ Q\_DISABLE\_COPY(ServerWorker)}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{explicit}\ ServerWorker(QObject\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_server_worker_af7fabee95d40a9d14d31c0373d69eaeb}{setSocketDescriptor}}(qintptr\ socketDescriptor);}
+\DoxyCodeLine{00029\ \ \ \ \ QString\ \mbox{\hyperlink{class_server_worker_a302565e75390613de437beadd01fb9c1}{userName}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_server_worker_a98aeba7b1ed30b9c73de957b77475d6d}{setUserName}}(\textcolor{keyword}{const}\ QString\ \&\mbox{\hyperlink{class_server_worker_a302565e75390613de437beadd01fb9c1}{userName}});}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_server_worker_ab502224070b0286ca793cedaa53ac2a3}{sendJson}}(\textcolor{keyword}{const}\ QJsonObject\ \&jsonData);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{public}\ slots:}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_server_worker_a63fcb2e44f78b5dea4f676255459d66c}{disconnectFromClient}}();}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00038\ \ \ \ \ QTcpSocket\ *\mbox{\hyperlink{class_server_worker_a13e630372023dd7817a7140c86a2431b}{m\_serverSocket}};}
+\DoxyCodeLine{00040\ \ \ \ \ QString\ \mbox{\hyperlink{class_server_worker_a0fcd05799ae18a586aaddfeb47cae110}{m\_userName}};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{keyword}{private}\ slots:}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_server_worker_a77e374fa7cf877cc2d18c82a9e05b8e2}{receiveJson}}();}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ signals:}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{void}\ jsonReceived(\textcolor{keyword}{const}\ QJsonObject\ \&jsonDoc);}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ disconnectedFromClient();}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{void}\ error();}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{void}\ logMessage(\textcolor{keyword}{const}\ QString\ \&msg);}
+\DoxyCodeLine{00050\ \};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SERVERWORKER\_H}}
+
+\end{DoxyCode}

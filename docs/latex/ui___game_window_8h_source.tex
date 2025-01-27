@@ -1,0 +1,87 @@
+\doxysection{ui\+\_\+\+Game\+Window.\+h}
+\hypertarget{ui___game_window_8h_source}{}\label{ui___game_window_8h_source}\index{C:/Users/rodri/OneDrive/Documentos/ENSTA/2A/POO/Tetris/build/Desktop\_Qt\_6\_8\_1\_MinGW\_64\_bit-\/Debug/Tetris\_autogen/include/ui\_GameWindow.h@{C:/Users/rodri/OneDrive/Documentos/ENSTA/2A/POO/Tetris/build/Desktop\_Qt\_6\_8\_1\_MinGW\_64\_bit-\/Debug/Tetris\_autogen/include/ui\_GameWindow.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/********************************************************************************}}
+\DoxyCodeLine{00002\ \textcolor{comment}{**\ Form\ generated\ from\ reading\ UI\ file\ 'GameWindow.ui'}}
+\DoxyCodeLine{00003\ \textcolor{comment}{**}}
+\DoxyCodeLine{00004\ \textcolor{comment}{**\ Created\ by:\ Qt\ User\ Interface\ Compiler\ version\ 6.8.1}}
+\DoxyCodeLine{00005\ \textcolor{comment}{**}}
+\DoxyCodeLine{00006\ \textcolor{comment}{**\ WARNING!\ All\ changes\ made\ in\ this\ file\ will\ be\ lost\ when\ recompiling\ UI\ file!}}
+\DoxyCodeLine{00007\ \textcolor{comment}{********************************************************************************/}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#ifndef\ UI\_GAMEWINDOW\_H}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ UI\_GAMEWINDOW\_H}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <QtCore/QVariant>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <QtGui/QIcon>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <QtWidgets/QApplication>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <QtWidgets/QMainWindow>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <QtWidgets/QPushButton>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <QtWidgets/QWidget>}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ QT\_BEGIN\_NAMESPACE}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_ui___game_window}{Ui\_GameWindow}}}
+\DoxyCodeLine{00022\ \{}
+\DoxyCodeLine{00023\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ QWidget\ *centralwidget;}
+\DoxyCodeLine{00025\ \ \ \ \ QPushButton\ *btnMenu;}
+\DoxyCodeLine{00026\ \ \ \ \ QPushButton\ *btnReset;}
+\DoxyCodeLine{00027\ \ \ \ \ QPushButton\ *btnConnect;}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{void}\ setupUi(QMainWindow\ *\mbox{\hyperlink{class_game_window}{GameWindow}})}
+\DoxyCodeLine{00030\ \ \ \ \ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_game_window}{GameWindow}}-\/>objectName().isEmpty())}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_window}{GameWindow}}-\/>setObjectName(\textcolor{stringliteral}{"{}GameWindow"{}});}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_window}{GameWindow}}-\/>resize(1000,\ 700);}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_window}{GameWindow}}-\/>setMinimumSize(QSize(1000,\ 700));}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_window}{GameWindow}}-\/>setMaximumSize(QSize(1000,\ 700));}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ QIcon\ icon(QIcon::fromTheme(QIcon::ThemeIcon::MediaTape));}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_window}{GameWindow}}-\/>setWindowIcon(icon);}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ centralwidget\ =\ \textcolor{keyword}{new}\ QWidget(\mbox{\hyperlink{class_game_window}{GameWindow}});}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ centralwidget-\/>setObjectName(\textcolor{stringliteral}{"{}centralwidget"{}});}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ btnMenu\ =\ \textcolor{keyword}{new}\ QPushButton(centralwidget);}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ btnMenu-\/>setObjectName(\textcolor{stringliteral}{"{}btnMenu"{}});}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ btnMenu-\/>setGeometry(QRect(10,\ 10,\ 84,\ 30));}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ QFont\ font;}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ font.setFamilies(\{QString::fromUtf8(\textcolor{stringliteral}{"{}8514oem"{}})\});}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ font.setBold(\textcolor{keyword}{false});}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ btnMenu-\/>setFont(font);}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ btnReset\ =\ \textcolor{keyword}{new}\ QPushButton(centralwidget);}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ btnReset-\/>setObjectName(\textcolor{stringliteral}{"{}btnReset"{}});}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ btnReset-\/>setGeometry(QRect(900,\ 10,\ 84,\ 30));}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ QFont\ font1;}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ font1.setFamilies(\{QString::fromUtf8(\textcolor{stringliteral}{"{}8514oem"{}})\});}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ font1.setPointSize(12);}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ btnReset-\/>setFont(font1);}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ btnConnect\ =\ \textcolor{keyword}{new}\ QPushButton(centralwidget);}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ btnConnect-\/>setObjectName(\textcolor{stringliteral}{"{}btnConnect"{}});}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ btnConnect-\/>setGeometry(QRect(458,\ 230,\ 84,\ 30));}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ btnConnect-\/>setFont(font);}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_window}{GameWindow}}-\/>setCentralWidget(centralwidget);}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ retranslateUi(\mbox{\hyperlink{class_game_window}{GameWindow}});}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ QMetaObject::connectSlotsByName(\mbox{\hyperlink{class_game_window}{GameWindow}});}
+\DoxyCodeLine{00063\ \ \ \ \ \}\ \textcolor{comment}{//\ setupUi}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{void}\ retranslateUi(QMainWindow\ *\mbox{\hyperlink{class_game_window}{GameWindow}})}
+\DoxyCodeLine{00066\ \ \ \ \ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_window}{GameWindow}}-\/>setWindowTitle(QCoreApplication::translate(\textcolor{stringliteral}{"{}GameWindow"{}},\ \textcolor{stringliteral}{"{}T\ E\ T\ R\ I\ S"{}},\ \textcolor{keyword}{nullptr}));}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ btnMenu-\/>setText(QCoreApplication::translate(\textcolor{stringliteral}{"{}GameWindow"{}},\ \textcolor{stringliteral}{"{}Menu"{}},\ \textcolor{keyword}{nullptr}));}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ btnReset-\/>setText(QCoreApplication::translate(\textcolor{stringliteral}{"{}GameWindow"{}},\ \textcolor{stringliteral}{"{}Reset"{}},\ \textcolor{keyword}{nullptr}));}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ btnConnect-\/>setText(QCoreApplication::translate(\textcolor{stringliteral}{"{}GameWindow"{}},\ \textcolor{stringliteral}{"{}Connect"{}},\ \textcolor{keyword}{nullptr}));}
+\DoxyCodeLine{00071\ \ \ \ \ \}\ \textcolor{comment}{//\ retranslateUi}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \};}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \textcolor{keyword}{namespace\ }Ui\ \{}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_ui_1_1_game_window}{GameWindow}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_ui___game_window}{Ui\_GameWindow}}\ \{\};}
+\DoxyCodeLine{00077\ \}\ \textcolor{comment}{//\ namespace\ Ui}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ QT\_END\_NAMESPACE}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ UI\_GAMEWINDOW\_H}}
+
+\end{DoxyCode}

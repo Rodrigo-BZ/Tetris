@@ -1,0 +1,32 @@
+\doxysection{C\+:/\+Users/rodri/\+One\+Drive/\+Documentos/\+ENSTA/2\+A/\+POO/\+Tetris/\+Bloc.h}
+\hypertarget{_bloc_8h_source}{}\label{_bloc_8h_source}\mbox{\hyperlink{_bloc_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#ifndef\ CLASS\_BLOC}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ CLASS\_BLOC}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <QColor>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <array>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_game_grid_8h}{GameGrid.h}}"{}}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }Bloc\ \{}
+\DoxyCodeLine{00019\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00021\ \ \ \ \ std::array<std::array<int,\ 4>,\ 4>\ \mbox{\hyperlink{class_bloc_aa2430d696c0b2ae6dd944a1fe0496363}{forme}}\ =\ \{0\};\ }
+\DoxyCodeLine{00023\ \ \ \ \ QColor\ \mbox{\hyperlink{class_bloc_a4ab2d5e72978af0d66489811454118c7}{color}};}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_bloc_affa061e50da8818f5914df0bd243aea3}{lenght}};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00028\ \ \ \ \ Bloc(QColor\ c)\ :\ \mbox{\hyperlink{class_bloc_a4ab2d5e72978af0d66489811454118c7}{color}}(c)\ \{\};}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_bloc}{\string~Bloc}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_bloc_a3a2bd8ccc58d5f30ad1a2075ab31f016}{RotateClockwise}}(\textcolor{keywordtype}{int}\ *position,\ \mbox{\hyperlink{class_game_grid}{GameGrid}}\ *grid);}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_bloc_acfc01d505a4eb8f4e08cca2612ef9b86}{RotateCounterClockwise}}(\textcolor{keywordtype}{int}\ *position,\ \mbox{\hyperlink{class_game_grid}{GameGrid}}\ *grid);}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_bloc_a603f495af722a055aee8f492d747bb89}{FreeColumn}}(\textcolor{keywordtype}{int}\ columnNumber);}
+\DoxyCodeLine{00034\ \ \ \ \ std::array<std::array<int,\ 4>,\ 4>\ \mbox{\hyperlink{class_bloc_a01a150de91267ac8d9ae10f912f3ecca}{GetForme}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00035\ \ \ \ \ QColor\ \mbox{\hyperlink{class_bloc_aec0bdbc76df0a4a57f09269440c1ca2d}{GetColor}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_bloc_a70bc4087a503c3b6782d3521b02b911a}{GetLenght}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00037\ \};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ CLASS\_BLOC}}
+
+\end{DoxyCode}

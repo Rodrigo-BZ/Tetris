@@ -1,0 +1,36 @@
+\doxysection{Server\+Window.\+h}
+\hypertarget{_server_window_8h_source}{}\label{_server_window_8h_source}\index{C:/Users/rodri/OneDrive/Documentos/ENSTA/2A/POO/Tetris/Server/ServerWindow.h@{C:/Users/rodri/OneDrive/Documentos/ENSTA/2A/POO/Tetris/Server/ServerWindow.h}}
+\mbox{\hyperlink{_server_window_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#ifndef\ SERVERWINDOW\_H}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ SERVERWINDOW\_H}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <QWidget>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <QMessageBox>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_central_server_8h}{CentralServer.h}}"{}}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ QT\_BEGIN\_NAMESPACE}
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }Ui\ \{\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_ui_1_1_server_window}{ServerWindow}};\ \}}
+\DoxyCodeLine{00016\ QT\_END\_NAMESPACE}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }ServerWindow\ :\ \textcolor{keyword}{public}\ QWidget}
+\DoxyCodeLine{00023\ \{}
+\DoxyCodeLine{00024\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00025\ \ \ \ \ Q\_DISABLE\_COPY(ServerWindow)}
+\DoxyCodeLine{00026\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{explicit}\ ServerWindow(QWidget\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00028\ \ \ \ \ \string~ServerWindow();}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{class_ui_1_1_server_window}{Ui::ServerWindow}}\ *\mbox{\hyperlink{class_server_window_a69f6fae3360979d8f9a5499f933dd8a9}{ui}};}
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{class_central_server}{CentralServer}}\ *\mbox{\hyperlink{class_server_window_ac5ccce9001a8f93edb43695970d6e8c0}{m\_centralServer}};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{private}\ slots:}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_server_window_acb4be0a352e600e164478d91bb59527d}{toggleStartServer}}();}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_server_window_a270f7f2c53ceb35031e0e971b08e31b5}{logMessage}}(\textcolor{keyword}{const}\ QString\ \&msg);}
+\DoxyCodeLine{00039\ \};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SERVERWINDOW\_H}}
+
+\end{DoxyCode}

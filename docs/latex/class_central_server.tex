@@ -1,0 +1,209 @@
+\doxysection{Central\+Server Class Reference}
+\hypertarget{class_central_server}{}\label{class_central_server}\index{CentralServer@{CentralServer}}
+
+
+This class represents the central server unit. It manages all server workers and communications from and to clients.  
+
+
+
+
+{\ttfamily \#include $<$Central\+Server.\+h$>$}
+
+Inheritance diagram for Central\+Server\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_central_server}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_central_server_a5bd41c790a9512f98e03da987f8475cb}\label{class_central_server_a5bd41c790a9512f98e03da987f8475cb} 
+void {\bfseries stop\+Server} ()
+\begin{DoxyCompactList}\small\item\em This function stops the server. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_central_server_a20f4c777397319797768056a7f6191a3}\label{class_central_server_a20f4c777397319797768056a7f6191a3} 
+void {\bfseries log\+Message} (const QString \&msg)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_central_server_a94ad56c54eea5b118235862063fd8809}\label{class_central_server_a94ad56c54eea5b118235862063fd8809} 
+{\bfseries Central\+Server} (QObject \texorpdfstring{$\ast$}{*}parent=nullptr)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_central_server_aec57dfd56171843a8af9e559264d856d}{incoming\+Connection}} (qintptr socket\+Descriptor) override
+\begin{DoxyCompactList}\small\item\em This function is called when a client attempts to connect to the server. It verifies the validity of the connection and takes the appopriate measure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_central_server_a7e4335c8e994cd179b16ba1c998369af}{broadcast}} (const QJson\+Object \&message, \mbox{\hyperlink{class_server_worker}{Server\+Worker}} \texorpdfstring{$\ast$}{*}exclude)
+\begin{DoxyCompactList}\small\item\em This function sends a Json to all clients connected except for the excluded one. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_central_server_a703953e607d9ffc9cfbec9b3f3d96d39}{json\+Received}} (\mbox{\hyperlink{class_server_worker}{Server\+Worker}} \texorpdfstring{$\ast$}{*}sender, const QJson\+Object \&doc)
+\begin{DoxyCompactList}\small\item\em This function is called when the server receives a Json. It calls the appropriate function to handle the messade. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_central_server_a4c0a040d4bfde5c4bc894e50e185e3bc}{user\+Disconnected}} (\mbox{\hyperlink{class_server_worker}{Server\+Worker}} \texorpdfstring{$\ast$}{*}sender)
+\begin{DoxyCompactList}\small\item\em This function is called when a user is disconnected from the server. It removes the server worker. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_central_server_a5ae461862bae004e71d54f4e4bdf2ef3}{user\+Error}} (\mbox{\hyperlink{class_server_worker}{Server\+Worker}} \texorpdfstring{$\ast$}{*}sender)
+\begin{DoxyCompactList}\small\item\em This function emits an error from a client. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_central_server_a0543b44435380a4bdc8f3a89695df565}{json\+From\+Logged\+Out}} (\mbox{\hyperlink{class_server_worker}{Server\+Worker}} \texorpdfstring{$\ast$}{*}sender, const QJson\+Object \&doc)
+\begin{DoxyCompactList}\small\item\em This function handles the Json messages from logged out clients. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_central_server_a1c96af4e754f5fa59a6d79519e2610a8}{json\+From\+Logged\+In}} (\mbox{\hyperlink{class_server_worker}{Server\+Worker}} \texorpdfstring{$\ast$}{*}sender, const QJson\+Object \&doc)
+\begin{DoxyCompactList}\small\item\em This function handles the Json messages from logged in clients. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_central_server_a1acf1fe589641ca20ee4106d702fc94d}{send\+Json}} (\mbox{\hyperlink{class_server_worker}{Server\+Worker}} \texorpdfstring{$\ast$}{*}destination, const QJson\+Object \&message)
+\begin{DoxyCompactList}\small\item\em This function send a Json to a client. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_central_server_a6ca8868981e004a6ed2eacff61bdb3a3}\label{class_central_server_a6ca8868981e004a6ed2eacff61bdb3a3} 
+QVector$<$ \mbox{\hyperlink{class_server_worker}{Server\+Worker}} \texorpdfstring{$\ast$}{*} $>$ {\bfseries m\+\_\+clients}
+\begin{DoxyCompactList}\small\item\em A QVector containing server workers. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class represents the central server unit. It manages all server workers and communications from and to clients. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_central_server_a7e4335c8e994cd179b16ba1c998369af}\index{CentralServer@{CentralServer}!broadcast@{broadcast}}
+\index{broadcast@{broadcast}!CentralServer@{CentralServer}}
+\doxysubsubsection{\texorpdfstring{broadcast}{broadcast}}
+{\footnotesize\ttfamily \label{class_central_server_a7e4335c8e994cd179b16ba1c998369af} 
+void Central\+Server\+::broadcast (\begin{DoxyParamCaption}\item[{const QJson\+Object \&}]{message}{, }\item[{\mbox{\hyperlink{class_server_worker}{Server\+Worker}} \texorpdfstring{$\ast$}{*}}]{exclude}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+This function sends a Json to all clients connected except for the excluded one. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The Json message\textquotesingle{}s content. \\
+\hline
+{\em exclude} & The client that will not receive the Json. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_central_server_aec57dfd56171843a8af9e559264d856d}\index{CentralServer@{CentralServer}!incomingConnection@{incomingConnection}}
+\index{incomingConnection@{incomingConnection}!CentralServer@{CentralServer}}
+\doxysubsubsection{\texorpdfstring{incomingConnection()}{incomingConnection()}}
+{\footnotesize\ttfamily \label{class_central_server_aec57dfd56171843a8af9e559264d856d} 
+void Central\+Server\+::incoming\+Connection (\begin{DoxyParamCaption}\item[{qintptr}]{socket\+Descriptor}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+This function is called when a client attempts to connect to the server. It verifies the validity of the connection and takes the appopriate measure. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em socket\+Descriptor} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_central_server_a1c96af4e754f5fa59a6d79519e2610a8}\index{CentralServer@{CentralServer}!jsonFromLoggedIn@{jsonFromLoggedIn}}
+\index{jsonFromLoggedIn@{jsonFromLoggedIn}!CentralServer@{CentralServer}}
+\doxysubsubsection{\texorpdfstring{jsonFromLoggedIn()}{jsonFromLoggedIn()}}
+{\footnotesize\ttfamily \label{class_central_server_a1c96af4e754f5fa59a6d79519e2610a8} 
+void Central\+Server\+::json\+From\+Logged\+In (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_server_worker}{Server\+Worker}} \texorpdfstring{$\ast$}{*}}]{sender}{, }\item[{const QJson\+Object \&}]{doc\+Obj}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+This function handles the Json messages from logged in clients. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & The client. \\
+\hline
+{\em doc\+Obj} & The message. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_central_server_a0543b44435380a4bdc8f3a89695df565}\index{CentralServer@{CentralServer}!jsonFromLoggedOut@{jsonFromLoggedOut}}
+\index{jsonFromLoggedOut@{jsonFromLoggedOut}!CentralServer@{CentralServer}}
+\doxysubsubsection{\texorpdfstring{jsonFromLoggedOut()}{jsonFromLoggedOut()}}
+{\footnotesize\ttfamily \label{class_central_server_a0543b44435380a4bdc8f3a89695df565} 
+void Central\+Server\+::json\+From\+Logged\+Out (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_server_worker}{Server\+Worker}} \texorpdfstring{$\ast$}{*}}]{sender}{, }\item[{const QJson\+Object \&}]{doc\+Obj}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+This function handles the Json messages from logged out clients. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & The client. \\
+\hline
+{\em doc\+Obj} & The message. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_central_server_a703953e607d9ffc9cfbec9b3f3d96d39}\index{CentralServer@{CentralServer}!jsonReceived@{jsonReceived}}
+\index{jsonReceived@{jsonReceived}!CentralServer@{CentralServer}}
+\doxysubsubsection{\texorpdfstring{jsonReceived}{jsonReceived}}
+{\footnotesize\ttfamily \label{class_central_server_a703953e607d9ffc9cfbec9b3f3d96d39} 
+void Central\+Server\+::json\+Received (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_server_worker}{Server\+Worker}} \texorpdfstring{$\ast$}{*}}]{sender}{, }\item[{const QJson\+Object \&}]{doc}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+This function is called when the server receives a Json. It calls the appropriate function to handle the messade. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & The message\textquotesingle{}s sender. \\
+\hline
+{\em doc} & the Json object containing the message. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_central_server_a1acf1fe589641ca20ee4106d702fc94d}\index{CentralServer@{CentralServer}!sendJson@{sendJson}}
+\index{sendJson@{sendJson}!CentralServer@{CentralServer}}
+\doxysubsubsection{\texorpdfstring{sendJson()}{sendJson()}}
+{\footnotesize\ttfamily \label{class_central_server_a1acf1fe589641ca20ee4106d702fc94d} 
+void Central\+Server\+::send\+Json (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_server_worker}{Server\+Worker}} \texorpdfstring{$\ast$}{*}}]{destination}{, }\item[{const QJson\+Object \&}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+This function send a Json to a client. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em destination} & The client that will receive the Json. \\
+\hline
+{\em message} & The Json message\textquotesingle{}s content. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_central_server_a4c0a040d4bfde5c4bc894e50e185e3bc}\index{CentralServer@{CentralServer}!userDisconnected@{userDisconnected}}
+\index{userDisconnected@{userDisconnected}!CentralServer@{CentralServer}}
+\doxysubsubsection{\texorpdfstring{userDisconnected}{userDisconnected}}
+{\footnotesize\ttfamily \label{class_central_server_a4c0a040d4bfde5c4bc894e50e185e3bc} 
+void Central\+Server\+::user\+Disconnected (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_server_worker}{Server\+Worker}} \texorpdfstring{$\ast$}{*}}]{sender}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+This function is called when a user is disconnected from the server. It removes the server worker. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & The disconnected client. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_central_server_a5ae461862bae004e71d54f4e4bdf2ef3}\index{CentralServer@{CentralServer}!userError@{userError}}
+\index{userError@{userError}!CentralServer@{CentralServer}}
+\doxysubsubsection{\texorpdfstring{userError}{userError}}
+{\footnotesize\ttfamily \label{class_central_server_a5ae461862bae004e71d54f4e4bdf2ef3} 
+void Central\+Server\+::user\+Error (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_server_worker}{Server\+Worker}} \texorpdfstring{$\ast$}{*}}]{sender}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+This function emits an error from a client. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & The client emiting the error. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/rodri/\+One\+Drive/\+Documentos/\+ENSTA/2\+A/\+POO/\+Tetris/\+Server/\mbox{\hyperlink{_central_server_8h}{Central\+Server.\+h}}\item 
+C\+:/\+Users/rodri/\+One\+Drive/\+Documentos/\+ENSTA/2\+A/\+POO/\+Tetris/build/\+Desktop\+\_\+\+Qt\+\_\+6\+\_\+8\+\_\+1\+\_\+\+Min\+GW\+\_\+64\+\_\+bit-\/\+Debug/\+Server/\+Server\+\_\+autogen/\+EWIEGA46\+WW/moc\+\_\+\+Central\+Server.\+cpp\item 
+C\+:/\+Users/rodri/\+One\+Drive/\+Documentos/\+ENSTA/2\+A/\+POO/\+Tetris/\+Server/\mbox{\hyperlink{_central_server_8cpp}{Central\+Server.\+cpp}}\end{DoxyCompactItemize}

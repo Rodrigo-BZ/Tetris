@@ -1,0 +1,85 @@
+\doxysection{Next\+Bloc\+Pred Class Reference}
+\hypertarget{class_next_bloc_pred}{}\label{class_next_bloc_pred}\index{NextBlocPred@{NextBlocPred}}
+
+
+This class representes the prediction for the next bloc int the game. It contains a mini grid for representing it and handles modifications to it.  
+
+
+
+
+{\ttfamily \#include $<$Next\+Bloc\+Pred.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_next_bloc_pred_ab62f9e6824b6dee9666c3979594e198b}\label{class_next_bloc_pred_ab62f9e6824b6dee9666c3979594e198b} 
+{\bfseries Next\+Bloc\+Pred} (QWidget \texorpdfstring{$\ast$}{*}grid\+Parent, int initialX, int initialY, int cell\+Width, int cell\+Height)
+\item 
+void \mbox{\hyperlink{class_next_bloc_pred_a15e5701f67eb6fd438330ade65d8e1fe}{Set\+Next\+Bloc}} (std\+::array$<$ std\+::array$<$ int, 4 $>$, 4 $>$ bloc, QColor color)
+\begin{DoxyCompactList}\small\item\em This function paints in the grid the next bloc. \end{DoxyCompactList}\item 
+\Hypertarget{class_next_bloc_pred_add95cc404f29d56069f823fc898bfcbc}\label{class_next_bloc_pred_add95cc404f29d56069f823fc898bfcbc} 
+void {\bfseries Clear\+Grid} ()
+\begin{DoxyCompactList}\small\item\em Clears the grid. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_next_bloc_pred_a992d36ee9f001b399045bb72aa40a4d3}{Construct\+Grid}} (QWidget \texorpdfstring{$\ast$}{*}grid\+Parent, int initialX, int initialY, int cell\+Width, int cell\+Height)
+\begin{DoxyCompactList}\small\item\em This function constructs a grid of QLabel\textquotesingle{}s that will display the next bloc. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_next_bloc_pred_a7a51c40964adf08e066c837daaaab269}\label{class_next_bloc_pred_a7a51c40964adf08e066c837daaaab269} 
+QLabel \texorpdfstring{$\ast$}{*} {\bfseries label\+Grid} \mbox{[}4\mbox{]}\mbox{[}4\mbox{]}
+\begin{DoxyCompactList}\small\item\em Matrix of QLabel objects used to represent the next bloc. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class representes the prediction for the next bloc int the game. It contains a mini grid for representing it and handles modifications to it. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_next_bloc_pred_a992d36ee9f001b399045bb72aa40a4d3}\index{NextBlocPred@{NextBlocPred}!ConstructGrid@{ConstructGrid}}
+\index{ConstructGrid@{ConstructGrid}!NextBlocPred@{NextBlocPred}}
+\doxysubsubsection{\texorpdfstring{ConstructGrid()}{ConstructGrid()}}
+{\footnotesize\ttfamily \label{class_next_bloc_pred_a992d36ee9f001b399045bb72aa40a4d3} 
+void Next\+Bloc\+Pred\+::\+Construct\+Grid (\begin{DoxyParamCaption}\item[{QWidget \texorpdfstring{$\ast$}{*}}]{grid\+Parent}{, }\item[{int}]{initialX}{, }\item[{int}]{initialY}{, }\item[{int}]{cell\+Width}{, }\item[{int}]{cell\+Height}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+This function constructs a grid of QLabel\textquotesingle{}s that will display the next bloc. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em grid\+Parent} & The QWidget where the grid will be contained. \\
+\hline
+{\em initialX} & The starting X position for the grid. \\
+\hline
+{\em initialY} & The starting Y position for the grid. \\
+\hline
+{\em cell\+Width} & The width of each cell in the grid. \\
+\hline
+{\em cell\+Height} & The height of each cell in the grid. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_next_bloc_pred_a15e5701f67eb6fd438330ade65d8e1fe}\index{NextBlocPred@{NextBlocPred}!SetNextBloc@{SetNextBloc}}
+\index{SetNextBloc@{SetNextBloc}!NextBlocPred@{NextBlocPred}}
+\doxysubsubsection{\texorpdfstring{SetNextBloc()}{SetNextBloc()}}
+{\footnotesize\ttfamily \label{class_next_bloc_pred_a15e5701f67eb6fd438330ade65d8e1fe} 
+void Next\+Bloc\+Pred\+::\+Set\+Next\+Bloc (\begin{DoxyParamCaption}\item[{std\+::array$<$ std\+::array$<$ int, 4 $>$, 4 $>$}]{bloc}{, }\item[{QColor}]{color}{}\end{DoxyParamCaption})}
+
+
+
+This function paints in the grid the next bloc. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bloc} & Int array that represents the shape of the next bloc. \\
+\hline
+{\em color} & QColor object that contains the color of the next bloc. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/rodri/\+One\+Drive/\+Documentos/\+ENSTA/2\+A/\+POO/\+Tetris/\mbox{\hyperlink{_next_bloc_pred_8h}{Next\+Bloc\+Pred.\+h}}\item 
+C\+:/\+Users/rodri/\+One\+Drive/\+Documentos/\+ENSTA/2\+A/\+POO/\+Tetris/\mbox{\hyperlink{_next_bloc_pred_8cpp}{Next\+Bloc\+Pred.\+cpp}}\end{DoxyCompactItemize}

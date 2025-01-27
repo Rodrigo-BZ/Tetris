@@ -1,0 +1,42 @@
+\doxysection{C\+:/\+Users/rodri/\+One\+Drive/\+Documentos/\+ENSTA/2\+A/\+POO/\+Tetris/\+Game\+Grid.h}
+\hypertarget{_game_grid_8h_source}{}\label{_game_grid_8h_source}\mbox{\hyperlink{_game_grid_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#ifndef\ GAMEGRID\_H}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ GAMEGRID\_H}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <QWidget>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <QLabel>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <QFrame>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <QPalette>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <QColor>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <array>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <QDebug>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_game_enums_8h}{GameEnums.h}}"{}}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{class\ }GameGrid\ :\ QWidget}
+\DoxyCodeLine{00024\ \{}
+\DoxyCodeLine{00025\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ \ \ \ \ GameGrid(QWidget\ *gridParent);}
+\DoxyCodeLine{00027\ \ \ \ \ GameGrid(QWidget\ *gridParent,\ \textcolor{keywordtype}{int}\ initialX,\ \textcolor{keywordtype}{int}\ initialY,\ \textcolor{keywordtype}{int}\ cellWidth,\ \textcolor{keywordtype}{int}\ cellHeight);}
+\DoxyCodeLine{00028\ \ \ \ \ \string~GameGrid();}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{public}\ slots:}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_game_grid_a77df31d1831a9e4411a01624c0dc3481}{ColorGrid}}(std::array<std::array<int,\ 4>,\ 4>\ forme,\ \textcolor{keywordtype}{int}\ *position,\ \textcolor{keywordtype}{int}\ *initialPosition,\ QColor\ color,\ Direction\ direction);}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_grid_a87bda8d78b270462668e3b5ab7bca617}{UncolorGrid}}(std::array<std::array<int,\ 4>,\ 4>\ forme,\ \textcolor{keywordtype}{int}\ *position);}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_grid_a68d260ae2eea8e9d4eb7a0746e91012c}{CopyState}}(QString\ oppState);}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_grid_a5c204c6fa72fb0fbf465b3f1cf8fd0d9}{Show}}();}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_grid_a22bd7fa5a4c033983592c0b9efadb5ef}{AddLineBottom}}(std::array<std::array<int,\ 4>,\ 4>\ forme,\ \textcolor{keywordtype}{int}\ *position);}
+\DoxyCodeLine{00036\ \ \ \ \ QString\ \mbox{\hyperlink{class_game_grid_a1e23b5f2f0f00f728add6cd0947ab25a}{SaveState}}();}
+\DoxyCodeLine{00037\ \ \ \ \ QLabel*\ (*\mbox{\hyperlink{class_game_grid_aa1de802937f2d0a65eaa6ebcac609af2}{GetLabelGrid}}())[21];}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00041\ \ \ \ \ QLabel\ *\mbox{\hyperlink{class_game_grid_aae63b8639b1267551457adecb3af6f84}{labelGrid}}[10][21];}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{keyword}{private}\ slots:}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_grid_a05b6a413f27c70449e8c359a2bc84045}{ConstructGrid}}(QWidget\ *gridParent,\ \textcolor{keywordtype}{int}\ initialX,\ \textcolor{keywordtype}{int}\ initialY,\ \textcolor{keywordtype}{int}\ cellWidth,\ \textcolor{keywordtype}{int}\ cellHeight);}
+\DoxyCodeLine{00045\ \};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

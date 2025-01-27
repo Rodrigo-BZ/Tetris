@@ -1,3 +1,9 @@
+/**
+ * @file GameGrid.h
+ * @brief Header file for the GameGrid class
+ * @version 0.1
+ * 
+ */
 #ifndef GAMEGRID_H
 #define GAMEGRID_H
 
@@ -10,6 +16,10 @@
 #include <QDebug>
 #include "GameEnums.h"
 
+/**
+ * @brief This class representes the game grid of labels. It handles all modifications of the grid during the game.
+ * 
+ */
 class GameGrid : QWidget
 {
 public:
@@ -19,7 +29,6 @@ public:
 
 public slots:
     int ColorGrid(std::array<std::array<int, 4>, 4> forme, int *position, int *initialPosition, QColor color, Direction direction);
-    int AdjustRotation(std::array<std::array<int, 4>, 4> forme, std::array<std::array<int, 4>, 4> temp, int *position, QColor color);
     void UncolorGrid(std::array<std::array<int, 4>, 4> forme, int *position);
     void CopyState(QString oppState);
     void Show();
@@ -28,6 +37,7 @@ public slots:
     QLabel* (*GetLabelGrid())[21];
 
 private:
+    /// @brief This object contains a pointer to a matrix of QLabel objects. They are used to show the grid on the screen.
     QLabel *labelGrid[10][21];
 
 private slots:

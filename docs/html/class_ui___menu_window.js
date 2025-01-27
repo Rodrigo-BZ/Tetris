@@ -1,0 +1,26 @@
+var class_ui___menu_window =
+[
+    [ "retranslateUi", "class_ui___menu_window.html#a1c57d84b591acac9049741965208b408", null ],
+    [ "setupUi", "class_ui___menu_window.html#a10c2b602d7fa67f3501513e33813f026", null ],
+    [ "btnMultiplayer", "class_ui___menu_window.html#aefd6be9ce249aea26238187a9d29b3f6", null ],
+    [ "btnPlay", "class_ui___menu_window.html#a635ce3fc908aa631a40be299d9b0ec1f", null ],
+    [ "btnQuit", "class_ui___menu_window.html#a84c7d90ce4cfaf100dd7784301a1bae5", null ],
+    [ "btnTutorial", "class_ui___menu_window.html#a99c779af0881c920f63336e2eb1ae3af", null ],
+    [ "centralwidget", "class_ui___menu_window.html#a7d4ebf77cb3baa7efb20da3c5143fe30", null ],
+    [ "label", "class_ui___menu_window.html#a28a6221ee48c3f6d11d8f222ff756cf7", null ],
+    [ "label_10", "class_ui___menu_window.html#a959a30c1255c58502579307bb64e8f76", null ],
+    [ "label_11", "class_ui___menu_window.html#ab26cbbab098b1ffc9a6f3283a53ebf85", null ],
+    [ "label_13", "class_ui___menu_window.html#a740e958e31a71fae760fda83711dbbf7", null ],
+    [ "label_14", "class_ui___menu_window.html#aa5687d7c87e8b37e7f6c8fba433f0684", null ],
+    [ "label_15", "class_ui___menu_window.html#a7ff9736dfbb2531da796658594e518ab", null ],
+    [ "label_16", "class_ui___menu_window.html#af4f820b6ae07684046f3207c54be57be", null ],
+    [ "label_17", "class_ui___menu_window.html#aaf5c9ad673b13a13cb673735fde77afb", null ],
+    [ "label_18", "class_ui___menu_window.html#a316c3f770b1eae360f69bda93269fca0", null ],
+    [ "label_2", "class_ui___menu_window.html#ae1c956df5b5b88c11865ca3d53891eca", null ],
+    [ "label_3", "class_ui___menu_window.html#ad172557061911522ad5bd0aa3138aa5c", null ],
+    [ "label_4", "class_ui___menu_window.html#a9a011123825a1c01f5b4695ed2133c21", null ],
+    [ "label_5", "class_ui___menu_window.html#a1745516016763195184377eadc882b7a", null ],
+    [ "label_7", "class_ui___menu_window.html#a4b6e498d5f74fb50b5531b7d428b61ef", null ],
+    [ "label_8", "class_ui___menu_window.html#afefb7181aee68cf629d007843f15dc6f", null ],
+    [ "label_9", "class_ui___menu_window.html#a1aa3fa3a1177f92e696008917cb81575", null ]
+];

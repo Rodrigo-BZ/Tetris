@@ -1,0 +1,40 @@
+\doxysection{BlocL Class Reference}
+\hypertarget{class_bloc_l}{}\label{class_bloc_l}\index{BlocL@{BlocL}}
+Inheritance diagram for BlocL\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_bloc_l}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_bloc}{Bloc}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Bloc} (QColor c)
+\item 
+void \mbox{\hyperlink{class_bloc_a3a2bd8ccc58d5f30ad1a2075ab31f016}{Rotate\+Clockwise}} (int \texorpdfstring{$\ast$}{*}position, \mbox{\hyperlink{class_game_grid}{Game\+Grid}} \texorpdfstring{$\ast$}{*}grid)
+\begin{DoxyCompactList}\small\item\em This function rotates a \doxylink{class_bloc}{Bloc} pieace 90 degrees clockwise. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_bloc_acfc01d505a4eb8f4e08cca2612ef9b86}{Rotate\+Counter\+Clockwise}} (int \texorpdfstring{$\ast$}{*}position, \mbox{\hyperlink{class_game_grid}{Game\+Grid}} \texorpdfstring{$\ast$}{*}grid)
+\begin{DoxyCompactList}\small\item\em This function rotates a \doxylink{class_bloc}{Bloc} pieace 90 degrees clockwise. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_bloc_a603f495af722a055aee8f492d747bb89}{Free\+Column}} (int column\+Number)
+\begin{DoxyCompactList}\small\item\em This function checks if a specific column in the \doxylink{class_bloc}{Bloc} piece matrix is free (only 0\textquotesingle{}s). \end{DoxyCompactList}\item 
+std\+::array$<$ std\+::array$<$ int, 4 $>$, 4 $>$ \mbox{\hyperlink{class_bloc_a01a150de91267ac8d9ae10f912f3ecca}{Get\+Forme}} () const
+\begin{DoxyCompactList}\small\item\em This function returns an int array that represents the shape of the \doxylink{class_bloc}{Bloc} piece. \end{DoxyCompactList}\item 
+QColor \mbox{\hyperlink{class_bloc_aec0bdbc76df0a4a57f09269440c1ca2d}{Get\+Color}} () const
+\begin{DoxyCompactList}\small\item\em This function returns the QColor value of a \doxylink{class_bloc}{Bloc} piece. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_bloc_a70bc4087a503c3b6782d3521b02b911a}{Get\+Lenght}} () const
+\begin{DoxyCompactList}\small\item\em This function returns the "{}length"{} of the \doxylink{class_bloc}{Bloc} piece. This corresponds to the matrix size necessary for representing the piece. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_bloc}{Bloc}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::array$<$ std\+::array$<$ int, 4 $>$, 4 $>$ {\bfseries forme} = \{0\}
+\begin{DoxyCompactList}\small\item\em The int array that represents the \doxylink{class_bloc}{Bloc} piece shape. \end{DoxyCompactList}\item 
+QColor {\bfseries color}
+\begin{DoxyCompactList}\small\item\em The QColor attribute to indicate the color of the \doxylink{class_bloc}{Bloc} piece. \end{DoxyCompactList}\item 
+int {\bfseries lenght}
+\begin{DoxyCompactList}\small\item\em This corresponds to the matrix size necessary for representing the piece. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/rodri/\+One\+Drive/\+Documentos/\+ENSTA/2\+A/\+POO/\+Tetris/\mbox{\hyperlink{_bloc_types_8h}{Bloc\+Types.\+h}}\end{DoxyCompactItemize}

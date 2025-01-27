@@ -1,3 +1,9 @@
+/**
+ * @file GameGrid.cpp
+ * @brief This file implements the functions for the GameGrid class
+ * @version 0.1
+ * 
+ */
 #include "GameGrid.h"
 
 GameGrid::GameGrid(QWidget *gridParent)
@@ -19,10 +25,24 @@ GameGrid::~GameGrid()
     }
 }
 
+/**
+ * @brief This function returns the QLabel matrix that represents the game grid.
+ * 
+ * @return QLabel*(*)[21] 
+ */
 QLabel* (*GameGrid::GetLabelGrid())[21] {
     return labelGrid;
 }
 
+/**
+ * @brief This function constructs a new empty grid but keeps it invisible. It is 10 cells wide and 21 cells high.
+ * 
+ * @param gridParent The QWidget that will contain the grid.
+ * @param initialX The starting X position for the grid.
+ * @param initialY The starting Y position for the grid.
+ * @param cellWidth The width of each cell of the grid.
+ * @param cellHeight The height of each cell of the grid
+ */
 void GameGrid::ConstructGrid(QWidget *gridParent, int initialX, int initialY, int cellWidth, int cellHeight)
 {
     for(int i = 0; i < 10; i++) {
@@ -41,6 +61,10 @@ void GameGrid::ConstructGrid(QWidget *gridParent, int initialX, int initialY, in
     }
 }
 
+/**
+ * @brief This function sets the grid to visible.
+ * 
+ */
 void GameGrid::Show()
 {
     if(*labelGrid != nullptr) {
@@ -51,6 +75,16 @@ void GameGrid::Show()
     }
 }
 
+/**
+ * @brief This function colors a certain Bloc piece in the grid.
+ * 
+ * @param forme The int array that represents the Bloc shape that will be painted.
+ * @param position The position [x,y] where the bloc will be inserted.
+ * @param initialPosition The bloc's initial position [x,y]. Can be equal to 'position' if the bloc has no previous position.
+ * @param color The color of the bloc.
+ * @param direction The direction in which the block is moving.
+ * @return int 
+ */
 int GameGrid::ColorGrid(std::array<std::array<int, 4>, 4> forme, int *position, int *initialPosition, QColor color, Direction direction)
 {
     int valid = 1;
@@ -148,6 +182,12 @@ int GameGrid::ColorGrid(std::array<std::array<int, 4>, 4> forme, int *position, 
     return valid;
 }
 
+/**
+ * @brief This function uncolors a certain Bloc piece in the grid.
+ * 
+ * @param forme The int array that represents the Bloc shape that will be erased.
+ * @param position The position of the bloc in the grid.
+ */
 void GameGrid::UncolorGrid(std::array<std::array<int, 4>, 4> forme, int *position)
 {
     for(int i = 0; i < 4; i++) {
@@ -158,6 +198,11 @@ void GameGrid::UncolorGrid(std::array<std::array<int, 4>, 4> forme, int *positio
     }
 }
 
+/**
+ * @brief This function returns a QSting containing a replica of the current grid state.
+ * 
+ * @return QString 
+ */
 QString GameGrid::SaveState()
 {
     QString state;
@@ -194,6 +239,11 @@ QString GameGrid::SaveState()
     return state;
 }
 
+/**
+ * @brief This function copies another grid state.
+ * 
+ * @param oppState A QString containing the replica of the grid state.
+ */
 void GameGrid::CopyState(QString oppState)
 {
     for(int i = 0; i < 10; i++) {
@@ -225,6 +275,12 @@ void GameGrid::CopyState(QString oppState)
     }
 }
 
+/**
+ * @brief This function adds a 'Garbage Line' to the bottom of a grid.
+ * 
+ * @param forme The int array that represents the Bloc shape of the current falling bloc.
+ * @param position The position of the current falling bloc.
+ */
 void GameGrid::AddLineBottom(std::array<std::array<int, 4>, 4> forme, int *position)
 {
     for(int i = 0; i < 10; i++) {

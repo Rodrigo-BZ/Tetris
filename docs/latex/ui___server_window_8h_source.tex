@@ -1,0 +1,89 @@
+\doxysection{ui\+\_\+\+Server\+Window.\+h}
+\hypertarget{ui___server_window_8h_source}{}\label{ui___server_window_8h_source}\index{C:/Users/rodri/OneDrive/Documentos/ENSTA/2A/POO/Tetris/build/Desktop\_Qt\_6\_8\_1\_MinGW\_64\_bit-\/Debug/Server/Server\_autogen/include/ui\_ServerWindow.h@{C:/Users/rodri/OneDrive/Documentos/ENSTA/2A/POO/Tetris/build/Desktop\_Qt\_6\_8\_1\_MinGW\_64\_bit-\/Debug/Server/Server\_autogen/include/ui\_ServerWindow.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/********************************************************************************}}
+\DoxyCodeLine{00002\ \textcolor{comment}{**\ Form\ generated\ from\ reading\ UI\ file\ 'ServerWindow.ui'}}
+\DoxyCodeLine{00003\ \textcolor{comment}{**}}
+\DoxyCodeLine{00004\ \textcolor{comment}{**\ Created\ by:\ Qt\ User\ Interface\ Compiler\ version\ 6.8.1}}
+\DoxyCodeLine{00005\ \textcolor{comment}{**}}
+\DoxyCodeLine{00006\ \textcolor{comment}{**\ WARNING!\ All\ changes\ made\ in\ this\ file\ will\ be\ lost\ when\ recompiling\ UI\ file!}}
+\DoxyCodeLine{00007\ \textcolor{comment}{********************************************************************************/}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#ifndef\ UI\_SERVERWINDOW\_H}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ UI\_SERVERWINDOW\_H}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <QtCore/QVariant>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <QtGui/QIcon>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <QtWidgets/QApplication>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <QtWidgets/QGridLayout>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <QtWidgets/QLabel>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <QtWidgets/QPlainTextEdit>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <QtWidgets/QPushButton>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <QtWidgets/QSpacerItem>}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <QtWidgets/QWidget>}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ QT\_BEGIN\_NAMESPACE}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_ui___server_window}{Ui\_ServerWindow}}}
+\DoxyCodeLine{00025\ \{}
+\DoxyCodeLine{00026\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00027\ \ \ \ \ QGridLayout\ *gridLayout;}
+\DoxyCodeLine{00028\ \ \ \ \ QLabel\ *label;}
+\DoxyCodeLine{00029\ \ \ \ \ QPlainTextEdit\ *logEditor;}
+\DoxyCodeLine{00030\ \ \ \ \ QSpacerItem\ *horizontalSpacer;}
+\DoxyCodeLine{00031\ \ \ \ \ QPushButton\ *startStopButton;}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ setupUi(QWidget\ *\mbox{\hyperlink{class_server_window}{ServerWindow}})}
+\DoxyCodeLine{00034\ \ \ \ \ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_server_window}{ServerWindow}}-\/>objectName().isEmpty())}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_server_window}{ServerWindow}}-\/>setObjectName(\textcolor{stringliteral}{"{}ServerWindow"{}});}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_server_window}{ServerWindow}}-\/>resize(400,\ 300);}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ QIcon\ icon(QIcon::fromTheme(QIcon::ThemeIcon::NetworkWireless));}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_server_window}{ServerWindow}}-\/>setWindowIcon(icon);}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ gridLayout\ =\ \textcolor{keyword}{new}\ QGridLayout(\mbox{\hyperlink{class_server_window}{ServerWindow}});}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ gridLayout-\/>setObjectName(\textcolor{stringliteral}{"{}gridLayout"{}});}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ label\ =\ \textcolor{keyword}{new}\ QLabel(\mbox{\hyperlink{class_server_window}{ServerWindow}});}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ label-\/>setObjectName(\textcolor{stringliteral}{"{}label"{}});}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ gridLayout-\/>addWidget(label,\ 0,\ 0,\ 1,\ 2);}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ logEditor\ =\ \textcolor{keyword}{new}\ QPlainTextEdit(\mbox{\hyperlink{class_server_window}{ServerWindow}});}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ logEditor-\/>setObjectName(\textcolor{stringliteral}{"{}logEditor"{}});}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ logEditor-\/>setReadOnly(\textcolor{keyword}{true});}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ gridLayout-\/>addWidget(logEditor,\ 1,\ 0,\ 1,\ 2);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ horizontalSpacer\ =\ \textcolor{keyword}{new}\ QSpacerItem(298,\ 20,\ QSizePolicy::Policy::Expanding,\ QSizePolicy::Policy::Minimum);}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ gridLayout-\/>addItem(horizontalSpacer,\ 2,\ 0,\ 1,\ 1);}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ startStopButton\ =\ \textcolor{keyword}{new}\ QPushButton(\mbox{\hyperlink{class_server_window}{ServerWindow}});}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ startStopButton-\/>setObjectName(\textcolor{stringliteral}{"{}startStopButton"{}});}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ gridLayout-\/>addWidget(startStopButton,\ 2,\ 1,\ 1,\ 1);}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ retranslateUi(\mbox{\hyperlink{class_server_window}{ServerWindow}});}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ QMetaObject::connectSlotsByName(\mbox{\hyperlink{class_server_window}{ServerWindow}});}
+\DoxyCodeLine{00066\ \ \ \ \ \}\ \textcolor{comment}{//\ setupUi}}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{void}\ retranslateUi(QWidget\ *\mbox{\hyperlink{class_server_window}{ServerWindow}})}
+\DoxyCodeLine{00069\ \ \ \ \ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_server_window}{ServerWindow}}-\/>setWindowTitle(QCoreApplication::translate(\textcolor{stringliteral}{"{}ServerWindow"{}},\ \textcolor{stringliteral}{"{}ServerWindow"{}},\ \textcolor{keyword}{nullptr}));}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ label-\/>setText(QCoreApplication::translate(\textcolor{stringliteral}{"{}ServerWindow"{}},\ \textcolor{stringliteral}{"{}Server\ Log"{}},\ \textcolor{keyword}{nullptr}));}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ startStopButton-\/>setText(QCoreApplication::translate(\textcolor{stringliteral}{"{}ServerWindow"{}},\ \textcolor{stringliteral}{"{}Start\ Server"{}},\ \textcolor{keyword}{nullptr}));}
+\DoxyCodeLine{00073\ \ \ \ \ \}\ \textcolor{comment}{//\ retranslateUi}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \};}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \textcolor{keyword}{namespace\ }Ui\ \{}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_ui_1_1_server_window}{ServerWindow}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_ui___server_window}{Ui\_ServerWindow}}\ \{\};}
+\DoxyCodeLine{00079\ \}\ \textcolor{comment}{//\ namespace\ Ui}}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ QT\_END\_NAMESPACE}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ UI\_SERVERWINDOW\_H}}
+
+\end{DoxyCode}

@@ -1,0 +1,51 @@
+\doxysection{C\+:/\+Users/rodri/\+One\+Drive/\+Documentos/\+ENSTA/2\+A/\+POO/\+Tetris/\+Player\+Client.h}
+\hypertarget{_player_client_8h_source}{}\label{_player_client_8h_source}\mbox{\hyperlink{_player_client_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#ifndef\ PLAYERCLIENT\_H}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ PLAYERCLIENT\_H}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <QTcpSocket>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <QString>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <QDataStream>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <QJsonParseError>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <QJsonDocument>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <QJsonObject>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <QJsonValue>}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_player_client_a0514fcbc26e9dfdc349929e85990bd14}{PlayerClient}}\ :\ \textcolor{keyword}{public}\ QObject}
+\DoxyCodeLine{00023\ \{}
+\DoxyCodeLine{00024\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00025\ \ \ \ \ Q\_DISABLE\_COPY(\mbox{\hyperlink{class_player_client_a0514fcbc26e9dfdc349929e85990bd14}{PlayerClient}})}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_player_client_a0514fcbc26e9dfdc349929e85990bd14}{PlayerClient}}(QObject\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{public}\ slots:}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_client_abe7bab6c08559c3f53301dc80dd93b31}{connectToServer}}(\textcolor{keyword}{const}\ QHostAddress\ \&address,\ quint16\ port);}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_client_a9336547ff8a279dbd7fbb101dcda22b9}{login}}(\textcolor{keyword}{const}\ QString\ \&userName);}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_client_a11388855a5f97a4e5e84617bcc07ade8}{sendMessage}}(\textcolor{keyword}{const}\ QString\ \&text);}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_client_a7a66ba981fed1337bd024d846e306adb}{disconnectFromHost}}();}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00038\ \ \ \ \ std::unique\_ptr<QTcpSocket>\ \mbox{\hyperlink{class_player_client_ad2ef5ade109063b7ce275bcdeb76f9f2}{m\_clientSocket}};}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_player_client_ac152ca0fde5f61c6f54a2e5cdee8c49e}{m\_loggedIn}};}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_client_ab5f9a9835893567b4c304f44bf2b8522}{jsonReceived}}(\textcolor{keyword}{const}\ QJsonObject\ \&doc);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{keyword}{private}\ slots:}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_client_a267d6282c87259fef3e246515af5fdc2}{onReadyRead}}();}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ signals:}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ connected();}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{void}\ loggedIn();}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{void}\ loginError(\textcolor{keyword}{const}\ QString\ \&reason);}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ disconnected();}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{void}\ messageReceived(\textcolor{keyword}{const}\ QString\ \&sender,\ \textcolor{keyword}{const}\ QString\ \&text);}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{void}\ error(QAbstractSocket::SocketError\ socketError);}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{void}\ userJoined(\textcolor{keyword}{const}\ QString\ \&username);}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{void}\ userLeft(\textcolor{keyword}{const}\ QString\ \&username);}
+\DoxyCodeLine{00055\ \};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ PLAYERCLIENT\_H}}
+
+\end{DoxyCode}

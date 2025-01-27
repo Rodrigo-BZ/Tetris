@@ -1,3 +1,9 @@
+/**
+ * @file BlocTypes.h
+ * @brief Header file for the BlocTypes class. It contains the classes of all 7 Bloc types
+ * @version 0.1
+ * 
+ */
 #include "Bloc.h"
 
 class BlocL: public Bloc{

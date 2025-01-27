@@ -1,0 +1,49 @@
+\doxysection{Central\+Server.\+h}
+\hypertarget{_central_server_8h_source}{}\label{_central_server_8h_source}\index{C:/Users/rodri/OneDrive/Documentos/ENSTA/2A/POO/Tetris/Server/CentralServer.h@{C:/Users/rodri/OneDrive/Documentos/ENSTA/2A/POO/Tetris/Server/CentralServer.h}}
+\mbox{\hyperlink{_central_server_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#ifndef\ CENTRALSERVER\_H}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ CENTRALSERVER\_H}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <QTcpServer>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <QVector>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <QJsonDocument>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <QJsonObject>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <QJsonValue>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <QTimer>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_server_worker_8h}{serverworker.h}}"{}}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }CentralServer\ :\ \textcolor{keyword}{public}\ QTcpServer}
+\DoxyCodeLine{00023\ \{}
+\DoxyCodeLine{00024\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00025\ \ \ \ \ Q\_DISABLE\_COPY(CentralServer)}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{explicit}\ CentralServer(QObject\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{public}\ slots:}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_central_server_a5bd41c790a9512f98e03da987f8475cb}{stopServer}}();}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_central_server_aec57dfd56171843a8af9e559264d856d}{incomingConnection}}(qintptr\ socketDescriptor)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_central_server_a0543b44435380a4bdc8f3a89695df565}{jsonFromLoggedOut}}(\mbox{\hyperlink{class_server_worker}{ServerWorker}}\ *sender,\ \textcolor{keyword}{const}\ QJsonObject\ \&doc);}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_central_server_a1c96af4e754f5fa59a6d79519e2610a8}{jsonFromLoggedIn}}(\mbox{\hyperlink{class_server_worker}{ServerWorker}}\ *sender,\ \textcolor{keyword}{const}\ QJsonObject\ \&doc);}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_central_server_a1acf1fe589641ca20ee4106d702fc94d}{sendJson}}(\mbox{\hyperlink{class_server_worker}{ServerWorker}}\ *destination,\ \textcolor{keyword}{const}\ QJsonObject\ \&message);}
+\DoxyCodeLine{00041\ \ \ \ \ QVector<ServerWorker\ *>\ \mbox{\hyperlink{class_central_server_a6ca8868981e004a6ed2eacff61bdb3a3}{m\_clients}};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{keyword}{private}\ slots:}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_central_server_a7e4335c8e994cd179b16ba1c998369af}{broadcast}}(\textcolor{keyword}{const}\ QJsonObject\ \&message,\ \mbox{\hyperlink{class_server_worker}{ServerWorker}}\ *exclude);}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_central_server_a703953e607d9ffc9cfbec9b3f3d96d39}{jsonReceived}}(\mbox{\hyperlink{class_server_worker}{ServerWorker}}\ *sender,\ \textcolor{keyword}{const}\ QJsonObject\ \&doc);}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_central_server_a4c0a040d4bfde5c4bc894e50e185e3bc}{userDisconnected}}(\mbox{\hyperlink{class_server_worker}{ServerWorker}}\ *sender);}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_central_server_a5ae461862bae004e71d54f4e4bdf2ef3}{userError}}(\mbox{\hyperlink{class_server_worker}{ServerWorker}}\ *sender);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ signals:}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ logMessage(\textcolor{keyword}{const}\ QString\ \&msg);}
+\DoxyCodeLine{00051\ \};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ CENTRALSERVER\_H}}
+
+\end{DoxyCode}

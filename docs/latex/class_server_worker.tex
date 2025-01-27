@@ -1,0 +1,143 @@
+\doxysection{Server\+Worker Class Reference}
+\hypertarget{class_server_worker}{}\label{class_server_worker}\index{ServerWorker@{ServerWorker}}
+
+
+This class represents the server worker. It handles the communications from one client to the server.  
+
+
+
+
+{\ttfamily \#include $<$Server\+Worker.\+h$>$}
+
+Inheritance diagram for Server\+Worker\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_server_worker}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_server_worker_a63fcb2e44f78b5dea4f676255459d66c}\label{class_server_worker_a63fcb2e44f78b5dea4f676255459d66c} 
+void {\bfseries disconnect\+From\+Client} ()
+\begin{DoxyCompactList}\small\item\em This function disconnects the client being handled by the server worker from the server. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_server_worker_a4c0ecabb218149825bac11878aae3cb8}\label{class_server_worker_a4c0ecabb218149825bac11878aae3cb8} 
+void {\bfseries json\+Received} (const QJson\+Object \&json\+Doc)
+\item 
+\Hypertarget{class_server_worker_a2e6c11702849e3f0aeeb8e4ff4267d5c}\label{class_server_worker_a2e6c11702849e3f0aeeb8e4ff4267d5c} 
+void {\bfseries disconnected\+From\+Client} ()
+\item 
+\Hypertarget{class_server_worker_acac590313c425ce3bbc6c7425faf4f82}\label{class_server_worker_acac590313c425ce3bbc6c7425faf4f82} 
+void {\bfseries error} ()
+\item 
+\Hypertarget{class_server_worker_acbcc05d95c2b08e10f3f30224692a313}\label{class_server_worker_acbcc05d95c2b08e10f3f30224692a313} 
+void {\bfseries log\+Message} (const QString \&msg)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_server_worker_a877c40ee4c9824f8c95cdca7ca9435e6}\label{class_server_worker_a877c40ee4c9824f8c95cdca7ca9435e6} 
+{\bfseries Server\+Worker} (QObject \texorpdfstring{$\ast$}{*}parent=nullptr)
+\item 
+virtual bool \mbox{\hyperlink{class_server_worker_af7fabee95d40a9d14d31c0373d69eaeb}{set\+Socket\+Descriptor}} (qintptr socket\+Descriptor)
+\begin{DoxyCompactList}\small\item\em This function sets the value for the server socket object. \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{class_server_worker_a302565e75390613de437beadd01fb9c1}{user\+Name}} () const
+\begin{DoxyCompactList}\small\item\em This fuction returns the username of the client being handled by the server worker. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_server_worker_a98aeba7b1ed30b9c73de957b77475d6d}{set\+User\+Name}} (const QString \&\mbox{\hyperlink{class_server_worker_a302565e75390613de437beadd01fb9c1}{user\+Name}})
+\begin{DoxyCompactList}\small\item\em This function sets the username of the client being handled by the server worker. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_server_worker_ab502224070b0286ca793cedaa53ac2a3}{send\+Json}} (const QJson\+Object \&json\+Data)
+\begin{DoxyCompactList}\small\item\em This functions attempts to send a Json. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_server_worker_a77e374fa7cf877cc2d18c82a9e05b8e2}\label{class_server_worker_a77e374fa7cf877cc2d18c82a9e05b8e2} 
+void {\bfseries receive\+Json} ()
+\begin{DoxyCompactList}\small\item\em This function attempts to receive a Json. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_server_worker_a13e630372023dd7817a7140c86a2431b}\label{class_server_worker_a13e630372023dd7817a7140c86a2431b} 
+QTcp\+Socket \texorpdfstring{$\ast$}{*} {\bfseries m\+\_\+server\+Socket}
+\begin{DoxyCompactList}\small\item\em A pointer to the server socket object. \end{DoxyCompactList}\item 
+\Hypertarget{class_server_worker_a0fcd05799ae18a586aaddfeb47cae110}\label{class_server_worker_a0fcd05799ae18a586aaddfeb47cae110} 
+QString {\bfseries m\+\_\+user\+Name}
+\begin{DoxyCompactList}\small\item\em The user name of the client being handled by the server worker. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class represents the server worker. It handles the communications from one client to the server. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_server_worker_ab502224070b0286ca793cedaa53ac2a3}\index{ServerWorker@{ServerWorker}!sendJson@{sendJson}}
+\index{sendJson@{sendJson}!ServerWorker@{ServerWorker}}
+\doxysubsubsection{\texorpdfstring{sendJson()}{sendJson()}}
+{\footnotesize\ttfamily \label{class_server_worker_ab502224070b0286ca793cedaa53ac2a3} 
+void Server\+Worker\+::send\+Json (\begin{DoxyParamCaption}\item[{const QJson\+Object \&}]{json}{}\end{DoxyParamCaption})}
+
+
+
+This functions attempts to send a Json. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em json} & The Json being sent. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_server_worker_af7fabee95d40a9d14d31c0373d69eaeb}\index{ServerWorker@{ServerWorker}!setSocketDescriptor@{setSocketDescriptor}}
+\index{setSocketDescriptor@{setSocketDescriptor}!ServerWorker@{ServerWorker}}
+\doxysubsubsection{\texorpdfstring{setSocketDescriptor()}{setSocketDescriptor()}}
+{\footnotesize\ttfamily \label{class_server_worker_af7fabee95d40a9d14d31c0373d69eaeb} 
+bool Server\+Worker\+::set\+Socket\+Descriptor (\begin{DoxyParamCaption}\item[{qintptr}]{socket\+Descriptor}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+This function sets the value for the server socket object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em socket\+Descriptor} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true 
+
+false 
+\end{DoxyReturn}
+\Hypertarget{class_server_worker_a98aeba7b1ed30b9c73de957b77475d6d}\index{ServerWorker@{ServerWorker}!setUserName@{setUserName}}
+\index{setUserName@{setUserName}!ServerWorker@{ServerWorker}}
+\doxysubsubsection{\texorpdfstring{setUserName()}{setUserName()}}
+{\footnotesize\ttfamily \label{class_server_worker_a98aeba7b1ed30b9c73de957b77475d6d} 
+void Server\+Worker\+::set\+User\+Name (\begin{DoxyParamCaption}\item[{const QString \&}]{user\+Name}{}\end{DoxyParamCaption})}
+
+
+
+This function sets the username of the client being handled by the server worker. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em user\+Name} & Unername of the client. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_server_worker_a302565e75390613de437beadd01fb9c1}\index{ServerWorker@{ServerWorker}!userName@{userName}}
+\index{userName@{userName}!ServerWorker@{ServerWorker}}
+\doxysubsubsection{\texorpdfstring{userName()}{userName()}}
+{\footnotesize\ttfamily \label{class_server_worker_a302565e75390613de437beadd01fb9c1} 
+QString Server\+Worker\+::user\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+This fuction returns the username of the client being handled by the server worker. 
+
+\begin{DoxyReturn}{Returns}
+QString 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/rodri/\+One\+Drive/\+Documentos/\+ENSTA/2\+A/\+POO/\+Tetris/\+Server/\mbox{\hyperlink{_server_worker_8h}{Server\+Worker.\+h}}\item 
+C\+:/\+Users/rodri/\+One\+Drive/\+Documentos/\+ENSTA/2\+A/\+POO/\+Tetris/build/\+Desktop\+\_\+\+Qt\+\_\+6\+\_\+8\+\_\+1\+\_\+\+Min\+GW\+\_\+64\+\_\+bit-\/\+Debug/\+Server/\+Server\+\_\+autogen/\+EWIEGA46\+WW/moc\+\_\+\+Server\+Worker.\+cpp\item 
+C\+:/\+Users/rodri/\+One\+Drive/\+Documentos/\+ENSTA/2\+A/\+POO/\+Tetris/\+Server/\mbox{\hyperlink{_server_worker_8cpp}{Server\+Worker.\+cpp}}\end{DoxyCompactItemize}

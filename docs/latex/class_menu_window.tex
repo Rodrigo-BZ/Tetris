@@ -1,0 +1,76 @@
+\doxysection{Menu\+Window Class Reference}
+\hypertarget{class_menu_window}{}\label{class_menu_window}\index{MenuWindow@{MenuWindow}}
+
+
+This class represents the \doxylink{class_menu_window}{Menu\+Window}. It functions as a menu manager, handling all user interactions in the menu screen.  
+
+
+
+
+{\ttfamily \#include $<$Menu\+Window.\+h$>$}
+
+Inheritance diagram for Menu\+Window\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_menu_window}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_menu_window_a8b0827e31f1373dde6f48a944ac32f3e}\label{class_menu_window_a8b0827e31f1373dde6f48a944ac32f3e} 
+{\bfseries Menu\+Window} (QWidget \texorpdfstring{$\ast$}{*}parent=nullptr)
+\item 
+void \mbox{\hyperlink{class_menu_window_a9a691e006d3871eb33c957b20ada4175}{Get\+Game\+Window\+Ptr}} (\mbox{\hyperlink{class_game_window}{Game\+Window}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_menu_window_ab25749bf46a34fd7e77596832850c25d}{game\+Window}})
+\begin{DoxyCompactList}\small\item\em This function sets the value for the \doxylink{class_game_window}{Game\+Window} object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_menu_window_ace5b000eb3259c8e525323a845631898}\label{class_menu_window_ace5b000eb3259c8e525323a845631898} 
+void {\bfseries on\+\_\+btn\+Play\+\_\+clicked} ()
+\begin{DoxyCompactList}\small\item\em This function is called when the play button in pressed. It opens a singleplayer game window. \end{DoxyCompactList}\item 
+\Hypertarget{class_menu_window_a7e3027142675b703d4b9e38cff453d24}\label{class_menu_window_a7e3027142675b703d4b9e38cff453d24} 
+void {\bfseries on\+\_\+btn\+Multiplayer\+\_\+clicked} ()
+\begin{DoxyCompactList}\small\item\em This function is called when the multiplayer button in pressed. It opens a multiplayer game window. \end{DoxyCompactList}\item 
+\Hypertarget{class_menu_window_afb8a17a7eefcdfb82a6fcfef4f1b080f}\label{class_menu_window_afb8a17a7eefcdfb82a6fcfef4f1b080f} 
+void {\bfseries on\+\_\+btn\+Tutorial\+\_\+clicked} ()
+\begin{DoxyCompactList}\small\item\em This function is called when the tutorial button in pressed. It opens the tutorial for the game in a default browser. \end{DoxyCompactList}\item 
+\Hypertarget{class_menu_window_ae0d80f2ec47bc1f45f983a893feb9dc1}\label{class_menu_window_ae0d80f2ec47bc1f45f983a893feb9dc1} 
+void {\bfseries on\+\_\+btn\+Quit\+\_\+clicked} ()
+\begin{DoxyCompactList}\small\item\em This function is called when the quit button in pressed. It closes the application. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_menu_window_af8370d2802f21a9c9121d341fb3fe831}\label{class_menu_window_af8370d2802f21a9c9121d341fb3fe831} 
+\mbox{\hyperlink{class_ui_1_1_menu_window}{Ui\+::\+Menu\+Window}} \texorpdfstring{$\ast$}{*} {\bfseries ui}
+\begin{DoxyCompactList}\small\item\em Ui object from the Qt libraries that contains the menu window\textquotesingle{}s visual elements. \end{DoxyCompactList}\item 
+\Hypertarget{class_menu_window_ab25749bf46a34fd7e77596832850c25d}\label{class_menu_window_ab25749bf46a34fd7e77596832850c25d} 
+\mbox{\hyperlink{class_game_window}{Game\+Window}} \texorpdfstring{$\ast$}{*} {\bfseries game\+Window}
+\begin{DoxyCompactList}\small\item\em QWidget pointer to the game window, for toggling between windows. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class represents the \doxylink{class_menu_window}{Menu\+Window}. It functions as a menu manager, handling all user interactions in the menu screen. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_menu_window_a9a691e006d3871eb33c957b20ada4175}\index{MenuWindow@{MenuWindow}!GetGameWindowPtr@{GetGameWindowPtr}}
+\index{GetGameWindowPtr@{GetGameWindowPtr}!MenuWindow@{MenuWindow}}
+\doxysubsubsection{\texorpdfstring{GetGameWindowPtr()}{GetGameWindowPtr()}}
+{\footnotesize\ttfamily \label{class_menu_window_a9a691e006d3871eb33c957b20ada4175} 
+void Menu\+Window\+::\+Get\+Game\+Window\+Ptr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_game_window}{Game\+Window}} \texorpdfstring{$\ast$}{*}}]{game\+Window}{}\end{DoxyParamCaption})}
+
+
+
+This function sets the value for the \doxylink{class_game_window}{Game\+Window} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\+Window} & \doxylink{class_game_window}{Game\+Window} pointer object. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/rodri/\+One\+Drive/\+Documentos/\+ENSTA/2\+A/\+POO/\+Tetris/\mbox{\hyperlink{_menu_window_8h}{Menu\+Window.\+h}}\item 
+C\+:/\+Users/rodri/\+One\+Drive/\+Documentos/\+ENSTA/2\+A/\+POO/\+Tetris/Menu\+Window.\+cpp\end{DoxyCompactItemize}

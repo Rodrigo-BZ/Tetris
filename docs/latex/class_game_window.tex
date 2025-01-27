@@ -1,0 +1,451 @@
+\doxysection{Game\+Window Class Reference}
+\hypertarget{class_game_window}{}\label{class_game_window}\index{GameWindow@{GameWindow}}
+
+
+This class represents the \doxylink{class_game_window}{Game\+Window}. It functions as a game manager, handling all player interactions during the game.  
+
+
+
+
+{\ttfamily \#include $<$Game\+Window.\+h$>$}
+
+Inheritance diagram for Game\+Window\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_game_window}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_game_window_ac3eeb92ff59cb36fd579f290013db4d5}{Game\+Window}} (QWidget \texorpdfstring{$\ast$}{*}parent=nullptr)
+\begin{DoxyCompactList}\small\item\em Construct a new Game Window\+:\+: Game Window object and connect all signals from \doxylink{class_player_client}{Player\+Client} object to appropriate functions. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_window_a414401497b4c72b99bfc707c2de5dfaa}{Get\+Menu\+Window\+Ptr}} (QWidget \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_game_window_a308f83ec2191fd99b379d0a358d55b6d}{menu\+Window}})
+\begin{DoxyCompactList}\small\item\em This function sets the value of the pointer to the menu window object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_window_aa781515e0e0c896544de8e431186445b}{Set\+Multi\+Player}} (bool \mbox{\hyperlink{class_game_window_a8d221d87186a60ad24fc698bd375fc74}{multip}})
+\begin{DoxyCompactList}\small\item\em This function sets the value of the multip boolean and follows with appropriate measures. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_game_window_a11c52879d0892baf57851575d6cb34f2}\label{class_game_window_a11c52879d0892baf57851575d6cb34f2} 
+void {\bfseries on\+\_\+btn\+Menu\+\_\+clicked} ()
+\begin{DoxyCompactList}\small\item\em This function is activated on the click of the menu button. It stops the game, disconnects from server and leaves to menu window. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_a2d804bc10a3d19759b641e876f16e8be}\label{class_game_window_a2d804bc10a3d19759b641e876f16e8be} 
+void {\bfseries on\+\_\+btn\+Reset\+\_\+clicked} ()
+\begin{DoxyCompactList}\small\item\em This function is activated on the click of the reset button. It resets the current game. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_a150ab2d821aa2ea449e30f566241880b}\label{class_game_window_a150ab2d821aa2ea449e30f566241880b} 
+void {\bfseries on\+\_\+btn\+Connect\+\_\+clicked} ()
+\begin{DoxyCompactList}\small\item\em This function is activated on the click of the connect button. It calls the \doxylink{class_game_window_a035ce657aa4bdad0030b8a590ced2ea1}{attempt\+Connection()} function. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_a87af1765f9a060648a75aa7325ff3a62}\label{class_game_window_a87af1765f9a060648a75aa7325ff3a62} 
+void {\bfseries Generate\+Bloc} ()
+\begin{DoxyCompactList}\small\item\em This function generates a new \doxylink{class_bloc}{Bloc}. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_ad6dcafc7eeb652b594b71239156a4c2a}\label{class_game_window_ad6dcafc7eeb652b594b71239156a4c2a} 
+void {\bfseries Predict\+Bloc} ()
+\begin{DoxyCompactList}\small\item\em This function generates a new \doxylink{class_bloc}{Bloc} object and stores it in the next\+Bloc attribute. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_a8c5076658b54a6b9be76a71be29cf38e}\label{class_game_window_a8c5076658b54a6b9be76a71be29cf38e} 
+void {\bfseries Place\+Bloc} ()
+\begin{DoxyCompactList}\small\item\em This function places a \doxylink{class_bloc}{Bloc} on the grid. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_window_a79970e77edd38c92f59c4af96579684b}{Update\+Bloc\+Position}} (int \texorpdfstring{$\ast$}{*}difference, Direction direction)
+\begin{DoxyCompactList}\small\item\em This function is used for updating the \doxylink{class_bloc}{Bloc}\textquotesingle{}s position. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_a15b5de212a47dead8c434eda50bf604d}\label{class_game_window_a15b5de212a47dead8c434eda50bf604d} 
+void {\bfseries Fix\+Bloc} ()
+\begin{DoxyCompactList}\small\item\em This function fixates the \doxylink{class_bloc}{Bloc} in it\textquotesingle{}s place and handles appropriate measures after. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_ac72d0c1c49cb70cdca886003e33829f7}\label{class_game_window_ac72d0c1c49cb70cdca886003e33829f7} 
+void {\bfseries Timer\+Event} ()
+\begin{DoxyCompactList}\small\item\em This function is called each time the timer is activated. It moves the current \doxylink{class_bloc}{Bloc} down by 1 cell in the grid. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_window_aa66b8cec64c0065d4d506cf910b8a66d}{key\+Press\+Event}} (QKey\+Event \texorpdfstring{$\ast$}{*}k)
+\begin{DoxyCompactList}\small\item\em This function is called when the player presses a key on the keyboard. It handles the possible movements. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_a049e168b8fbb6938d5b66f8ac2c7ca01}\label{class_game_window_a049e168b8fbb6938d5b66f8ac2c7ca01} 
+void {\bfseries focus\+In\+Event} (QFocus\+Event \texorpdfstring{$\ast$}{*}event)
+\item 
+void \mbox{\hyperlink{class_game_window_ac4296a2c7589438b1d81c35600a67664}{Exclude\+Line}} (int Line\+Number)
+\begin{DoxyCompactList}\small\item\em This function excludes a line from the game grid. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_a41e74428d80235b22793b1befa7db1c3}\label{class_game_window_a41e74428d80235b22793b1befa7db1c3} 
+void {\bfseries Add\+Line\+Penalty} ()
+\begin{DoxyCompactList}\small\item\em This functions adds a line as a penalty for the current player. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_af6ffeffa886479bf31e777e2f62e8efe}\label{class_game_window_af6ffeffa886479bf31e777e2f62e8efe} 
+void {\bfseries game\+Over} ()
+\begin{DoxyCompactList}\small\item\em This function ends the game, displaying the current player\textquotesingle{}s loss. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_a24cc7f99c8f97bbf2ae4bd95d8027e72}\label{class_game_window_a24cc7f99c8f97bbf2ae4bd95d8027e72} 
+void {\bfseries Victory} ()
+\begin{DoxyCompactList}\small\item\em This function ends the game, displaying the current player\textquotesingle{}s victory. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_a963d02340f5172fb50c5b55002fae18b}\label{class_game_window_a963d02340f5172fb50c5b55002fae18b} 
+void {\bfseries Initialize\+Game} ()
+\begin{DoxyCompactList}\small\item\em This function does everything necessary to initialize a new game. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_window_a9b17d31766df9a82cb30e69e62b421be}{Reset\+Ui}} (bool \mbox{\hyperlink{class_game_window_a8d221d87186a60ad24fc698bd375fc74}{multip}})
+\begin{DoxyCompactList}\small\item\em This function resets all visual elements in the game window. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_window_a39df08102c30eab1b1573d7cde845c3f}{Initialize\+Prediction\+Widget}} (int label\+StartingX, int bloc\+StartingX)
+\begin{DoxyCompactList}\small\item\em This function initializes the prediction QLabel and \doxylink{class_next_bloc_pred}{Next\+Bloc\+Pred} objects. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_window_ad470458e6d12e4ba681d23eaa563aaac}{Initialize\+Score\+Widget}} (int startingX)
+\begin{DoxyCompactList}\small\item\em This function initializes the score and level Qlabel\textquotesingle{}s. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_a07e0504ecf8ceecd3590ffc1702aec2c}\label{class_game_window_a07e0504ecf8ceecd3590ffc1702aec2c} 
+void {\bfseries Update\+Score\+Label} ()
+\begin{DoxyCompactList}\small\item\em This function updates the score and level QLabel\textquotesingle{}s with the current values of score an level of the game. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_a035ce657aa4bdad0030b8a590ced2ea1}\label{class_game_window_a035ce657aa4bdad0030b8a590ced2ea1} 
+void {\bfseries attempt\+Connection} ()
+\begin{DoxyCompactList}\small\item\em This function connects the player to the server at the desired address. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_ae05f67a7b693443b07c80225baa17858}\label{class_game_window_ae05f67a7b693443b07c80225baa17858} 
+void {\bfseries connected\+To\+Server} ()
+\begin{DoxyCompactList}\small\item\em This function is called when the player is connected to server. It pops up a prompt asking for the player\textquotesingle{}s username. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_window_adaa1afe4d71da838759508c85d393623}{attempt\+Login}} (const QString \&user\+Name)
+\begin{DoxyCompactList}\small\item\em This function attempts to login the player with the given username. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_a38e404dc760defc86e32c19f2f0cd92f}\label{class_game_window_a38e404dc760defc86e32c19f2f0cd92f} 
+void {\bfseries logged\+In} ()
+\begin{DoxyCompactList}\small\item\em This function is called when the player is succesfully logged in. It handles visual changes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_window_a3bddd97b7e4b245a13cc7fce93ee8831}{login\+Failed}} (const QString \&reason)
+\begin{DoxyCompactList}\small\item\em This function is called when the login failed. It displays an error message and tries to connect the user again. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_window_a1b3ca2c1966bb786d40814de5527d51f}{message\+Received}} (const QString \&sender, const QString \&text)
+\begin{DoxyCompactList}\small\item\em This function is called when the player receives a message from the server. It handles the consequences for each message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_window_a5108b7dce44468ae2bfa60fb772c910f}{send\+Message}} (QChar event)
+\begin{DoxyCompactList}\small\item\em This function sends a message that will be broadcasted by the server. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_ab22af65ced3f4ad81c1293431e9fba61}\label{class_game_window_ab22af65ced3f4ad81c1293431e9fba61} 
+void {\bfseries disconnected\+From\+Server} ()
+\begin{DoxyCompactList}\small\item\em This function is called when the player is disconneted from the server. It emits a warning message and stops the game. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_window_a9dbe703363f0c8a1de239c3941cb243c}{user\+Joined}} (const QString \&username)
+\begin{DoxyCompactList}\small\item\em This function is called when another user joins the server. It starts the game. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_window_af3ea80ab55224c875a75f381bc3cc3e0}{user\+Left}} (const QString \&username)
+\begin{DoxyCompactList}\small\item\em This function is called when another user leaves the server. It ends the game if it hasn\textquotesingle{}t already ended. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_window_a30495f09f609ff2d0106e8e6630b68dc}{error}} (QAbstract\+Socket\+::\+Socket\+Error socket\+Error)
+\begin{DoxyCompactList}\small\item\em This function handles possible errors in server communications. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_game_window_a8d221d87186a60ad24fc698bd375fc74}\label{class_game_window_a8d221d87186a60ad24fc698bd375fc74} 
+bool {\bfseries multip} = false
+\begin{DoxyCompactList}\small\item\em Boolean attribute to indicate if the game is singleplayer or multiplayer. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_ab707effb23e12debbe5fd5d7f42fe577}\label{class_game_window_ab707effb23e12debbe5fd5d7f42fe577} 
+bool {\bfseries allow\+Movements} = false
+\begin{DoxyCompactList}\small\item\em Boolean attribute to prevent player movements when it is necessary. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_ae380ced8aee2a068e598c7146492dd53}\label{class_game_window_ae380ced8aee2a068e598c7146492dd53} 
+int {\bfseries bloc\+Position} \mbox{[}2\mbox{]} = \{3, 0\}
+\begin{DoxyCompactList}\small\item\em Int vector representing the position of the current falling \doxylink{class_bloc}{Bloc} piece. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_ade5b4890df9acd789a9e7ac22c6964e0}\label{class_game_window_ade5b4890df9acd789a9e7ac22c6964e0} 
+int {\bfseries current\+Key}
+\item 
+\Hypertarget{class_game_window_a7fc2005f1b65c921cc4bc5bceb3f48cd}\label{class_game_window_a7fc2005f1b65c921cc4bc5bceb3f48cd} 
+int {\bfseries Niveau}
+\begin{DoxyCompactList}\small\item\em Int value that indicates the current Level during the game. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_ac399547296d66d1b2a785206e858e738}\label{class_game_window_ac399547296d66d1b2a785206e858e738} 
+int {\bfseries lines\+Cleared}
+\begin{DoxyCompactList}\small\item\em Int value that stores the number of lines cleared during the game. It grows from 0 to 9, and when it reaches 10, the value of Level goes up by 1 and this returns to 0. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_a688ee6c11bdac39a5ccea25afc7e4060}\label{class_game_window_a688ee6c11bdac39a5ccea25afc7e4060} 
+int {\bfseries lines\+Clearedat\+Once}
+\begin{DoxyCompactList}\small\item\em Int value that stores the number of lines cleared in a single move. Used to calculate points obtained and number of garbage lines sent to opponent. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_a496581228425fe58fc846a1af7267907}\label{class_game_window_a496581228425fe58fc846a1af7267907} 
+int {\bfseries Score} = 0
+\begin{DoxyCompactList}\small\item\em Int value that indicates the current player\textquotesingle{}s score. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_ab55293cef16c4d14fa1add3e6ccb382f}\label{class_game_window_ab55293cef16c4d14fa1add3e6ccb382f} 
+\mbox{\hyperlink{class_ui_1_1_game_window}{Ui\+::\+Game\+Window}} \texorpdfstring{$\ast$}{*} {\bfseries ui}
+\begin{DoxyCompactList}\small\item\em Ui object from the Qt libraries that contains the game window\textquotesingle{}s visual elements. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_a308f83ec2191fd99b379d0a358d55b6d}\label{class_game_window_a308f83ec2191fd99b379d0a358d55b6d} 
+QWidget \texorpdfstring{$\ast$}{*} {\bfseries menu\+Window}
+\begin{DoxyCompactList}\small\item\em QWidget pointer to the menu window, for toggling between windows. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_ab6c36f79eb590e208d09ecabc154d183}\label{class_game_window_ab6c36f79eb590e208d09ecabc154d183} 
+QString {\bfseries player\+Name}
+\begin{DoxyCompactList}\small\item\em QString that stores the current player\textquotesingle{}s username. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_ac48cb3202cba923c23d48cac61745205}\label{class_game_window_ac48cb3202cba923c23d48cac61745205} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_next_bloc_pred}{Next\+Bloc\+Pred}} $>$ {\bfseries bloc\+Pred}
+\begin{DoxyCompactList}\small\item\em Smart unique pointer to an object of the class \doxylink{class_next_bloc_pred}{Next\+Bloc\+Pred}. Contains the next \doxylink{class_bloc}{Bloc} piece prediction. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_abc1877c094084f7b78868228048b4c5e}\label{class_game_window_abc1877c094084f7b78868228048b4c5e} 
+std\+::unique\+\_\+ptr$<$ QTimer $>$ {\bfseries timer}
+\begin{DoxyCompactList}\small\item\em Smart unique pointer to an object of the class QTimer. Contains the timer used for making pieces fall. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_aa413be53da060dbf2ad6bb577da445ef}\label{class_game_window_aa413be53da060dbf2ad6bb577da445ef} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_game_grid}{Game\+Grid}} $>$ {\bfseries grid}
+\begin{DoxyCompactList}\small\item\em Smart unique pointer to an object of the class \doxylink{class_game_grid}{Game\+Grid}. Contains the current player\textquotesingle{}s grid. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_aa79367fbf1c6da4cb54db34f82487348}\label{class_game_window_aa79367fbf1c6da4cb54db34f82487348} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_game_grid}{Game\+Grid}} $>$ {\bfseries opponent\+Grid}
+\begin{DoxyCompactList}\small\item\em Smart unique pointer to an object of the class \doxylink{class_game_grid}{Game\+Grid}. Contains the opponent player\textquotesingle{}s grid. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_af572796f79f8e651b295385860bc0926}\label{class_game_window_af572796f79f8e651b295385860bc0926} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_bloc}{Bloc}} $>$ {\bfseries current\+Bloc}
+\begin{DoxyCompactList}\small\item\em Smart shared pointer to an object of the class \doxylink{class_bloc}{Bloc}. Contains the current falling \doxylink{class_bloc}{Bloc} piece. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_a518f33ba308809fca7a7a90f9495ba86}\label{class_game_window_a518f33ba308809fca7a7a90f9495ba86} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_bloc}{Bloc}} $>$ {\bfseries next\+Bloc}
+\begin{DoxyCompactList}\small\item\em Smart shared pointer to an object of the class \doxylink{class_bloc}{Bloc}. Contains the next \doxylink{class_bloc}{Bloc} piece that will be inserted once the current one is fixed. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_af992555ffb5ddfade2a981231d9a2bb5}\label{class_game_window_af992555ffb5ddfade2a981231d9a2bb5} 
+std\+::unique\+\_\+ptr$<$ QLabel $>$ {\bfseries score\+Label}
+\begin{DoxyCompactList}\small\item\em Smart unique pointer to an object of the class QLabel. Contains the label used to display the current player\textquotesingle{}s score. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_a15d1299fe6f0d8d9764eb14d153f7efd}\label{class_game_window_a15d1299fe6f0d8d9764eb14d153f7efd} 
+std\+::unique\+\_\+ptr$<$ QLabel $>$ {\bfseries level\+Label}
+\begin{DoxyCompactList}\small\item\em Smart unique pointer to an object of the class QLabel. Contains the label used to display the current level during the game. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_a105e3c649d2dc589a0a13f1bb8503d54}\label{class_game_window_a105e3c649d2dc589a0a13f1bb8503d54} 
+std\+::unique\+\_\+ptr$<$ QLabel $>$ {\bfseries pred\+Label}
+\begin{DoxyCompactList}\small\item\em Smart unique pointer to an object of the class QLabel. Contains the label used to display the "{}\+Next Bloc"{} text. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_aea13818fc10cc2f9e67d31fbf1902bb6}\label{class_game_window_aea13818fc10cc2f9e67d31fbf1902bb6} 
+std\+::unique\+\_\+ptr$<$ QLabel $>$ {\bfseries game\+Over\+Label}
+\begin{DoxyCompactList}\small\item\em Smart unique pointer to an object of the class QLabel. Contains the label used to display the "{}\+VICTORY"{} or "{}\+GAME OVER"{} texts for the current player. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_a1792ab31fc8df3a0e52935291a95bc98}\label{class_game_window_a1792ab31fc8df3a0e52935291a95bc98} 
+std\+::unique\+\_\+ptr$<$ QLabel $>$ {\bfseries opponent\+Game\+Over\+Label}
+\begin{DoxyCompactList}\small\item\em Smart unique pointer to an object of the class QLabel. Contains the label used to display the "{}\+VICTORY"{} or "{}\+GAME OVER"{} texts for the opponent player. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_a81abcc1066b83fff07140d1686cc3afc}\label{class_game_window_a81abcc1066b83fff07140d1686cc3afc} 
+std\+::unique\+\_\+ptr$<$ QLabel $>$ {\bfseries waiting\+Opponent\+Label}
+\begin{DoxyCompactList}\small\item\em Smart unique pointer to an object of the class QLabel. Contains the label used to display the "{}\+Waiting for opponent to connect..."{} text. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_a46c4c3e28d4b453bfc78c1fb5bc61551}\label{class_game_window_a46c4c3e28d4b453bfc78c1fb5bc61551} 
+std\+::unique\+\_\+ptr$<$ QLabel $>$ {\bfseries player\+Name\+Label}
+\begin{DoxyCompactList}\small\item\em Smart unique pointer to an object of the class QLabel. Contains the label used to display the current player\textquotesingle{}s username. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_a61f384409a55f376536abc5ac1868597}\label{class_game_window_a61f384409a55f376536abc5ac1868597} 
+std\+::unique\+\_\+ptr$<$ QLabel $>$ {\bfseries opponent\+Name\+Label}
+\begin{DoxyCompactList}\small\item\em Smart unique pointer to an object of the class QLabel. Contains the label used to display the opponent player\textquotesingle{}s username. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_window_af244a3e8a8bcde3d4200abfdb5322b34}\label{class_game_window_af244a3e8a8bcde3d4200abfdb5322b34} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_player_client}{Player\+Client}} $>$ {\bfseries m\+\_\+player\+Client}
+\begin{DoxyCompactList}\small\item\em Smart unique pointer to an object of the class \doxylink{class_player_client}{Player\+Client}. Contains the object that handles TCP communications between the player and the server. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class represents the \doxylink{class_game_window}{Game\+Window}. It functions as a game manager, handling all player interactions during the game. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_game_window_ac3eeb92ff59cb36fd579f290013db4d5}\index{GameWindow@{GameWindow}!GameWindow@{GameWindow}}
+\index{GameWindow@{GameWindow}!GameWindow@{GameWindow}}
+\doxysubsubsection{\texorpdfstring{GameWindow()}{GameWindow()}}
+{\footnotesize\ttfamily \label{class_game_window_ac3eeb92ff59cb36fd579f290013db4d5} 
+Game\+Window\+::\+Game\+Window (\begin{DoxyParamCaption}\item[{QWidget \texorpdfstring{$\ast$}{*}}]{parent}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})}
+
+
+
+Construct a new Game Window\+:\+: Game Window object and connect all signals from \doxylink{class_player_client}{Player\+Client} object to appropriate functions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_game_window_adaa1afe4d71da838759508c85d393623}\index{GameWindow@{GameWindow}!attemptLogin@{attemptLogin}}
+\index{attemptLogin@{attemptLogin}!GameWindow@{GameWindow}}
+\doxysubsubsection{\texorpdfstring{attemptLogin}{attemptLogin}}
+{\footnotesize\ttfamily \label{class_game_window_adaa1afe4d71da838759508c85d393623} 
+void Game\+Window\+::attempt\+Login (\begin{DoxyParamCaption}\item[{const QString \&}]{user\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+This function attempts to login the player with the given username. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em user\+Name} & QString that holds the desired username. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_game_window_a30495f09f609ff2d0106e8e6630b68dc}\index{GameWindow@{GameWindow}!error@{error}}
+\index{error@{error}!GameWindow@{GameWindow}}
+\doxysubsubsection{\texorpdfstring{error}{error}}
+{\footnotesize\ttfamily \label{class_game_window_a30495f09f609ff2d0106e8e6630b68dc} 
+void Game\+Window\+::error (\begin{DoxyParamCaption}\item[{QAbstract\+Socket\+::\+Socket\+Error}]{socket\+Error}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+This function handles possible errors in server communications. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em socket\+Error} & The error received. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_game_window_ac4296a2c7589438b1d81c35600a67664}\index{GameWindow@{GameWindow}!ExcludeLine@{ExcludeLine}}
+\index{ExcludeLine@{ExcludeLine}!GameWindow@{GameWindow}}
+\doxysubsubsection{\texorpdfstring{ExcludeLine}{ExcludeLine}}
+{\footnotesize\ttfamily \label{class_game_window_ac4296a2c7589438b1d81c35600a67664} 
+void Game\+Window\+::\+Exclude\+Line (\begin{DoxyParamCaption}\item[{int}]{Line\+Number}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+This function excludes a line from the game grid. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Line\+Number} & The line to be excluded. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_game_window_a414401497b4c72b99bfc707c2de5dfaa}\index{GameWindow@{GameWindow}!GetMenuWindowPtr@{GetMenuWindowPtr}}
+\index{GetMenuWindowPtr@{GetMenuWindowPtr}!GameWindow@{GameWindow}}
+\doxysubsubsection{\texorpdfstring{GetMenuWindowPtr()}{GetMenuWindowPtr()}}
+{\footnotesize\ttfamily \label{class_game_window_a414401497b4c72b99bfc707c2de5dfaa} 
+void Game\+Window\+::\+Get\+Menu\+Window\+Ptr (\begin{DoxyParamCaption}\item[{QWidget \texorpdfstring{$\ast$}{*}}]{menu\+Window}{}\end{DoxyParamCaption})}
+
+
+
+This function sets the value of the pointer to the menu window object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em menu\+Window} & Pointer to an object of the class \doxylink{class_menu_window}{Menu\+Window}. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_game_window_a39df08102c30eab1b1573d7cde845c3f}\index{GameWindow@{GameWindow}!InitializePredictionWidget@{InitializePredictionWidget}}
+\index{InitializePredictionWidget@{InitializePredictionWidget}!GameWindow@{GameWindow}}
+\doxysubsubsection{\texorpdfstring{InitializePredictionWidget}{InitializePredictionWidget}}
+{\footnotesize\ttfamily \label{class_game_window_a39df08102c30eab1b1573d7cde845c3f} 
+void Game\+Window\+::\+Initialize\+Prediction\+Widget (\begin{DoxyParamCaption}\item[{int}]{label\+StartingX}{, }\item[{int}]{bloc\+StartingX}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+This function initializes the prediction QLabel and \doxylink{class_next_bloc_pred}{Next\+Bloc\+Pred} objects. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em label\+StartingX} & The starting X position for displaying the label. \\
+\hline
+{\em bloc\+StartingX} & The starting X position for displaying the bloc. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_game_window_ad470458e6d12e4ba681d23eaa563aaac}\index{GameWindow@{GameWindow}!InitializeScoreWidget@{InitializeScoreWidget}}
+\index{InitializeScoreWidget@{InitializeScoreWidget}!GameWindow@{GameWindow}}
+\doxysubsubsection{\texorpdfstring{InitializeScoreWidget}{InitializeScoreWidget}}
+{\footnotesize\ttfamily \label{class_game_window_ad470458e6d12e4ba681d23eaa563aaac} 
+void Game\+Window\+::\+Initialize\+Score\+Widget (\begin{DoxyParamCaption}\item[{int}]{startingX}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+This function initializes the score and level Qlabel\textquotesingle{}s. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em startingX} & The starting X position for both labels. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_game_window_aa66b8cec64c0065d4d506cf910b8a66d}\index{GameWindow@{GameWindow}!keyPressEvent@{keyPressEvent}}
+\index{keyPressEvent@{keyPressEvent}!GameWindow@{GameWindow}}
+\doxysubsubsection{\texorpdfstring{keyPressEvent}{keyPressEvent}}
+{\footnotesize\ttfamily \label{class_game_window_aa66b8cec64c0065d4d506cf910b8a66d} 
+void Game\+Window\+::key\+Press\+Event (\begin{DoxyParamCaption}\item[{QKey\+Event \texorpdfstring{$\ast$}{*}}]{k}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+This function is called when the player presses a key on the keyboard. It handles the possible movements. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em k} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_game_window_a3bddd97b7e4b245a13cc7fce93ee8831}\index{GameWindow@{GameWindow}!loginFailed@{loginFailed}}
+\index{loginFailed@{loginFailed}!GameWindow@{GameWindow}}
+\doxysubsubsection{\texorpdfstring{loginFailed}{loginFailed}}
+{\footnotesize\ttfamily \label{class_game_window_a3bddd97b7e4b245a13cc7fce93ee8831} 
+void Game\+Window\+::login\+Failed (\begin{DoxyParamCaption}\item[{const QString \&}]{reason}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+This function is called when the login failed. It displays an error message and tries to connect the user again. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reason} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_game_window_a1b3ca2c1966bb786d40814de5527d51f}\index{GameWindow@{GameWindow}!messageReceived@{messageReceived}}
+\index{messageReceived@{messageReceived}!GameWindow@{GameWindow}}
+\doxysubsubsection{\texorpdfstring{messageReceived}{messageReceived}}
+{\footnotesize\ttfamily \label{class_game_window_a1b3ca2c1966bb786d40814de5527d51f} 
+void Game\+Window\+::message\+Received (\begin{DoxyParamCaption}\item[{const QString \&}]{sender}{, }\item[{const QString \&}]{text}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+This function is called when the player receives a message from the server. It handles the consequences for each message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & QSrtring containing the username of the message\textquotesingle{}s sender. \\
+\hline
+{\em text} & QSrtring containing the message\textquotesingle{}s content. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_game_window_a9b17d31766df9a82cb30e69e62b421be}\index{GameWindow@{GameWindow}!ResetUi@{ResetUi}}
+\index{ResetUi@{ResetUi}!GameWindow@{GameWindow}}
+\doxysubsubsection{\texorpdfstring{ResetUi}{ResetUi}}
+{\footnotesize\ttfamily \label{class_game_window_a9b17d31766df9a82cb30e69e62b421be} 
+void Game\+Window\+::\+Reset\+Ui (\begin{DoxyParamCaption}\item[{bool}]{multip}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+This function resets all visual elements in the game window. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em multip} & Boolean value that indicates if the current game is singleplayer or multiplayer. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_game_window_a5108b7dce44468ae2bfa60fb772c910f}\index{GameWindow@{GameWindow}!sendMessage@{sendMessage}}
+\index{sendMessage@{sendMessage}!GameWindow@{GameWindow}}
+\doxysubsubsection{\texorpdfstring{sendMessage}{sendMessage}}
+{\footnotesize\ttfamily \label{class_game_window_a5108b7dce44468ae2bfa60fb772c910f} 
+void Game\+Window\+::send\+Message (\begin{DoxyParamCaption}\item[{QChar}]{event}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+This function sends a message that will be broadcasted by the server. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & QChar that contains a letter if there is a specific event to transmit. Is empty space if just for tranferring grid state. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_game_window_aa781515e0e0c896544de8e431186445b}\index{GameWindow@{GameWindow}!SetMultiPlayer@{SetMultiPlayer}}
+\index{SetMultiPlayer@{SetMultiPlayer}!GameWindow@{GameWindow}}
+\doxysubsubsection{\texorpdfstring{SetMultiPlayer()}{SetMultiPlayer()}}
+{\footnotesize\ttfamily \label{class_game_window_aa781515e0e0c896544de8e431186445b} 
+void Game\+Window\+::\+Set\+Multi\+Player (\begin{DoxyParamCaption}\item[{bool}]{multip}{}\end{DoxyParamCaption})}
+
+
+
+This function sets the value of the multip boolean and follows with appropriate measures. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em multip} & Boolean value that indicates if the current game is singleplayer or multiplayer. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_game_window_a79970e77edd38c92f59c4af96579684b}\index{GameWindow@{GameWindow}!UpdateBlocPosition@{UpdateBlocPosition}}
+\index{UpdateBlocPosition@{UpdateBlocPosition}!GameWindow@{GameWindow}}
+\doxysubsubsection{\texorpdfstring{UpdateBlocPosition}{UpdateBlocPosition}}
+{\footnotesize\ttfamily \label{class_game_window_a79970e77edd38c92f59c4af96579684b} 
+void Game\+Window\+::\+Update\+Bloc\+Position (\begin{DoxyParamCaption}\item[{int \texorpdfstring{$\ast$}{*}}]{difference}{, }\item[{Direction}]{direction}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+This function is used for updating the \doxylink{class_bloc}{Bloc}\textquotesingle{}s position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em difference} & Int vector that representes the \doxylink{class_bloc}{Bloc}\textquotesingle{}s dislocation in both directions. \\
+\hline
+{\em direction} & The direction of the BLoc\textquotesingle{}s movement. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_game_window_a9dbe703363f0c8a1de239c3941cb243c}\index{GameWindow@{GameWindow}!userJoined@{userJoined}}
+\index{userJoined@{userJoined}!GameWindow@{GameWindow}}
+\doxysubsubsection{\texorpdfstring{userJoined}{userJoined}}
+{\footnotesize\ttfamily \label{class_game_window_a9dbe703363f0c8a1de239c3941cb243c} 
+void Game\+Window\+::user\+Joined (\begin{DoxyParamCaption}\item[{const QString \&}]{username}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+This function is called when another user joins the server. It starts the game. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em username} & QString containing the username of the player that joined the server. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_game_window_af3ea80ab55224c875a75f381bc3cc3e0}\index{GameWindow@{GameWindow}!userLeft@{userLeft}}
+\index{userLeft@{userLeft}!GameWindow@{GameWindow}}
+\doxysubsubsection{\texorpdfstring{userLeft}{userLeft}}
+{\footnotesize\ttfamily \label{class_game_window_af3ea80ab55224c875a75f381bc3cc3e0} 
+void Game\+Window\+::user\+Left (\begin{DoxyParamCaption}\item[{const QString \&}]{username}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+This function is called when another user leaves the server. It ends the game if it hasn\textquotesingle{}t already ended. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em username} & QString containing the username of the player that left the server. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/rodri/\+One\+Drive/\+Documentos/\+ENSTA/2\+A/\+POO/\+Tetris/\mbox{\hyperlink{_game_window_8h}{Game\+Window.\+h}}\item 
+C\+:/\+Users/rodri/\+One\+Drive/\+Documentos/\+ENSTA/2\+A/\+POO/\+Tetris/\mbox{\hyperlink{_game_window_8cpp}{Game\+Window.\+cpp}}\end{DoxyCompactItemize}

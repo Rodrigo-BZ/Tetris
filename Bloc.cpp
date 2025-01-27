@@ -1,5 +1,17 @@
+/**
+ * @file Bloc.cpp
+ * @brief This file implements the functions for the Bloc class
+ * @version 0.1
+ * 
+ */
 #include "Bloc.h"
 
+/**
+ * @brief This function rotates a Bloc pieace 90 degrees clockwise
+ * 
+ * @param position The position [x, y] of the current falling Bloc piece
+ * @param grid A pointer to the game Grid object
+ */
 void Bloc::RotateClockwise(int *position, GameGrid *grid)
 {
     std::array<std::array<int, 4>, 4> temp = forme;
@@ -155,6 +167,12 @@ void Bloc::RotateClockwise(int *position, GameGrid *grid)
     }
 }
 
+/**
+ * @brief This function rotates a Bloc pieace 90 degrees clockwise
+ * 
+ * @param position The position [x, y] of the current falling Bloc piece
+ * @param grid A pointer to the game Grid object
+ */
 void Bloc::RotateCounterClockwise(int *position, GameGrid *grid)
 {
     std::array<std::array<int, 4>, 4> temp = forme;
@@ -308,20 +326,42 @@ void Bloc::RotateCounterClockwise(int *position, GameGrid *grid)
     }
 }
 
+/**
+ * @brief This function returns the QColor value of a Bloc piece
+ * 
+ * @return QColor 
+ */
 QColor Bloc::GetColor() const
 {
     return color;
 }
 
+/**
+ * @brief This function returns the "length" of the Bloc piece. This corresponds to the matrix size necessary for representing the piece.
+ * 
+ * @return int 
+ */
 int Bloc::GetLenght() const {
     return lenght;
 }
 
+/**
+ * @brief This function returns an int array that represents the shape of the Bloc piece.
+ * 
+ * @return std::array<std::array<int, 4>, 4> 
+ */
 std::array<std::array<int, 4>, 4> Bloc::GetForme() const
 {
     return forme;
 }
 
+/**
+ * @brief This function checks if a specific column in the Bloc piece matrix is free (only 0's).
+ * 
+ * @param columnNumber The column to be checked.
+ * @return true
+ * @return false 
+ */
 bool Bloc::FreeColumn(int columnNumber){
     int count = 0;
     for(int i = 0; i < 4; i++){

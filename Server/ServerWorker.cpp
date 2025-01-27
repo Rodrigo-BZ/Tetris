@@ -1,3 +1,9 @@
+/**
+ * @file ServerWorker.cpp
+ * @brief This file implements the functions for the ServerWorker class
+ * @version 0.1
+ * 
+ */
 #include "ServerWorker.h"
 
 ServerWorker::ServerWorker(QObject *parent)
@@ -11,26 +17,51 @@ ServerWorker::ServerWorker(QObject *parent)
     connect(m_serverSocket, &QAbstractSocket::errorOccurred, this, &ServerWorker::error);
 }
 
+/**
+ * @brief This function sets the value for the server socket object.
+ * 
+ * @param socketDescriptor 
+ * @return true 
+ * @return false 
+ */
 bool ServerWorker::setSocketDescriptor(qintptr socketDescriptor)
 {
     return m_serverSocket->setSocketDescriptor(socketDescriptor);
 }
 
+/**
+ * @brief This function disconnects the client being handled by the server worker from the server.
+ * 
+ */
 void ServerWorker::disconnectFromClient()
 {
     m_serverSocket->disconnectFromHost();
 }
 
+/**
+ * @brief This fuction returns the username of the client being handled by the server worker.
+ * 
+ * @return QString
+ */
 QString ServerWorker::userName() const
 {
     return m_userName;
 }
 
+/**
+ * @brief This function sets the username of the client being handled by the server worker.
+ * 
+ * @param userName Unername of the client.
+ */
 void ServerWorker::setUserName(const QString &userName)
 {
     m_userName = userName;
 }
 
+/**
+ * @brief This function attempts to receive a Json.
+ * 
+ */
 void ServerWorker::receiveJson()
 {
     // prepare a container to hold the UTF-8 encoded JSON we receive from the socket
@@ -69,6 +100,11 @@ void ServerWorker::receiveJson()
     }
 }
 
+/**
+ * @brief This functions attempts to send a Json.
+ * 
+ * @param json The Json being sent.
+ */
 void ServerWorker::sendJson(const QJsonObject &json)
 {
     // we crate a temporary QJsonDocument forom the object and then convert it

@@ -1,3 +1,9 @@
+/**
+ * @file PlayerClient.h
+ * @brief Header file for the PlayerClient class
+ * @version 0.1
+ * 
+ */
 #ifndef PLAYERCLIENT_H
 #define PLAYERCLIENT_H
 
@@ -9,6 +15,10 @@
 #include <QJsonObject>
 #include <QJsonValue>
 
+/**
+ * @brief This class represents the client that communicates with the server. It handles all multiplayer communications.
+ * 
+ */
 class PlayerClient : public QObject
 {
     Q_OBJECT
@@ -24,7 +34,9 @@ public slots:
     void disconnectFromHost();
 
 private:
+    /// @brief Smart unique pointer of the class QTcpSocket. It contains the TCP socket for the client.
     std::unique_ptr<QTcpSocket> m_clientSocket;
+    /// @brief Boolean value that indicates if the client is logged in or not.
     bool m_loggedIn;
     void jsonReceived(const QJsonObject &doc);
 

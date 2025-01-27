@@ -1,0 +1,67 @@
+\doxysection{Server\+Window Class Reference}
+\hypertarget{class_server_window}{}\label{class_server_window}\index{ServerWindow@{ServerWindow}}
+
+
+This class represents the \doxylink{class_server_window}{Server\+Window}. It acts as a server screen manager to handle interactions with UI.  
+
+
+
+
+{\ttfamily \#include $<$Server\+Window.\+h$>$}
+
+Inheritance diagram for Server\+Window\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_server_window}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_server_window_a17fbfb5945bb3949c23189aeec66635d}\label{class_server_window_a17fbfb5945bb3949c23189aeec66635d} 
+{\bfseries Server\+Window} (QWidget \texorpdfstring{$\ast$}{*}parent=nullptr)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_server_window_acb4be0a352e600e164478d91bb59527d}\label{class_server_window_acb4be0a352e600e164478d91bb59527d} 
+void {\bfseries toggle\+Start\+Server} ()
+\begin{DoxyCompactList}\small\item\em This function is called the the button is pressed. It toggles the server between started and stopped states. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_server_window_a270f7f2c53ceb35031e0e971b08e31b5}{log\+Message}} (const QString \&msg)
+\begin{DoxyCompactList}\small\item\em This function logs a message in the server window. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_server_window_a69f6fae3360979d8f9a5499f933dd8a9}\label{class_server_window_a69f6fae3360979d8f9a5499f933dd8a9} 
+\mbox{\hyperlink{class_ui_1_1_server_window}{Ui\+::\+Server\+Window}} \texorpdfstring{$\ast$}{*} {\bfseries ui}
+\begin{DoxyCompactList}\small\item\em Ui containing visual elements of the server window. \end{DoxyCompactList}\item 
+\Hypertarget{class_server_window_ac5ccce9001a8f93edb43695970d6e8c0}\label{class_server_window_ac5ccce9001a8f93edb43695970d6e8c0} 
+\mbox{\hyperlink{class_central_server}{Central\+Server}} \texorpdfstring{$\ast$}{*} {\bfseries m\+\_\+central\+Server}
+\begin{DoxyCompactList}\small\item\em Pointer to the \doxylink{class_central_server}{Central\+Server} object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class represents the \doxylink{class_server_window}{Server\+Window}. It acts as a server screen manager to handle interactions with UI. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_server_window_a270f7f2c53ceb35031e0e971b08e31b5}\index{ServerWindow@{ServerWindow}!logMessage@{logMessage}}
+\index{logMessage@{logMessage}!ServerWindow@{ServerWindow}}
+\doxysubsubsection{\texorpdfstring{logMessage}{logMessage}}
+{\footnotesize\ttfamily \label{class_server_window_a270f7f2c53ceb35031e0e971b08e31b5} 
+void Server\+Window\+::log\+Message (\begin{DoxyParamCaption}\item[{const QString \&}]{msg}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+This function logs a message in the server window. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & The message being recorded. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/rodri/\+One\+Drive/\+Documentos/\+ENSTA/2\+A/\+POO/\+Tetris/\+Server/\mbox{\hyperlink{_server_window_8h}{Server\+Window.\+h}}\item 
+C\+:/\+Users/rodri/\+One\+Drive/\+Documentos/\+ENSTA/2\+A/\+POO/\+Tetris/\+Server/\mbox{\hyperlink{_server_window_8cpp}{Server\+Window.\+cpp}}\end{DoxyCompactItemize}

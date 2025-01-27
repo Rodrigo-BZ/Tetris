@@ -1,0 +1,39 @@
+\doxysection{C\+:/\+Users/rodri/\+One\+Drive/\+Documentos/\+ENSTA/2\+A/\+POO/\+Tetris/\+Menu\+Window.h}
+\hypertarget{_menu_window_8h_source}{}\label{_menu_window_8h_source}\mbox{\hyperlink{_menu_window_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ \#ifndef\ MENUWINDOW\_H}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//\ \#define\ MENUWINDOW\_H}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <QMainWindow>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <QDesktopServices>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_game_window_8h}{GameWindow.h}}"{}}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ QT\_BEGIN\_NAMESPACE}
+\DoxyCodeLine{00016\ \textcolor{keyword}{namespace\ }Ui\ \{\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_ui_1_1_menu_window}{MenuWindow}};\ \}}
+\DoxyCodeLine{00017\ QT\_END\_NAMESPACE}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{class\ }MenuWindow\ :\ \textcolor{keyword}{public}\ QMainWindow}
+\DoxyCodeLine{00024\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00028\ \ \ \ \ MenuWindow(QWidget\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00029\ \ \ \ \ \string~MenuWindow();}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_window_a9a691e006d3871eb33c957b20ada4175}{GetGameWindowPtr}}(\mbox{\hyperlink{class_game_window}{GameWindow}}\ *\mbox{\hyperlink{class_menu_window_ab25749bf46a34fd7e77596832850c25d}{gameWindow}});}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{private}\ slots:}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_window_ace5b000eb3259c8e525323a845631898}{on\_btnPlay\_clicked}}();}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_window_a7e3027142675b703d4b9e38cff453d24}{on\_btnMultiplayer\_clicked}}();}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_window_afb8a17a7eefcdfb82a6fcfef4f1b080f}{on\_btnTutorial\_clicked}}();}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_menu_window_ae0d80f2ec47bc1f45f983a893feb9dc1}{on\_btnQuit\_clicked}}();}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{class_ui_1_1_menu_window}{Ui::MenuWindow}}\ *\mbox{\hyperlink{class_menu_window_af8370d2802f21a9c9121d341fb3fe831}{ui}};}
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{class_game_window}{GameWindow}}\ *\mbox{\hyperlink{class_menu_window_ab25749bf46a34fd7e77596832850c25d}{gameWindow}};}
+\DoxyCodeLine{00044\ \};}
+\DoxyCodeLine{00045\ \textcolor{comment}{//\ \#endif\ //\ MENUWINDOW\_H}}
+
+\end{DoxyCode}

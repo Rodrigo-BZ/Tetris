@@ -1,5 +1,16 @@
+/**
+ * @file PlayerClient.cpp
+ * @brief This file implements the functions for the PlayerClient class
+ * @version 0.1
+ * 
+ */
 #include "PlayerClient.h"
 
+/**
+ * @brief Construct a new Player Client:: Player Client object and Connect signals to socket.
+ * 
+ * @param parent Object that contains this client.
+ */
 PlayerClient::PlayerClient(QObject *parent): QObject(parent), m_clientSocket(std::make_unique<QTcpSocket>(this)), m_loggedIn(false)
 {
     // Forward the connected and disconnected signals
@@ -16,6 +27,11 @@ PlayerClient::PlayerClient(QObject *parent): QObject(parent), m_clientSocket(std
     connect(m_clientSocket.get(), &QTcpSocket::disconnected, this, [this]()->void{m_loggedIn = false;});
 }
 
+/**
+ * @brief This function attempts to log in the client with a given username.
+ * 
+ * @param userName The client's desired username.
+ */
 void PlayerClient::login(const QString &userName)
 {
     if (m_clientSocket->state() == QAbstractSocket::ConnectedState) { // If the client is connected
@@ -35,6 +51,11 @@ void PlayerClient::login(const QString &userName)
     }
 }
 
+/**
+ * @brief This function attempts to send a message from the user to the server. 
+ * 
+ * @param text The message's content.
+ */
 void PlayerClient::sendMessage(const QString &text)
 {
     if (text.isEmpty())
@@ -55,16 +76,31 @@ void PlayerClient::sendMessage(const QString &text)
     clientStream << QJsonDocument(message).toJson();
 }
 
+/**
+ * @brief This function disconnects the client from the server.
+ * 
+ */
 void PlayerClient::disconnectFromHost()
 {
     m_clientSocket->disconnectFromHost();
 }
 
+/**
+ * @brief This function connects the clien to the server.
+ * 
+ * @param address Address o attempted connection.
+ * @param port Port of attemped connection.
+ */
 void PlayerClient::connectToServer(const QHostAddress &address, quint16 port)
 {
     m_clientSocket->connectToHost(address, port);
 }
 
+/**
+ * @brief This function is acvtivated when the user receives a Json from the server.
+ * 
+ * @param docObj The Json object received.
+ */
 void PlayerClient::jsonReceived(const QJsonObject &docObj)
 {
     // actions depend on the type of message
@@ -116,6 +152,10 @@ void PlayerClient::jsonReceived(const QJsonObject &docObj)
     }
 }
 
+/**
+ * @brief This function is called when client is available to receive a new Json. It attempts to read a new received Json.
+ * 
+ */
 void PlayerClient::onReadyRead()
 {
     // prepare a container to hold the UTF-8 encoded JSON we receive from the socket

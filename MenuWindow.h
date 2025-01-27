@@ -1,3 +1,9 @@
+/**
+ * @file MenuWindow.h
+ * @brief Header file for the MenuWindow class
+ * @version 0.1
+ * 
+ */
 // #ifndef MENUWINDOW_H
 // #define MENUWINDOW_H
 
@@ -10,6 +16,10 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MenuWindow; }
 QT_END_NAMESPACE
 
+/**
+ * @brief This class represents the MenuWindow. It functions as a menu manager, handling all user interactions in the menu screen.
+ * 
+ */
 class MenuWindow : public QMainWindow
 {
     Q_OBJECT
@@ -27,7 +37,9 @@ private slots:
     void on_btnQuit_clicked();
 
 private:
+    /// @brief Ui object from the Qt libraries that contains the menu window's visual elements.
     Ui::MenuWindow *ui;
+    /// @brief QWidget pointer to the game window, for toggling between windows.
     GameWindow *gameWindow;
 };
 // #endif // MENUWINDOW_H
