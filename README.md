@@ -17,4 +17,4 @@ Doxygen was used to create the documentation for this project. It can be found a
 
 ### Presentation
 
-The slides for the presentation can ve found [here]([www.google.com](https://www.canva.com/design/DAGdS3JgrAw/1AAMEs55mYHU69M5MjNw0A/view?utm_content=DAGdS3JgrAw&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h82f216051c)).
+The slides for the presentation can ve found [here](https://www.canva.com/design/DAGdS3JgrAw/1AAMEs55mYHU69M5MjNw0A/view?utm_content=DAGdS3JgrAw&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h82f216051c).
